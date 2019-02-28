@@ -101,14 +101,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvback=view.findViewById(R.id.tvback);
         tvdirec=view.findViewById(R.id.tvdirec);
         laysearch=view.findViewById(R.id.laysearch);
-
-
-
-
-
 //        btsearch=view.findViewById(R.id.btsearch);
-
-
         initGoogleMap(savedInstanceState);
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
@@ -255,7 +248,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvdirec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 orglatlng=new LatLng(orglatitude,orglongitude);
                 Intent putIn=new Intent(getActivity(),DirectionActivity.class);
                 putIn.putExtra("origin",orglatlng);
