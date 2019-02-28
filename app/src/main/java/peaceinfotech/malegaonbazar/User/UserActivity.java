@@ -42,6 +42,8 @@ public class UserActivity extends AppCompatActivity
     public static final int PERMISSIONS_REQUEST_ENABLE_GPS=9002;
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9003;
     Boolean gpsLocation=false;
+    int c=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,8 +174,6 @@ public class UserActivity extends AppCompatActivity
         }
 
     }
-
-
 
     @Override
     public void onBackPressed() {
