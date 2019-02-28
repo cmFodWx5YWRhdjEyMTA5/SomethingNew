@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import peaceinfotech.malegaonbazar.R;
 
-public class FragmentVendorOffers extends Fragment {
+public class FragmentOffers extends Fragment {
 
     @Nullable
     @Override

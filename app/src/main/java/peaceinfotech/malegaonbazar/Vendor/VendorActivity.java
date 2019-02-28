@@ -3,12 +3,9 @@ package peaceinfotech.malegaonbazar.Vendor;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,11 +19,8 @@ import android.view.WindowManager;
 import peaceinfotech.malegaonbazar.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
-import peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile;
-import peaceinfotech.malegaonbazar.User.UserActivity;
-import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentVendorOffers;
-import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentVendorProfile;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentProfile;
 
 public class VendorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -116,10 +110,10 @@ public class VendorActivity extends AppCompatActivity
 
         switch (item){
             case R.id.nav_profile:
-                fragment=new FragmentVendorProfile();
+                fragment=new FragmentProfile();
                 break;
             case R.id.nav_offers:
-                fragment=new FragmentVendorOffers();
+                fragment=new FragmentOffers();
                 break;
             case R.id.nav_logout:
                 alertDialog.show();
