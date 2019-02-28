@@ -69,7 +69,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     private MapView mMapView;
     GoogleApiClient client;
     public static final int REQUEST_LOCATION_CODE = 99;
-    Double orglatitude, orglongitude,sorglat, sorglog;
+    Double orglatitude, orglongitude,sorglat,sorglog;
     int PROXIMITY = 1000;
     FusedLocationProviderClient mfusedLocationProviderClient;
     Boolean onMarkerclick = false;
