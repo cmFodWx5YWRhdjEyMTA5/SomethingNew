@@ -541,6 +541,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     @Override
     public void onLocationChanged(Location location) {
 
+        getLocation();
     }
 
     @Override
