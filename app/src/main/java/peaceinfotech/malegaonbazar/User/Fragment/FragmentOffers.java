@@ -2,17 +2,21 @@ package peaceinfotech.malegaonbazar.User.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -78,11 +83,13 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     List<Address> addresses;
     LinearLayout layup,laysearch;
     Animation infoup,infodown;
-    TextView tvtitle,tvvic,tvback,tvdirec;
+    TextView tvtitle,tvvic,tvback,tvdirec,tvviewoffers;
     LatLng endlatlng,orglatlng;
     LatLng searchLatlng;
     boolean searchout=false;
     String destName;
+    PopupWindow popupWindow;
+
 
     @Nullable
     @Override
@@ -101,9 +108,19 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvback=view.findViewById(R.id.tvback);
         tvdirec=view.findViewById(R.id.tvdirec);
         laysearch=view.findViewById(R.id.laysearch);
+        tvviewoffers=view.findViewById(R.id.tvviewoffers);
 //        btsearch=view.findViewById(R.id.btsearch);
         initGoogleMap(savedInstanceState);
+
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        categories.add(0,"Select a Category");
+        categories.add(1,"Restaurant");
+        categories.add(2,"School");
+        categories.add(3,"Hospital");
+
+        spinner = (Spinner) view.findViewById(R.id.spin);
+
 
 
 
@@ -115,16 +132,30 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             }
         });
 
+        tvviewoffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.view_offers_popup, null);
+                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+               //instantiate popup window
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+               //display the popup window
+                popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
+
+               //close the popup window on button click
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                   }
+               });
+            }
+        });
 
 
 
-
-        categories.add(0,"Select a Category");
-        categories.add(1,"Restaurant");
-        categories.add(2,"School");
-        categories.add(3,"Hospital");
-
-        spinner = (Spinner) view.findViewById(R.id.spin);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -142,10 +173,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
                 }
                 else{
-
                     if(spinner.getSelectedItem() == "Restaurant") {
                         mMap.clear();
-
                         if(onSearchClick&&searchout){
                             searchNewLocation(sorglat,sorglog);
                             click = "restaurant";
@@ -236,12 +265,14 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         });
 
         tvback.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi
             @Override
             public void onClick(View v) {
 
                 infodown=AnimationUtils.loadAnimation(getActivity(),R.anim.down_info);
                 layup.setVisibility(View.GONE);
                 layup.setAnimation(infodown);
+                spinner.setEnabled(true);
             }
         });
 
@@ -408,8 +439,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
                 mMapView.setClickable(false);
                 destName=title;
-
                 onMarkerclick=true;
+                spinner.setEnabled(false);
                 return true;
             }
         });
@@ -478,7 +509,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
@@ -487,6 +518,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
         }
         mMapView.onSaveInstanceState(mapViewBundle);
+
+            // do this for each or your Spinner
+            // You might consider using Bundle.putStringArray() instead
     }
 
     @Override

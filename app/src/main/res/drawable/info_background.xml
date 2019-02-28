@@ -7,7 +7,7 @@
         android:height="82dp" />
 
     <stroke
-        android:width="2dp"
+        android:width="4dp"
         android:color="#ff207d94"/>
 
     <corners
