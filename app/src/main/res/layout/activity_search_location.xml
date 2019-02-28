@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User.SearchLocation">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:background="@color/color_toolbar_back"
+        android:id="@+id/toolb"
+        app:titleTextColor="#ffffff" />
+
+    <com.google.android.gms.maps.MapView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="56dp"
+        android:id="@+id/searchMapView"/>
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="59dp"
+        android:layout_alignTop="@+id/toolb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
+        android:layout_marginBottom="43dp"
+        android:background="@drawable/search_back"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="20sp"
+            android:hint="Search Location"
+            android:id="@+id/etloc"/>
+
+        <ImageView
+            android:id="@+id/ivsearchlocation"
+            android:layout_width="46dp"
+            android:layout_height="32dp"
+            android:src="@drawable/user_marker" />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
