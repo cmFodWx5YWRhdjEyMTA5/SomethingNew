@@ -5,14 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,14 +19,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroupOverlay;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -41,7 +34,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,9 +52,9 @@ import java.util.List;
 import java.util.Locale;
 
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.User.DirectionActivity;
+import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
-import peaceinfotech.malegaonbazar.User.SearchLocation;
+import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
 
 public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener {
 

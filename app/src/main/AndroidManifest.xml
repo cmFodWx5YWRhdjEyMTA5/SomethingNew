@@ -27,15 +27,15 @@
         <activity android:name=".Signup.SignUpActivity" />
         <activity android:name=".Signup.RegisterActivity" />
         <activity
-            android:name=".User.UserActivity"
+            android:name=".User.UI.UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme" />
-        <activity android:name=".User.SearchLocation" />
+        <activity android:name=".User.UI.SearchLocation" />
         <activity
             android:name=".Vendor.VendorActivity"
             android:label="@string/title_activity_vendor"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".User.DirectionActivity"></activity>
+        <activity android:name=".User.UI.DirectionActivity"></activity>
     </application>
 
 </manifest>

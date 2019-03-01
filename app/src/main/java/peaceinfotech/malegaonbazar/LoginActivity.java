@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
-import peaceinfotech.malegaonbazar.User.UserActivity;
+import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

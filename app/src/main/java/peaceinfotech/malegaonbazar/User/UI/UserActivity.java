@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.User;
+package peaceinfotech.malegaonbazar.User.UI;
 
 import android.app.Dialog;
 import android.content.Context;

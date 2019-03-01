@@ -1,18 +1,25 @@
-package peaceinfotech.malegaonbazar.User;
+package peaceinfotech.malegaonbazar.User.UI;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,15 +37,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.List;
+
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
-import peaceinfotech.malegaonbazar.User.GetData.GetDirectionsData;
 
-public class DirectionActivity extends AppCompatActivity implements
+
+
+public class SearchLocation extends AppCompatActivity implements
         OnMapReadyCallback,
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
+
 
     private static final int LOCATION_REQUEST = 500;
     GoogleMap mMap;
@@ -48,75 +60,117 @@ public class DirectionActivity extends AppCompatActivity implements
     GoogleApiClient client;
     Boolean mLocationPermissionGranted = false;
     LocationRequest locationRequest;
-    Double orglatitude,orglongitude,destlatitude,destlongitude;
-    LatLng orglatlng,destlatlng;
-    String destName;
+    Double orglatitude,orglongitude,sorglat,sorglog;
+    ImageView ivSearch;
+    EditText etsearch;
+    Boolean onSearchClick=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_direction);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_search_location);
 
-        mMapView=findViewById(R.id.mapViewDirec);
-        toolbar=findViewById(R.id.toold);
-
+        mMapView = findViewById(R.id.searchMapView);
+        toolbar = findViewById(R.id.toolb);
+        ivSearch=findViewById(R.id.ivsearchlocation);
+        etsearch=findViewById(R.id.etloc);
         setSupportActionBar(toolbar);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                alertBuilder();
             }
         });
-        getSupportActionBar().setTitle("Directions");
-
+        getSupportActionBar().setTitle("Search Location");
 
         initGoogleMap(savedInstanceState);
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Intent getIn=getIntent();
-        orglatlng=getIn.getExtras().getParcelable("origin");
-        destlatlng=getIn.getExtras().getParcelable("end");
-        destName=getIn.getStringExtra("name");
+        ivSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String loc = etsearch.getText().toString();
+                List<Address> addressList = null;
+                MarkerOptions mo = new MarkerOptions();
 
-
-
-
-        orglatitude=orglatlng.latitude;
-        orglongitude=orglatlng.longitude;
-
-
-//        Log.d("lat",orglatitude.toString()+"/"+orglongitude.toString());
-        destlatitude=destlatlng.latitude;
-        destlongitude=destlatlng.longitude;
+                if(loc.isEmpty()){
+                    Toast.makeText(SearchLocation.this,"Please enter a Location",Toast.LENGTH_LONG).show();
+                }
+                else if (!loc.equals("")) {
+                    mMap.clear();
+                    Geocoder geocoder = new Geocoder(SearchLocation.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(loc, 5);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if(addressList.size()==0){
+                        Toast.makeText(SearchLocation.this,"Location not found, please enter the location again",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        for (int i = 0; i < addressList.size(); i++) {
+                            Address myAdress = addressList.get(i);
+                            LatLng latLng = new LatLng(myAdress.getLatitude(), myAdress.getLongitude());
+                            mo.position(latLng);
+                            mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            mo.title(loc);
+                            mMap.addMarker(mo);
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                            sorglat = myAdress.getLatitude();
+                            sorglog = myAdress.getLongitude();
+                        }
+                        onSearchClick = true;
+                    }
+                }
+            }
+        });
 
 
 
     }
 
-    public void getDirectionData(){
+    @Override
+    public void onBackPressed() {
 
-        String url = getDirectionUrl();
-        Object dataTransfer[] = new Object[2];
-        dataTransfer[0] = mMap;
-        dataTransfer[1] = url;
-//        dataTransfer[2] = destlatlng;
-        GetDirectionsData getDirectionsData = new GetDirectionsData(destlatlng);
-        getDirectionsData.execute(dataTransfer);
-        Toast.makeText(DirectionActivity.this, "Direction", Toast.LENGTH_LONG).show();
+        alertBuilder();
 
     }
 
-    private String getDirectionUrl() {
+    public void alertBuilder(){
 
-        StringBuilder directionUrl = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
-        directionUrl.append("origin=" + orglatitude + "," + orglongitude);
-        directionUrl.append("&destination=" + destlatitude + "," + destlongitude);
-        directionUrl.append("&key=" + "AIzaSyAEdRkdwVissmatsKvama28utF65K-4ZA8");
+        final AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
 
-        return directionUrl.toString();
+        alertDialog.setMessage("Are you sure you want to Edit your Location");
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("lat",sorglat);
+                returnIntent.putExtra("log",sorglog);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED, returnIntent);
+                finish();
+            }
+        });
+
+        AlertDialog alert=alertDialog.create();
+        alert.show();
+
 
     }
 
@@ -138,17 +192,52 @@ public class DirectionActivity extends AppCompatActivity implements
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        mfusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                if (task.isSuccessful()) {
+                    Location clocation = (Location) task.getResult();
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(clocation.getLatitude(), clocation.getLongitude())));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(orglatlng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(clocation.getLatitude(), clocation.getLongitude()));
+                    markerOptions.title("Current Location");
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    mMap.addMarker(markerOptions).showInfoWindow();
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(orglatlng);
-        markerOptions.title("Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(markerOptions).showInfoWindow();
+                    orglatitude = clocation.getLatitude();
+                    orglongitude = clocation.getLongitude();
 
+//                    else{
+//                        Toast.makeText(getActivity(),"Please wait",Toast.LENGTH_LONG).show();
+//                        getLocation();
+//                    }
+                } else {
+                    Toast.makeText(SearchLocation.this, "Current location not found check your gps", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap=googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        googleMap.setMyLocationEnabled(true);
+        getLocation();
+        View locationButton = ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+// position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 850, 30, 0);
+    }
+
 
 
 
@@ -186,29 +275,6 @@ public class DirectionActivity extends AppCompatActivity implements
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap=googleMap;
-//        googleMap.clear();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-//        googleMap.setMyLocationEnabled(true);
-        getLocation();
-
-        String url = getDirectionUrl();
-        Object dataTransfer[] = new Object[3];
-        dataTransfer[0] = googleMap;
-        dataTransfer[1] = url;
-        dataTransfer[2]=destName;
-//        dataTransfer[2] = destlatlng;
-        GetDirectionsData getDirectionsData = new GetDirectionsData(destlatlng);
-        getDirectionsData.execute(dataTransfer);
-        Toast.makeText(DirectionActivity.this, "Direction", Toast.LENGTH_LONG).show();
-
-    }
-
-    @Override
     public void onLocationChanged(Location location) {
 
     }
@@ -239,6 +305,7 @@ public class DirectionActivity extends AppCompatActivity implements
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
+
     }
 
     @Override
@@ -250,7 +317,6 @@ public class DirectionActivity extends AppCompatActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
 
     @Override
     protected void onResume() {
@@ -297,5 +363,4 @@ public class DirectionActivity extends AppCompatActivity implements
 
         mMapView.onSaveInstanceState(mapViewBundle);
     }
-
 }
