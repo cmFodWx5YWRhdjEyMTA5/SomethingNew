@@ -71,6 +71,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     FusedLocationProviderClient mfusedLocationProviderClient;
     Boolean onMarkerclick = false;
     Boolean onSearchClick=false;
+    Boolean onOffersClick=false;
     String click;
     Boolean mLocationPermissionGranted = false;
     Spinner spinner;
@@ -78,7 +79,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     TextView tvlocation;
     Geocoder geocoder;
     List<Address> addresses;
-    LinearLayout layup,laysearch;
+    LinearLayout layup,laysearch,layoffers;
     Animation infoup,infodown;
     TextView tvtitle,tvvic,tvback,tvdirec,tvviewoffers;
     LatLng endlatlng,orglatlng;
@@ -106,6 +107,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvdirec=view.findViewById(R.id.tvdirec);
         laysearch=view.findViewById(R.id.laysearch);
         tvviewoffers=view.findViewById(R.id.tvviewoffers);
+        layoffers=view.findViewById(R.id.offersup);
 //        btsearch=view.findViewById(R.id.btsearch);
         initGoogleMap(savedInstanceState);
 
@@ -130,23 +132,30 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvviewoffers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.view_offers_popup, null);
-                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
-               //instantiate popup window
-                popupWindow = new PopupWindow(customView, 650, 1000);
+//                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                View customView = layoutInflater.inflate(R.layout.view_offers_popup, null);
+//                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+//               //instantiate popup window
+//                popupWindow = new PopupWindow(customView, 650, 1000);
+//
+//               //display the popup window
+//                popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
+//
+//
+//               //close the popup window on button click
+//                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        popupWindow.dismiss();
+//                   }
+//               });
 
-               //display the popup window
-                popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
+                onOffersClick=true;
+                infoup=AnimationUtils.loadAnimation(getActivity(),R.anim.up_info);
+                layoffers.setVisibility(View.VISIBLE);
+                layoffers.setAnimation(infoup);
 
 
-               //close the popup window on button click
-                closePopupBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                   }
-               });
             }
         });
 
@@ -265,10 +274,17 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             @Override
             public void onClick(View v) {
 
-                infodown=AnimationUtils.loadAnimation(getActivity(),R.anim.down_info);
-                layup.setVisibility(View.GONE);
-                layup.setAnimation(infodown);
-                spinner.setEnabled(true);
+                if(tvviewoffers.isClickable()){
+                    infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
+                    layoffers.setVisibility(View.GONE);
+                    layoffers.setAnimation(infodown);
+                }
+                else {
+                    infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
+                    layup.setVisibility(View.GONE);
+                    layup.setAnimation(infodown);
+                    spinner.setEnabled(true);
+                }
             }
         });
 
@@ -423,12 +439,13 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             @Override
             public boolean onMarkerClick(Marker marker) {
 
+
                 String title=marker.getTitle();
                 String vicinity=marker.getSnippet();
                 endlatlng=marker.getPosition();
 
-                if(title.equals("Current Location")){
-
+                if(onOffersClick){
+                    onOffersClick=false;
                 }
                 else{
 
