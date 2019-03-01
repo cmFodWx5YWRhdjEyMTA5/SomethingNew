@@ -5,6 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,6 +23,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -139,10 +144,11 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 View customView = layoutInflater.inflate(R.layout.view_offers_popup, null);
                 Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
                //instantiate popup window
-                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow = new PopupWindow(customView, 650, 1000);
 
                //display the popup window
                 popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
+
 
                //close the popup window on button click
                 closePopupBtn.setOnClickListener(new View.OnClickListener() {
