@@ -81,12 +81,16 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     List<Address> addresses;
     LinearLayout layup,laysearch,layoffers;
     Animation infoup,infodown;
-    TextView tvtitle,tvvic,tvback,tvdirec,tvviewoffers;
+    TextView tvtitle,tvvic,tvback,tvdirec,tvviewoffers,tvboffer;
     LatLng endlatlng,orglatlng;
     LatLng searchLatlng;
     boolean searchout=false;
     String destName;
     PopupWindow popupWindow;
+
+    public boolean onBackPressed() {
+        return false;
+    }
 
 
     @Nullable
@@ -108,6 +112,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         laysearch=view.findViewById(R.id.laysearch);
         tvviewoffers=view.findViewById(R.id.tvviewoffers);
         layoffers=view.findViewById(R.id.offersup);
+        tvboffer=view.findViewById(R.id.tvboffer);
 //        btsearch=view.findViewById(R.id.btsearch);
         initGoogleMap(savedInstanceState);
 
@@ -271,6 +276,21 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 putIn.putExtra("end",endlatlng);
                 putIn.putExtra("name",destName);
                 startActivity(putIn);
+            }
+        });
+
+        tvboffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                infodown=AnimationUtils.loadAnimation(getActivity(),R.anim.down_info);
+                layoffers.setVisibility(View.GONE);
+                layoffers.setAnimation(infodown);
+
+                infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
+                layup.setVisibility(View.VISIBLE);
+                layup.setAnimation(infoup);
+
             }
         });
 
@@ -582,5 +602,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     public void onProviderDisabled(String provider) {
 
     }
+
+
 
 }
