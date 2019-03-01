@@ -126,7 +126,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
         spinner = (Spinner) view.findViewById(R.id.spin);
 
-        String dxyz;
 
         laysearch.setOnClickListener(new View.OnClickListener() {
             @Override
