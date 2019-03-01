@@ -149,7 +149,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                //display the popup window
                 popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
 
-
+                popupWindow.setBackgroundDrawable(null);
+                
                //close the popup window on button click
                 closePopupBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
