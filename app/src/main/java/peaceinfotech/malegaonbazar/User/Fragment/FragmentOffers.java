@@ -129,38 +129,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             }
         });
 
-        tvviewoffers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                View customView = layoutInflater.inflate(R.layout.view_offers_popup, null);
-//                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
-//               //instantiate popup window
-//                popupWindow = new PopupWindow(customView, 650, 1000);
-//
-//               //display the popup window
-//                popupWindow.showAtLocation(layup, Gravity.CENTER, 0, 0);
-//
-//
-//               //close the popup window on button click
-//                closePopupBtn.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        popupWindow.dismiss();
-//                   }
-//               });
-
-                onOffersClick=true;
-                infoup=AnimationUtils.loadAnimation(getActivity(),R.anim.up_info);
-                layoffers.setVisibility(View.VISIBLE);
-                layoffers.setAnimation(infoup);
-
-
-            }
-        });
-
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -261,30 +229,36 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     }
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
 
+
+        tvviewoffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                infodown=AnimationUtils.loadAnimation(getActivity(),R.anim.down_info);
+                layup.setVisibility(View.GONE);
+                layup.setAnimation(infodown);
+
+                infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
+                layoffers.setVisibility(View.VISIBLE);
+                layoffers.setAnimation(infoup);
+
+            }
         });
 
         tvback.setOnClickListener(new View.OnClickListener() {
             @RequiresApi
             @Override
             public void onClick(View v) {
-
-                if(tvviewoffers.isClickable()){
-                    infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
-                    layoffers.setVisibility(View.GONE);
-                    layoffers.setAnimation(infodown);
-                }
-                else {
-                    infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
-                    layup.setVisibility(View.GONE);
-                    layup.setAnimation(infodown);
-                    spinner.setEnabled(true);
-                }
+                infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
+                layup.setVisibility(View.GONE);
+                layup.setAnimation(infodown);
+                spinner.setEnabled(true);
             }
         });
 
@@ -444,20 +418,17 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 String vicinity=marker.getSnippet();
                 endlatlng=marker.getPosition();
 
-                if(onOffersClick){
-                    onOffersClick=false;
+                if(title.equals("Current Location")) {
                 }
-                else{
-
-                    infoup=AnimationUtils.loadAnimation(getActivity(),R.anim.up_info);
+                else {
+                    infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
                     layup.setVisibility(View.VISIBLE);
                     layup.setAnimation(infoup);
                     tvtitle.setText(title);
                     tvvic.setText(vicinity);
-
                     mMapView.setClickable(false);
-                    destName=title;
-                    onMarkerclick=true;
+                    destName = title;
+                    onMarkerclick = true;
                     spinner.setEnabled(false);
                 }
                 return true;
