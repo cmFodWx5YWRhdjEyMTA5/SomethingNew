@@ -37,9 +37,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-
-
-
         btsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
