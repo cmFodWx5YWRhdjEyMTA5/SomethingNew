@@ -427,16 +427,22 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 String vicinity=marker.getSnippet();
                 endlatlng=marker.getPosition();
 
-                infoup=AnimationUtils.loadAnimation(getActivity(),R.anim.up_info);
-                layup.setVisibility(View.VISIBLE);
-                layup.setAnimation(infoup);
-                tvtitle.setText(title);
-                tvvic.setText(vicinity);
+                if(title.equals("Current Location")){
 
-                mMapView.setClickable(false);
-                destName=title;
-                onMarkerclick=true;
-                spinner.setEnabled(false);
+                }
+                else{
+
+                    infoup=AnimationUtils.loadAnimation(getActivity(),R.anim.up_info);
+                    layup.setVisibility(View.VISIBLE);
+                    layup.setAnimation(infoup);
+                    tvtitle.setText(title);
+                    tvvic.setText(vicinity);
+
+                    mMapView.setClickable(false);
+                    destName=title;
+                    onMarkerclick=true;
+                    spinner.setEnabled(false);
+                }
                 return true;
             }
         });
