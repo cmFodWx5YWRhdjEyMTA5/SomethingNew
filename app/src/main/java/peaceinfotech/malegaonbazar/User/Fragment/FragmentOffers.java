@@ -116,7 +116,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvviewoffers=view.findViewById(R.id.tvviewoffers);
         layoffers=view.findViewById(R.id.offersup);
         tvboffer=view.findViewById(R.id.tvboffer);
-        recyclerView=view.findViewById(R.id.recycler);
+        recyclerView=view.findViewById(R.id.recycler_offers);
 //        btsearch=view.findViewById(R.id.btsearch);
         initGoogleMap(savedInstanceState);
 
@@ -259,6 +259,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layoffers.setVisibility(View.VISIBLE);
                 layoffers.setAnimation(infoup);
 
+                mMapView.setClickable(false);
+
                 for(int i=0;i<5;i++){
                     offersList.add(new OffersListModel("Offers Title","Get 20% off on first purchase","ss"));
                 }
@@ -277,6 +279,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
                 layup.setVisibility(View.GONE);
                 layup.setAnimation(infodown);
+
+                //chnaging the color
                 spinner.setEnabled(true);
                 laysearch.setEnabled(true);
                 tvlocation.setTextColor(Color.parseColor("#000000"));
@@ -380,6 +384,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             }
         });
     }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[],
@@ -395,6 +401,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             }
         }
     }
+
+
 
     protected synchronized void buildGoogleApiClient() {
         client = new GoogleApiClient.Builder(getActivity())
@@ -448,7 +456,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 String vicinity=marker.getSnippet();
                 endlatlng=marker.getPosition();
 
-                if(title.equals("Current Location")) {
+                if(title.equals("Current Location")||title.equals("Searched Location")) {
                 }
                 else {
                     infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
@@ -459,6 +467,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     mMapView.setClickable(false);
                     destName = title;
                     onMarkerclick = true;
+
+                    //change of color
                     spinner.setEnabled(false);
                     laysearch.setEnabled(false);
                     tvlocation.setTextColor(Color.parseColor("#CBCBCB"));
@@ -523,18 +533,35 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, log)));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(lat, log));
-        markerOptions.title("Searched Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(markerOptions).showInfoWindow();
+        if(orglatitude==lat&&orglongitude==log){
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(lat, log));
+            markerOptions.title("Current Location");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            mMap.addMarker(markerOptions).showInfoWindow();
 
-        sorglat=lat;
-        sorglog=log;
-        orglatitude = lat;
-        orglongitude = log;
+            sorglat=lat;
+            sorglog=log;
+            getGeocoder(orglatitude,orglongitude);
+        }
+        else{
 
-        getGeocoder(orglatitude,orglongitude);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(lat, log));
+            markerOptions.title("Searched Location");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            mMap.addMarker(markerOptions).showInfoWindow();
+
+            sorglat=lat;
+            sorglog=log;
+            orglatitude = lat;
+            orglongitude = log;
+
+            getGeocoder(orglatitude,orglongitude);
+
+        }
+
+
     }
 
     @Override
