@@ -487,9 +487,11 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 //Write your code if there's no result
                 mMap.clear();
                 if(searchout){
+                    spinner.setSelection(0);
                     searchNewLocation(sorglat,sorglog);
                 }
                 else{
+                    spinner.setSelection(0);
                     getLocation();
                     searchout=false;
                 }

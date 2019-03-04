@@ -13,7 +13,8 @@
         android:elevation="10dp"
         android:background="@color/color_toolbar_back"
         android:id="@+id/toolb"
-        app:titleTextColor="#ffffff" />
+        app:titleTextColor="#ffffff"
+        android:theme="@style/Theme.MyFancyTheme"/>
 
     <com.google.android.gms.maps.MapView
     android:layout_width="match_parent"

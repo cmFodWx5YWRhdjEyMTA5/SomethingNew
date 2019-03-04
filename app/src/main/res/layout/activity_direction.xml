@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/toold"
         app:titleTextColor="#ffffff"
-        android:background="@color/color_toolbar_back"/>
+        android:background="@color/color_toolbar_back"
+        android:theme="@style/Theme.MyFancyTheme"/>
 
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"

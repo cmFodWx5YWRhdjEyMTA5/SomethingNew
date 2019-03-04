@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@color/color_toolbar_back"
         android:id="@+id/offer_tool"
-        app:titleTextColor="#ffffff">
+        app:titleTextColor="#ffffff"
+        android:theme="@style/Theme.MyFancyTheme">
 
     </android.support.v7.widget.Toolbar>
 

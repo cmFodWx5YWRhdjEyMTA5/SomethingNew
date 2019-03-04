@@ -10,9 +10,9 @@
         android:width="4dp"
         android:color="#ff207d94"/>
 
-    <corners
-        android:topRightRadius="20dp"
-        android:topLeftRadius="20dp"/>
+    <!--<corners-->
+        <!--android:topRightRadius="20dp"-->
+        <!--android:topLeftRadius="20dp"/>-->
 
     <solid
         android:color="#ffffff"/>
