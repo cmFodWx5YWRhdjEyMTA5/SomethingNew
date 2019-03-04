@@ -88,9 +88,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     String destName;
     PopupWindow popupWindow;
 
-    public boolean onBackPressed() {
-        return false;
-    }
 
 
     @Nullable
@@ -264,6 +261,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layup.setVisibility(View.GONE);
                 layup.setAnimation(infodown);
                 spinner.setEnabled(true);
+                laysearch.setEnabled(true);
             }
         });
 
@@ -293,7 +291,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
             }
         });
-
 
 
         return view;
@@ -422,12 +419,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             mMap.clear();
             getLocation();
         }
-//        if(onSearchClick) {
-//            getSearchedLocation(searchLatlng);
-//        }
-//        else {
-//            getLocation();
-//        }
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -450,6 +441,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     destName = title;
                     onMarkerclick = true;
                     spinner.setEnabled(false);
+                    laysearch.setEnabled(false);
                 }
                 return true;
             }
@@ -474,8 +466,13 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
                 mMap.clear();
-                getLocation();
-                searchout=false;
+                if(searchout){
+                    searchNewLocation(sorglat,sorglog);
+                }
+                else{
+                    getLocation();
+                    searchout=false;
+                }
             }
         }
     }
@@ -580,6 +577,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Offers");
+
     }
 
     @Override
