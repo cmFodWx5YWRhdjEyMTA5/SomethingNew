@@ -169,7 +169,6 @@
                android:layout_height="wrap_content"
                android:id="@+id/tvtitle"
                android:textSize="30sp"
-               android:singleLine="true"
                android:layout_centerHorizontal="true"/>
 
            <TextView
