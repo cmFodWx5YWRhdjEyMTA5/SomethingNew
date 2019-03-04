@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".User.UI.OfferInformationActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_toolbar_back"
+        android:id="@+id/offer_tool"
+        app:titleTextColor="#ffffff">
+
+    </android.support.v7.widget.Toolbar>
+
 </RelativeLayout>
