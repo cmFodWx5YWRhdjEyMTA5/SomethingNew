@@ -45,7 +45,7 @@
             android:id="@+id/ivsearchlocation"
             android:layout_width="46dp"
             android:layout_height="32dp"
-            android:src="@drawable/user_marker" />
+            android:src="@drawable/search_location"/>
 
     </LinearLayout>
 

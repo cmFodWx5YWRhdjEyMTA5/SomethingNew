@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +55,8 @@ import java.util.List;
 import java.util.Locale;
 
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.User.OffersListAdapter;
+import peaceinfotech.malegaonbazar.User.OffersListModel;
 import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
 import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
@@ -86,8 +91,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     LatLng searchLatlng;
     boolean searchout=false;
     String destName;
-    PopupWindow popupWindow;
-
+    List<OffersListModel> offersList = new ArrayList<>();
+    RecyclerView recyclerView;
+    OffersListAdapter offersListAdapter;
 
 
     @Nullable
@@ -110,6 +116,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvviewoffers=view.findViewById(R.id.tvviewoffers);
         layoffers=view.findViewById(R.id.offersup);
         tvboffer=view.findViewById(R.id.tvboffer);
+        recyclerView=view.findViewById(R.id.recycler);
 //        btsearch=view.findViewById(R.id.btsearch);
         initGoogleMap(savedInstanceState);
 
@@ -122,6 +129,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
         spinner = (Spinner) view.findViewById(R.id.spin);
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
         laysearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,6 +259,14 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layoffers.setVisibility(View.VISIBLE);
                 layoffers.setAnimation(infoup);
 
+                for(int i=0;i<5;i++){
+                    offersList.add(new OffersListModel("Offers Title","Get 20% off on first purchase","ss"));
+                }
+
+                offersListAdapter = new OffersListAdapter(offersList,getActivity());
+                recyclerView.setAdapter(offersListAdapter);
+                offersListAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -262,6 +279,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layup.setAnimation(infodown);
                 spinner.setEnabled(true);
                 laysearch.setEnabled(true);
+                tvlocation.setTextColor(Color.parseColor("#000000"));
+
             }
         });
 
@@ -442,6 +461,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     onMarkerclick = true;
                     spinner.setEnabled(false);
                     laysearch.setEnabled(false);
+                    tvlocation.setTextColor(Color.parseColor("#CBCBCB"));
                 }
                 return true;
             }

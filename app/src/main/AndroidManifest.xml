@@ -34,8 +34,9 @@
         <activity
             android:name=".Vendor.VendorActivity"
             android:label="@string/title_activity_vendor"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".User.UI.DirectionActivity"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".User.UI.DirectionActivity" />
+        <activity android:name=".User.UI.OfferInformationActivity"></activity>
     </application>
 
 </manifest>
