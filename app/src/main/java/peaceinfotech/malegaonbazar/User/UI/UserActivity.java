@@ -262,18 +262,4 @@ public class UserActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if(checkMapServices()){
-            if(mLocationPermissionGranted){
-                return;
-            }
-            else{
-                getLocationPermission();
-            }
-        }
-
-    }
 }
