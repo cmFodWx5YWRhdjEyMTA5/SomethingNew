@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,23 +8,23 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"/>
+        android:clickable="true" />
 
 
     <LinearLayout
         android:layout_width="310dp"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="75dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="75dp"
         android:background="@drawable/search_back"
-        android:layout_centerHorizontal="true"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spin"
@@ -36,30 +35,29 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/laysearch"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/search_back"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
         android:elevation="10dp"
-        android:id="@+id/laysearch">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tvlocation"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:singleLine="true"
-            android:textSize="15sp"
-            android:id="@+id/tvlocation"
             android:textColor="#000000"
-            />
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/searchlocation"
@@ -70,41 +68,41 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="310dp"
-        android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/info_background"
-        android:visibility="gone"
         android:id="@+id/layup"
-        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/info_background"
         android:clickable="true"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BACK"
-                android:textColor="#000000"
                 android:layout_margin="20dp"
-                android:id="@+id/tvback"
-                />
+                android:text="BACK"
+                android:textColor="#000000" />
 
             <TextView
+                android:id="@+id/tvdirec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tvback"
-                android:layout_marginTop="20dp"
-                android:text="DIRECTION"
-                android:textColor="#000000"
                 android:layout_marginLeft="140dp"
-                android:id="@+id/tvdirec"/>
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tvback"
+                android:text="DIRECTION"
+                android:textColor="#000000" />
 
         </RelativeLayout>
+        w
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -113,17 +111,17 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@drawable/banner_img"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:src="@drawable/banner_img" />
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_width="100dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/profilephoto"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:src="@drawable/profilephoto" />
 
         </RelativeLayout>
 
@@ -135,34 +133,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="15dp">
 
 
                 <TextView
+                    android:id="@+id/tvtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvtitle"
-                    android:textSize="30sp"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textSize="30sp" />
 
                 <TextView
+                    android:id="@+id/tvvic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvtitle"
                     android:layout_centerHorizontal="true"
-                    android:textSize="20sp"
                     android:layout_margin="30dp"
-                    android:id="@+id/tvvic"/>
+                    android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tvviewoffers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:text="View Offers"
-                    android:id="@+id/tvviewoffers"
-                    android:textColor="#3457D2"
-                    android:layout_centerHorizontal="true"/>
+                    android:textColor="#3457D2" />
 
 
             </LinearLayout>
@@ -172,34 +170,34 @@
 
 
     <LinearLayout
+        android:id="@+id/offersup"
         android:layout_width="310dp"
         android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:id="@+id/offersup"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/info_background"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:background="@drawable/info_background">
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvboffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BACK"
-                android:textColor="#000000"
                 android:layout_margin="20dp"
-                android:id="@+id/tvboffer"/>
+                android:text="BACK"
+                android:textColor="#000000" />
 
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_offers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/recycler_offers"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
 
 
