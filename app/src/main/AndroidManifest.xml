@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Vendor.Fragment.FragmentOfferList"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -36,7 +38,7 @@
             android:label="@string/title_activity_vendor"
             android:theme="@style/AppTheme" />
         <activity android:name=".User.UI.DirectionActivity" />
-        <activity android:name=".User.UI.OfferInformationActivity"></activity>
+        <activity android:name=".User.UI.OfferInformationActivity" />
     </application>
 
 </manifest>

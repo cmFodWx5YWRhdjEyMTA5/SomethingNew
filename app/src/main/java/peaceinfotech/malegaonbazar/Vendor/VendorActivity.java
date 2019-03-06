@@ -19,7 +19,8 @@ import android.view.WindowManager;
 import peaceinfotech.malegaonbazar.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOfferList;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentProfile;
 
 public class VendorActivity extends AppCompatActivity
@@ -41,6 +42,8 @@ public class VendorActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        menuItemsSelected(R.id.nav_vendor_profile);
     }
 
     @Override
@@ -68,9 +71,6 @@ public class VendorActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -89,7 +89,7 @@ public class VendorActivity extends AppCompatActivity
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("Log-Out");
-        builder.setMessage("Are you sure ypu want to Log-Out");
+        builder.setMessage("Are you sure you want to Log-Out");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -109,12 +109,14 @@ public class VendorActivity extends AppCompatActivity
         Fragment fragment=null;
 
         switch (item){
-            case R.id.nav_profile:
+            case R.id.nav_vendor_profile:
                 fragment=new FragmentProfile();
                 break;
-            case R.id.nav_offers:
-                fragment=new FragmentOffers();
+            case R.id.nav_add_offers:
+                fragment=new FragmentAddOffers();
                 break;
+            case R.id.nav_offers_list:
+                fragment=new FragmentOfferList();
             case R.id.nav_logout:
                 alertDialog.show();
         }
