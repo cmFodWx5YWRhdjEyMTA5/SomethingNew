@@ -75,21 +75,13 @@
     </LinearLayout>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bt_preview"
-        android:text="Preview Offer"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/linear_lay"
-        android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bt_add_offer"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bt_preview"
+        android:layout_below="@+id/linear_lay"
         android:layout_marginTop="10dp"
         android:text="Add Offer"/>
 </RelativeLayout>

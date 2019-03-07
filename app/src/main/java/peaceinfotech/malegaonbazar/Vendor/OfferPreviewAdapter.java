@@ -28,7 +28,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer;
+        public TextView offertitle,offer,min,max;
         public ImageView image;
         public Button getbutton;
 
@@ -38,6 +38,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             offertitle=view.findViewById(R.id.tvoffertitle);
             offer=view.findViewById(R.id.tvoffer);
             image=view.findViewById(R.id.imgoffer);
+            min=view.findViewById(R.id.et_min);
+            max=view.findViewById(R.id.et_max);
             getbutton=view.findViewById(R.id.btoffer);
         }
     }
@@ -54,7 +56,12 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     @Override
     public void onBindViewHolder(@NonNull PreviewHolder holder, int i) {
 
+        final OfferPreviewModel offers = offerPreviewList.get(i);
 
+        holder.offertitle.setText(offers.getOffersName());
+        holder.offer.setText(offers.getOffer());
+        holder.min.setText(offers.getMin());
+        holder.max.setText(offers.getMax());
     }
 
     @Override

@@ -88,7 +88,7 @@ public class VendorActivity extends AppCompatActivity
     private void menuItemsSelected(Integer item) {
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("Log-Out");
+        builder.setTitle("Log Out");
         builder.setMessage("Are you sure you want to Log-Out");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
@@ -117,6 +117,7 @@ public class VendorActivity extends AppCompatActivity
                 break;
             case R.id.nav_offers_list:
                 fragment=new FragmentOfferList();
+                break;
             case R.id.nav_logout:
                 alertDialog.show();
         }

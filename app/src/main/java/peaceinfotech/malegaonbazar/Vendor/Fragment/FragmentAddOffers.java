@@ -32,7 +32,7 @@ public class FragmentAddOffers extends Fragment {
         etdesc=view.findViewById(R.id.et_descp);
         etmin=view.findViewById(R.id.et_min);
         etmax=view.findViewById(R.id.et_max);
-        preview=view.findViewById(R.id.bt_preview);
+
         add=view.findViewById(R.id.bt_add_offer);
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,6 @@ public class FragmentAddOffers extends Fragment {
                 final String max=etmax.getText().toString();
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                builder.setTitle("Log-Out");
                 builder.setMessage("Are you sure you want to add the offers");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -60,8 +59,8 @@ public class FragmentAddOffers extends Fragment {
 
                     }
                 });
-
-
+                final AlertDialog alert = builder.create();
+                alert.show();
 
             }
         });

@@ -53,10 +53,10 @@ public class SaveSharedPreference {
 
         List list = new ArrayList<>();
 
-        list.add(getPreferences(context).getString(KEY_TITLE,""));
-        list.add(getPreferences(context).getString(KEY_DESC,""));
-        list.add(getPreferences(context).getString(KEY_MIN,""));
-        list.add(getPreferences(context).getString(KEY_MAX,""));
+        list.add(0,getPreferences(context).getString(KEY_TITLE,""));
+        list.add(1,getPreferences(context).getString(KEY_DESC,""));
+        list.add(2,getPreferences(context).getString(KEY_MIN,""));
+        list.add(3,getPreferences(context).getString(KEY_MAX,""));
 
         return list;
     }

@@ -7,10 +7,18 @@
     tools:context=".Vendor.Fragment.FragmentOfferList">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/preview_recycler"
-        android:layout_centerHorizontal="true"
-        tools:listitem="@layout/offers_list_item"/>
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/preview_recycler"
+        android:layout_marginTop="20dp"
+        android:id="@+id/demo"
+        android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>

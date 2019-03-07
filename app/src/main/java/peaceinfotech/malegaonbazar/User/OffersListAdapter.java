@@ -28,7 +28,7 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
 
     public class MyviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer;
+        public TextView offertitle,offer,min,max;
         public ImageView image;
         public Button getbutton;
 
@@ -39,6 +39,8 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
             offer=view.findViewById(R.id.tvoffer);
             image=view.findViewById(R.id.imgoffer);
             getbutton=view.findViewById(R.id.btoffer);
+            min=view.findViewById(R.id.et_min);
+            max=view.findViewById(R.id.et_max);
 
         }
     }
