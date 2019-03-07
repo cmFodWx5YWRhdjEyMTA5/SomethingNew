@@ -22,6 +22,7 @@ import peaceinfotech.malegaonbazar.Vendor.VendorActivity;
 
 public class FragmentAddOffers extends Fragment {
     TextInputEditText ettitle,etdesc,etmin,etmax;
+
     Button preview,add;
     @Nullable
     @Override

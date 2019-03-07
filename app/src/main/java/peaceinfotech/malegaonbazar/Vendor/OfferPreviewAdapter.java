@@ -26,6 +26,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     }
 
 
+
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
         public TextView offertitle,offer,min,max;
@@ -38,8 +39,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             offertitle=view.findViewById(R.id.tvoffertitle);
             offer=view.findViewById(R.id.tvoffer);
             image=view.findViewById(R.id.imgoffer);
-            min=view.findViewById(R.id.et_min);
-            max=view.findViewById(R.id.et_max);
+            min=view.findViewById(R.id.tv_min);
+            max=view.findViewById(R.id.tv_max);
             getbutton=view.findViewById(R.id.btoffer);
         }
     }
@@ -62,6 +63,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.offer.setText(offers.getOffer());
         holder.min.setText(offers.getMin());
         holder.max.setText(offers.getMax());
+
+
     }
 
     @Override

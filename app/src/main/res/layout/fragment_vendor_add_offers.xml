@@ -51,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Minimum Transaction"
+                android:inputType="number"
                 android:padding="10dp"
                 android:textSize="20sp"
                 android:id="@+id/et_min"/>
@@ -68,7 +69,8 @@
                 android:hint="Maximum Transaction"
                 android:padding="10dp"
                 android:textSize="20sp"
-                android:id="@+id/et_max"/>
+                android:id="@+id/et_max"
+                android:inputType="number"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -83,5 +85,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/linear_lay"
         android:layout_marginTop="10dp"
-        android:text="Add Offer"/>
+        android:text="Add Offer"
+        android:background="@drawable/btsubmit_back"
+        android:textColor="#ffffff"/>
 </RelativeLayout>

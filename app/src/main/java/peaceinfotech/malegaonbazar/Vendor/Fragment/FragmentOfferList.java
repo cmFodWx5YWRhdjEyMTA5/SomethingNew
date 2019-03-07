@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class FragmentOfferList extends Fragment {
     RecyclerView recyclerView;
     OfferPreviewAdapter offerPreviewAdapter;
     TextView textView;
-    int c=1;
+    int i=0;
 
     @Nullable
     @Override
@@ -48,15 +49,17 @@ public class FragmentOfferList extends Fragment {
         String min=getList.get(2);
         String max=getList.get(3);
 
-        textView.setText(title);
+        if(!title.isEmpty()&&!desc.isEmpty()&&!min.isEmpty()&&!max.isEmpty()) {
 
-        for(int i=0;i<c;i++) {
-            offerList.add(new OfferPreviewModel(title,desc,"1",min,max));
+            offerList.add(new OfferPreviewModel(title, desc, "1", min, max));
+//
+            offerPreviewAdapter = new OfferPreviewAdapter(offerList, getActivity());
+            recyclerView.setAdapter(offerPreviewAdapter);
+            offerPreviewAdapter.notifyItemInserted(i++);
         }
-
-        offerPreviewAdapter= new OfferPreviewAdapter(offerList,getActivity());
-        recyclerView.setAdapter(offerPreviewAdapter);
-        offerPreviewAdapter.notifyDataSetChanged();
+        else{
+            Toast.makeText(getActivity(),"Some Error Please Restart the application",Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }
