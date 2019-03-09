@@ -85,10 +85,12 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        offerPreviewList.remove(i);
                         mdb.DeleteData(uid);
+
                         notifyItemRemoved(i);
-//                        notifyItemRangeRemoved(i,getItemCount());
                         notifyDataSetChanged();
+
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -108,5 +110,9 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     public int getItemCount() {
         return offerPreviewList.size();
     }
+
+
+
+
 
 }

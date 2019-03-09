@@ -58,19 +58,6 @@ public class FragmentOfferList extends Fragment {
             offerPreviewAdapter.notifyDataSetChanged();
         }
 
-
-//        if (!title.isEmpty() && !desc.isEmpty() && !min.isEmpty() && !max.isEmpty()) {
-//
-//
-////
-//
-//        } else {
-//            Toast.makeText(getActivity(), "Some Error Please Restart the application", Toast.LENGTH_LONG).show();
-//        }
-
-
-
-
         return view;
     }
 
@@ -79,4 +66,29 @@ public class FragmentOfferList extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Offers List");
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+      //  reloadRecycle();
+
+    }
+
+    public void reloadRecycle(){
+        Cursor res=myDb.GetAllOffers();
+
+        if(res.getCount()==0){
+            Toast.makeText(getActivity(),"No offers to Show",Toast.LENGTH_LONG).show();
+        }
+        else {
+            while (res.moveToNext()) {
+                offerList.add(new OfferPreviewModel(res.getString(0),res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)));
+            }
+            offerPreviewAdapter = new OfferPreviewAdapter(offerList, getActivity());
+            recyclerView.setAdapter(offerPreviewAdapter);
+            offerPreviewAdapter.notifyDataSetChanged();
+        }
+    }
+
 }
