@@ -49,7 +49,7 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
     @Override
     public MyviewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View itemView=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.offers_list_item,viewGroup,false);
+        View itemView=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.offers_list_item_user,viewGroup,false);
 
         return new MyviewHolder(itemView);
     }

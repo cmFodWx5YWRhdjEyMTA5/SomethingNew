@@ -207,7 +207,7 @@ public class UserActivity extends AppCompatActivity
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("Log-Out");
-        builder.setMessage("Are you sure ypu want to Log-Out");
+        builder.setMessage("Are you sure you want to Log-Out");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
