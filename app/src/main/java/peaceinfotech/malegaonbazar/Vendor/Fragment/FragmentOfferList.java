@@ -1,5 +1,6 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,19 +16,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.OfferPreviewAdapter;
 import peaceinfotech.malegaonbazar.Vendor.OfferPreviewModel;
 
 public class FragmentOfferList extends Fragment {
 
 
-    List<String> getList = new ArrayList<>();
+
     List<OfferPreviewModel> offerList=new ArrayList<>();
     RecyclerView recyclerView;
     OfferPreviewAdapter offerPreviewAdapter;
     TextView textView;
+    DatabaseHelper myDb;
 
     @Nullable
     @Override
@@ -37,22 +39,25 @@ public class FragmentOfferList extends Fragment {
 
         recyclerView=view.findViewById(R.id.preview_recycler);
         textView=view.findViewById(R.id.demo);
+        myDb=new DatabaseHelper(getActivity());
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        getList=SaveSharedPreference.getNewOffers(getActivity());
+        Cursor res=myDb.GetAllOffers();
 
-        String title=getList.get(0);
-        String desc=getList.get(1);
-        String min=getList.get(2);
-        String max=getList.get(3);
-
-        for(int i=0;i<5;i++) {
-
-            offerList.add(i,new OfferPreviewModel(title, desc, "1", min, max));
-
+        if(res.getCount()==0){
+            Toast.makeText(getActivity(),"No offers to Show",Toast.LENGTH_LONG).show();
         }
+        else {
+            while (res.moveToNext()) {
+                offerList.add(new OfferPreviewModel(res.getString(0),res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)));
+            }
+            offerPreviewAdapter = new OfferPreviewAdapter(offerList, getActivity());
+            recyclerView.setAdapter(offerPreviewAdapter);
+            offerPreviewAdapter.notifyDataSetChanged();
+        }
+
 
 //        if (!title.isEmpty() && !desc.isEmpty() && !min.isEmpty() && !max.isEmpty()) {
 //
@@ -63,9 +68,7 @@ public class FragmentOfferList extends Fragment {
 //            Toast.makeText(getActivity(), "Some Error Please Restart the application", Toast.LENGTH_LONG).show();
 //        }
 
-        offerPreviewAdapter = new OfferPreviewAdapter(offerList, getActivity());
-        recyclerView.setAdapter(offerPreviewAdapter);
-        offerPreviewAdapter.notifyDataSetChanged();
+
 
 
         return view;

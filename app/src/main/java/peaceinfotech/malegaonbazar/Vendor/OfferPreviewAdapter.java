@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
@@ -26,6 +27,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     List<OfferPreviewModel> offerPreviewList;
     Context context;
+    Boolean deleteClick=false;
 
     public OfferPreviewAdapter(List<OfferPreviewModel> offerPreviewList, Context context) {
         this.offerPreviewList = offerPreviewList;
@@ -66,11 +68,13 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     public void onBindViewHolder(@NonNull final PreviewHolder holder, final int i) {
 
         final OfferPreviewModel offers = offerPreviewList.get(i);
+        final DatabaseHelper mdb=new DatabaseHelper(context);
 
         holder.offertitle.setText(offers.getOffersName());
         holder.offer.setText(offers.getOffer());
         holder.min.setText(offers.getMin());
         holder.max.setText(offers.getMax());
+        final String uid=offers.getUid();
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +85,10 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        mdb.DeleteData(uid);
                         notifyItemRemoved(i);
+//                        notifyItemRangeRemoved(i,getItemCount());
+                        notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
