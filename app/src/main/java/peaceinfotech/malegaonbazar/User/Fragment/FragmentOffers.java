@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import peaceinfotech.malegaonbazar.OnBackPressedListener;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.User.OffersListAdapter;
 import peaceinfotech.malegaonbazar.User.OffersListModel;
@@ -61,7 +62,7 @@ import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
 import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
 
-public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener {
+public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener{
 
     GoogleMap mMap;
 
@@ -577,6 +578,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             // You might consider using Bundle.putStringArray() instead
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -646,6 +649,20 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void onBackPressed() {
+        if (layoffers.getVisibility()==View.VISIBLE||layup.getVisibility()==View.VISIBLE) {
+            if(layoffers.getVisibility()==View.VISIBLE){
+                layoffers.setVisibility(View.GONE);
+            }
+            else if(layup.getVisibility()==View.VISIBLE){
+                layup.setVisibility(View.GONE);
+            }
+        }
+        else {
+            getActivity().finish();
+        }
     }
 
 

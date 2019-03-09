@@ -202,8 +202,7 @@
             android:id="@+id/recycler_offers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            tools:listitem="@layout/offers_list_item_user"/>
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
 
 

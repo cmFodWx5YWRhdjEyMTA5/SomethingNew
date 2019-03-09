@@ -11,17 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:background="@color/color_toolbar_back"
+        android:background="@color/colorPrimary"
         android:id="@+id/toolb"
         app:titleTextColor="#ffffff"
         android:theme="@style/Theme.MyFancyTheme"/>
 
     <com.google.android.gms.maps.MapView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="57dp"
-        android:id="@+id/searchMapView"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/searchMapView"
+        android:layout_below="@+id/toolb"
+        />
 
     <LinearLayout
         android:layout_width="320dp"

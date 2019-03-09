@@ -6,7 +6,6 @@
         android:orientation="vertical"
         android:elevation="10dp"
         android:layout_margin="10dp"
-
         android:background="@drawable/offers_list_background">
 
     <LinearLayout
