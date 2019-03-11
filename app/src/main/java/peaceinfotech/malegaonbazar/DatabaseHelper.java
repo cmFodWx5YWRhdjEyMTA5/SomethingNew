@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    final public static String COL_5="MAX";
    final public static String COL_6="DETAILS";
    final public static String COL_7="START_DATE";
-   final public static String COL_8="END_DATE";
+   final public static String COL_8="EXPIRY_DATE";
 
 
     public DatabaseHelper(Context context) {
@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table "+TABLE_NAME+"("+COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT,"+COL_2+" TEXT,"+COL_3+" TEXT,"+COL_4+" TEXT,"+COL_5+" TEXT,"+COL_6+" TEXT)");
+        db.execSQL("create table "+TABLE_NAME+"("+COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT,"+COL_2+" TEXT,"+COL_3+" TEXT,"+COL_4+" TEXT,"+COL_5+" TEXT,"+COL_6+" TEXT,"+COL_7+" TEXT,"+COL_8+" TEXT)");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean InsertData (String title,String desc,String min,String max,String details){
+    public boolean InsertData (String title,String desc,String min,String max,String details,String startDate,String exDate){
         SQLiteDatabase db=this.getWritableDatabase();
 
         ContentValues contentValues=new ContentValues();
@@ -45,6 +45,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_4,min);
         contentValues.put(COL_5,max);
         contentValues.put(COL_6,details);
+        contentValues.put(COL_7,startDate);
+        contentValues.put(COL_8,exDate);
         Long result= db.insert(TABLE_NAME,null,contentValues);
         if(result==-1){
             return false;

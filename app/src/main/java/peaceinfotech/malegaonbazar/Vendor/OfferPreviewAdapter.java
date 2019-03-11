@@ -36,7 +36,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer,min,max,delete;
+        public TextView offertitle,offer,min,max,delete,start,expiry;
         public ImageView image;
         public Button getbutton;
         public LinearLayout linearMain;
@@ -51,6 +51,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             max=view.findViewById(R.id.tv_max);
             getbutton=view.findViewById(R.id.btoffer);
             delete=view.findViewById(R.id.tv_delete);
+            start=view.findViewById(R.id.tv_st_date);
+            expiry=view.findViewById(R.id.tv_ex_date);
             linearMain=view.findViewById(R.id.linear_main);
         }
     }
@@ -74,6 +76,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.offer.setText(offers.getOffer());
         holder.min.setText(offers.getMin());
         holder.max.setText(offers.getMax());
+        holder.start.setText(offers.getStart_date());
+        holder.expiry.setText(offers.getEnd_date());
         final String uid=offers.getUid();
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +91,6 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                     public void onClick(DialogInterface dialog, int which) {
                         offerPreviewList.remove(i);
                         mdb.DeleteData(uid);
-
                         notifyItemRemoved(i);
                         notifyDataSetChanged();
 
@@ -105,14 +108,9 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         });
     }
 
-
     @Override
     public int getItemCount() {
         return offerPreviewList.size();
     }
-
-
-
-
 
 }

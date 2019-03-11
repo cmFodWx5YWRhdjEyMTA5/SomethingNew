@@ -1,5 +1,6 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.LoginActivity;
@@ -22,7 +26,7 @@ import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.VendorActivity;
 
 public class FragmentAddOffers extends Fragment {
-    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails;
+    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry;
     DatabaseHelper myDb;
 
     Button preview,add;
@@ -38,8 +42,65 @@ public class FragmentAddOffers extends Fragment {
         etmax=view.findViewById(R.id.et_max);
         etdetails=view.findViewById(R.id.et_details);
         add=view.findViewById(R.id.bt_add_offer);
+        etstart=view.findViewById(R.id.et_date_start);
+        etexpiry=view.findViewById(R.id.et_date_end);
 
         myDb=new DatabaseHelper(getActivity());
+
+        etstart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Calendar c = Calendar.getInstance();
+
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                if (monthOfYear + 1 > 9)
+                                    etstart.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                else
+                                    etstart.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+        etexpiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Calendar c = Calendar.getInstance();
+
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                if (monthOfYear + 1 > 9)
+                                    etexpiry.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                else
+                                    etexpiry.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +116,7 @@ public class FragmentAddOffers extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString());
+                        myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString(),etstart.getText().toString(),etexpiry.getText().toString());
                         Toast.makeText(getActivity(),"Offer Added Successfully",Toast.LENGTH_LONG).show();
                     }
                 });
