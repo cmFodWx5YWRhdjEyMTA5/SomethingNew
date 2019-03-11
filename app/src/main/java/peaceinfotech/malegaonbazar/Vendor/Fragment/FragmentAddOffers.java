@@ -58,7 +58,7 @@ public class FragmentAddOffers extends Fragment {
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),R.style.datepickerCustom,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -85,7 +85,7 @@ public class FragmentAddOffers extends Fragment {
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),R.style.datepickerCustom,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
