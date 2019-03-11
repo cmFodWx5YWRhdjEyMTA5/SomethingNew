@@ -16,6 +16,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    final public static String COL_4="MIN";
    final public static String COL_5="MAX";
    final public static String COL_6="DETAILS";
+   final public static String COL_7="START_DATE";
+   final public static String COL_8="END_DATE";
 
 
     public DatabaseHelper(Context context) {
