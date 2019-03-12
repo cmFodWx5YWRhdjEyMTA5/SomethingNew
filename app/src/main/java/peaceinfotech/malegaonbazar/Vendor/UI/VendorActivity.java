@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.Vendor;
+package peaceinfotech.malegaonbazar.Vendor.UI;
 
 import android.content.DialogInterface;
 import android.content.Intent;

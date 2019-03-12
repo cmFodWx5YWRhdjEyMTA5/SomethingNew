@@ -14,7 +14,6 @@ import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
-import peaceinfotech.malegaonbazar.Vendor.VendorActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
