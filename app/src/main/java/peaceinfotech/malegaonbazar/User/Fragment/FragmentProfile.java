@@ -24,7 +24,7 @@ public class FragmentProfile extends Fragment {
         View view=inflater.inflate(R.layout.fragment_user_profile,container,false);
         TextView textView=view.findViewById(R.id.textView2);
 
-        textView.setText("UserRef"+random.nextInt(10000));
+        textView.setText("UseRef"+random.nextInt(10000));
         return view;
     }
 

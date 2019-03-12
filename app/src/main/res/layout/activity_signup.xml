@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:id="@+id/laymobile"
+        android:id="@+id/lay_reference"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

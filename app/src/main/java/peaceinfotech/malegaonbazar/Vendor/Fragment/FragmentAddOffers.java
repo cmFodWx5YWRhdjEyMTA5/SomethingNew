@@ -2,8 +2,6 @@ package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,10 +18,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
-import peaceinfotech.malegaonbazar.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.Vendor.VendorActivity;
 
 public class FragmentAddOffers extends Fragment {
     TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry;

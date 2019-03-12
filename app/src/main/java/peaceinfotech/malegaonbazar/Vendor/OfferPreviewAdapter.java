@@ -2,12 +2,10 @@ package peaceinfotech.malegaonbazar.Vendor;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -20,10 +18,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
-import peaceinfotech.malegaonbazar.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 
 public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapter.PreviewHolder> {
 

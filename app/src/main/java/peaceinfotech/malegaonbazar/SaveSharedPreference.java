@@ -17,6 +17,7 @@ public class SaveSharedPreference {
     final public static String KEY_MAX="max";
     final public static String KEY_USERREF="userref";
     final public static String KEY_VENREF="venref";
+    final public static String KEY_FIRST_TIME="first_time";
 
     public static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -85,6 +86,15 @@ public class SaveSharedPreference {
     }
 
 
+    public static void setFirstTimeLaunch(Context context,Boolean put){
+        SharedPreferences.Editor editor=getPreferences(context).edit();
+        editor.putBoolean(KEY_FIRST_TIME,put);
+        editor.apply();
+    }
+
+    public static boolean getFirstTimeLaunch(Context context){
+        return getPreferences(context).getBoolean(KEY_FIRST_TIME,false);
+    }
 
 
 }

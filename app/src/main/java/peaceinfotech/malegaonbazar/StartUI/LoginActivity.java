@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar;
+package peaceinfotech.malegaonbazar.StartUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
-import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.VendorActivity;
 
 public class LoginActivity extends AppCompatActivity {

@@ -22,7 +22,7 @@ public class FragmentProfile extends Fragment {
         View view=inflater.inflate(R.layout.fragment_vendor_profile,container,false);
 
         TextView textView=view.findViewById(R.id.textView3);
-        textView.setText("vendorref"+random.nextInt(10000));
+        textView.setText("VenRef"+random.nextInt(10000));
         return view;
     }
 
