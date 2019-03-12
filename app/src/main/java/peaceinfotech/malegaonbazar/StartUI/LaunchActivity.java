@@ -32,6 +32,7 @@ public class LaunchActivity extends AppCompatActivity {
         tvSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SaveSharedPreference.setFirstTimeLaunch(LaunchActivity.this,true);
                 startActivity(new Intent(LaunchActivity.this,LoginActivity.class));
                 finish();
             }
