@@ -1,7 +1,9 @@
 package peaceinfotech.malegaonbazar.Signup;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.SaveSharedPreference;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
@@ -23,6 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     String type;
     LinearLayout userlay;
     ScrollView vendorlay;
+
+    Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+
                 finish();
             }
         });
@@ -87,12 +96,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(pass.equals(repass)){
+                        String userReferenceId="userref"+rand.nextInt(10000);
+                        SaveSharedPreference.setUserReference(RegisterActivity.this,userReferenceId);
                         alertDialog.show();
                     }
                     else{
                         Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
+
+
             }
         });
 
@@ -115,13 +128,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(pass.equals(repass)){
+                        String vendorReferenceId="venref"+rand.nextInt(10000);;
+                        SaveSharedPreference.setVendorReference(RegisterActivity.this,vendorReferenceId);
                         alertDialog.show();
                     }
                     else{
                         Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
-
 
             }
         });

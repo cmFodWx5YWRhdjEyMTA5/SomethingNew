@@ -15,6 +15,8 @@ public class SaveSharedPreference {
     final public static String KEY_DESC="desc";
     final public static String KEY_MIN="min";
     final public static String KEY_MAX="max";
+    final public static String KEY_USERREF="userref";
+    final public static String KEY_VENREF="venref";
 
     public static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -59,6 +61,27 @@ public class SaveSharedPreference {
         list.add(3,getPreferences(context).getString(KEY_MAX,""));
 
         return list;
+    }
+
+
+    public static void  setUserReference (Context context,String string){
+        SharedPreferences.Editor editor=getPreferences(context).edit();
+        editor.putString(KEY_USERREF,string);
+        editor.apply();
+    }
+
+    public static String getUserReference(Context context){
+        return getPreferences(context).getString(KEY_USERREF,"nothing");
+    }
+
+    public static void setVendorReference(Context context,String string){
+        SharedPreferences.Editor editor=getPreferences(context).edit();
+        editor.putString(KEY_VENREF,string);
+        editor.apply();
+    }
+
+    public static String getVendorReference(Context context){
+        return getPreferences(context).getString(KEY_VENREF,"nothing");
     }
 
 
