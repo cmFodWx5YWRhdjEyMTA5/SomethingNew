@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Random;
+
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 
 public class FragmentProfile extends Fragment {
+    Random random=new Random();
 
     @Nullable
     @Override
@@ -21,7 +24,7 @@ public class FragmentProfile extends Fragment {
         View view=inflater.inflate(R.layout.fragment_user_profile,container,false);
         TextView textView=view.findViewById(R.id.textView2);
 
-        textView.setText(SaveSharedPreference.getVendorReference(getActivity()));
+        textView.setText("UserRef"+random.nextInt(10000));
         return view;
     }
 

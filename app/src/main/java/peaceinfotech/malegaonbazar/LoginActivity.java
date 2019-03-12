@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         warn=findViewById(R.id.tvwarn);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())){
-            startActivity(new Intent(LoginActivity.this,UserActivity.class));
+            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
             finish();
         }
 
@@ -58,12 +58,12 @@ public class LoginActivity extends AppCompatActivity {
                         if(warn.getVisibility()==View.VISIBLE){
                             warn.setVisibility(View.GONE);
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                            startActivity(new Intent(LoginActivity.this, VendorActivity.class));
                             finish();
                         }
                         else {
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                            startActivity(new Intent(LoginActivity.this, VendorActivity.class));
                             finish();
                         }
                     }

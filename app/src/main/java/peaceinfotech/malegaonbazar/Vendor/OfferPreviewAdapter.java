@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -89,11 +91,14 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        Animation exit= AnimationUtils.loadAnimation(context,R.anim.left_swipe);
+                        holder.linearMain.startAnimation(exit);
+                        holder.linearMain.setVisibility(View.GONE);
                         offerPreviewList.remove(i);
                         mdb.DeleteData(uid);
                         notifyItemRemoved(i);
                         notifyDataSetChanged();
-
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
