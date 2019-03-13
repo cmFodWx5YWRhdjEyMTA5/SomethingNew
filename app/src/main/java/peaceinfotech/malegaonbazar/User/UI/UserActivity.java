@@ -79,7 +79,7 @@ public class UserActivity extends AppCompatActivity
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("This application requires GPS to work properly, do you want to enable it?")
+            builder.setMessage("This application requires GPS to work properly, do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
@@ -101,7 +101,7 @@ public class UserActivity extends AppCompatActivity
         return true;
     }
 
-    private void getLocationPermission() {
+    private void  getLocationPermission() {
         /*
          * Request location permission, so that we can get the location of the
          * device. The result of the permission request is handled by a callback,
@@ -110,7 +110,7 @@ public class UserActivity extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mLocationPermissionGranted = true;
+                mLocationPermissionGranted = true;
             menuItemsSelected(R.id.nav_profile);
         } else {
             ActivityCompat.requestPermissions(this,
@@ -119,7 +119,7 @@ public class UserActivity extends AppCompatActivity
         }
     }
 
-    public boolean isServicesOK(){
+    public boolean  isServicesOK(){
 
 
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(UserActivity.this);
@@ -163,10 +163,12 @@ public class UserActivity extends AppCompatActivity
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
                 if(mLocationPermissionGranted){
-                    gpsLocation=true;
-                }
-                else{
-                    getLocationPermission();
+                    if(isMapsEnabled()) {
+                        gpsLocation = true;
+                    }
+                    else{
+                        getLocationPermission();
+                    }
                 }
             }
         }
@@ -271,9 +273,9 @@ public class UserActivity extends AppCompatActivity
             if(mLocationPermissionGranted){
                 return;
             }
-            else{
-                getLocationPermission();
-            }
+        }
+        else {
+            getLocationPermission();
         }
     }
 

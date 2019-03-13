@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.Random;
 
@@ -17,14 +18,19 @@ import peaceinfotech.malegaonbazar.SaveSharedPreference;
 public class FragmentProfile extends Fragment {
     Random random=new Random();
 
+    int i=0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_user_profile,container,false);
         TextView textView=view.findViewById(R.id.textView2);
+        TextView textView1=view.findViewById(R.id.textView4);
 
+        i =+ 10;
         textView.setText("UseRef"+random.nextInt(10000));
+        textView1.setText("Redeem Amount : "+i);
         return view;
     }
 
