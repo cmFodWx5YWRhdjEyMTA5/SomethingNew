@@ -163,12 +163,7 @@ public class UserActivity extends AppCompatActivity
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
                 if(mLocationPermissionGranted){
-                    if(isMapsEnabled()) {
                         gpsLocation = true;
-                    }
-                    else{
-                        getLocationPermission();
-                    }
                 }
             }
         }
