@@ -8,39 +8,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import java.util.Random;
 
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 
-public class FragmentProfile extends Fragment {
+public class FragmentWallet extends Fragment {
 
-    int i=0;
+    Random random=new Random();
+    TextView refId;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_user_wallet,container,false);
 
-        View view=inflater.inflate(R.layout.fragment_user_profile,container,false);
-        TextView textView=view.findViewById(R.id.textView2);
-        TextView textView1=view.findViewById(R.id.textView4);
+        refId = view.findViewById(R.id.tv_ref_id);
 
+        String refid = "UseRef"+random.nextInt(10000);
+
+        if(refid != SaveSharedPreference.getUserReference(getActivity())) {
+            refId.setText(SaveSharedPreference.getUserReference(getActivity()));
+        }
+        else {
+            refId.setText(refid);
+        }
 
         return view;
     }
 
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Profile");
+        getActivity().setTitle("Wallet");
     }
-
-
-
-
-
 }

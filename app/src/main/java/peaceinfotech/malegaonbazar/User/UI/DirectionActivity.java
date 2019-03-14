@@ -79,9 +79,6 @@ public class DirectionActivity extends AppCompatActivity implements
         destlatlng=getIn.getExtras().getParcelable("end");
         destName=getIn.getStringExtra("name");
 
-
-
-
         orglatitude=orglatlng.latitude;
         orglongitude=orglatlng.longitude;
 

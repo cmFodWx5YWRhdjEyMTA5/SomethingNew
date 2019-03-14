@@ -33,6 +33,7 @@ import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile;
+import peaceinfotech.malegaonbazar.User.Fragment.FragmentWallet;
 
 public class UserActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -225,10 +226,13 @@ public class UserActivity extends AppCompatActivity
 
         switch (item){
             case R.id.nav_profile:
-                fragment=new FragmentProfile();
+                fragment = new FragmentProfile();
                 break;
             case R.id.nav_offers:
-                fragment=new FragmentOffers();
+                fragment = new FragmentOffers();
+                break;
+            case R.id.nav_wallet:
+                fragment = new FragmentWallet();
                 break;
             case R.id.nav_logout:
                 alertDialog.show();
@@ -273,5 +277,4 @@ public class UserActivity extends AppCompatActivity
             getLocationPermission();
         }
     }
-
 }
