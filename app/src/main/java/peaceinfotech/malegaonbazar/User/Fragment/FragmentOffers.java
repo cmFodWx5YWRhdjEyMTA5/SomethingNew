@@ -11,6 +11,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -24,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -61,6 +65,7 @@ import peaceinfotech.malegaonbazar.User.OffersListModel;
 import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
 import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
+import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 
 public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener{
 
@@ -456,6 +461,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 endlatlng=marker.getPosition();
 
                 if(title.equals("Current Location")||title.equals("Searched Location")) {
+
                 }
                 else {
                     infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
@@ -664,7 +670,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             getActivity().finish();
         }
     }
-
 
 
 }
