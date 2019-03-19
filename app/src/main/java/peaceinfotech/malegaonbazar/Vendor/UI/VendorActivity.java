@@ -42,8 +42,8 @@ public class VendorActivity extends AppCompatActivity
         wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
         wallet.setGravity(Gravity.CENTER_VERTICAL);
         wallet.setTypeface(null, Typeface.BOLD);
-        wallet.setTextColor(getResources().getColor(R.color.colorAccent));
-        wallet.setText("7");
+        wallet.setTextColor(getResources().getColor(R.color.colorPrimary));
+        wallet.setText("3");
     }
 
     @Override
@@ -142,6 +142,9 @@ public class VendorActivity extends AppCompatActivity
                 break;
             case R.id.nav_request:
                 fragment = new FragmentRequest();
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                TextView wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
+                wallet.setText("");
                 break;
             case R.id.nav_logout:
                 alertDialog.show();
