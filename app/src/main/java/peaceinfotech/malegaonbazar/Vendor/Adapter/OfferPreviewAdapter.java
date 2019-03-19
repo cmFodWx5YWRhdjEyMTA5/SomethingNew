@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.Vendor;
+package peaceinfotech.malegaonbazar.Vendor.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +19,7 @@ import java.util.List;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
 
 public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapter.PreviewHolder> {
 

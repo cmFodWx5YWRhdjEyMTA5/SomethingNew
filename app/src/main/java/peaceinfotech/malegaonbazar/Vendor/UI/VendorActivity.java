@@ -2,9 +2,11 @@ package peaceinfotech.malegaonbazar.Vendor.UI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
@@ -22,9 +26,25 @@ import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddOffers;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOfferList;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentProfile;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentRequest;
 
 public class VendorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Boolean request = false;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        TextView wallet ;
+        wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
+        wallet.setGravity(Gravity.CENTER_VERTICAL);
+        wallet.setTypeface(null, Typeface.BOLD);
+        wallet.setTextColor(getResources().getColor(R.color.colorAccent));
+        wallet.setText("7");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +62,8 @@ public class VendorActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         menuItemsSelected(R.id.nav_vendor_profile);
     }
@@ -118,6 +140,9 @@ public class VendorActivity extends AppCompatActivity
             case R.id.nav_offers_list:
                 fragment=new FragmentOfferList();
                 break;
+            case R.id.nav_request:
+                fragment = new FragmentRequest();
+                break;
             case R.id.nav_logout:
                 alertDialog.show();
         }
@@ -130,6 +155,5 @@ public class VendorActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
     }
 }

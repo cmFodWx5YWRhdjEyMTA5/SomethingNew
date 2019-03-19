@@ -152,10 +152,18 @@ public class SearchLocation extends AppCompatActivity implements
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("lat",sorglat);
-                returnIntent.putExtra("log",sorglog);
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
+                if(sorglat!=null&&sorglog!=null){
+                    returnIntent.putExtra("lat",sorglat);
+                    returnIntent.putExtra("log",sorglog);
+                    setResult(Activity.RESULT_OK,returnIntent);
+                    finish();
+                }
+                else{
+                    returnIntent.putExtra("lat",orglatitude);
+                    returnIntent.putExtra("log",orglongitude);
+                    setResult(Activity.RESULT_OK,returnIntent);
+                    finish();
+                }
             }
         });
         alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {

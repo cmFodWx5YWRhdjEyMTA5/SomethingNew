@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.Vendor;
+package peaceinfotech.malegaonbazar.Vendor.Model;
 
 public class OfferPreviewModel  {
 

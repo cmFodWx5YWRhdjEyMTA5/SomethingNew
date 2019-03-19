@@ -18,8 +18,8 @@ import java.util.List;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.Vendor.OfferPreviewAdapter;
-import peaceinfotech.malegaonbazar.Vendor.OfferPreviewModel;
+import peaceinfotech.malegaonbazar.Vendor.Adapter.OfferPreviewAdapter;
+import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
 
 public class FragmentOfferList extends Fragment {
 
