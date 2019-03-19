@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StartUI.LaunchActivity"></activity>
-        <activity android:name=".Vendor.Fragment.FragmentOfferList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -32,6 +31,7 @@
         <activity
             android:name=".User.UI.UserActivity"
             android:label="@string/title_activity_user"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme" />
         <activity android:name=".User.UI.SearchLocation" />
         <activity
@@ -40,6 +40,11 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".User.UI.DirectionActivity" />
         <activity android:name=".User.UI.OfferInformationActivity" />
+        <activity
+            android:name=".User.NotificationActivity"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>

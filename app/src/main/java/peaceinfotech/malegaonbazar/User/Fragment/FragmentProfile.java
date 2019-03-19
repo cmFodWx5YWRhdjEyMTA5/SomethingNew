@@ -27,7 +27,6 @@ public class FragmentProfile extends Fragment {
         TextView textView=view.findViewById(R.id.textView2);
         TextView textView1=view.findViewById(R.id.textView4);
 
-
         return view;
     }
 

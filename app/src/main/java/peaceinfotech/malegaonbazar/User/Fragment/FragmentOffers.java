@@ -336,12 +336,12 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
         StringBuilder placeurl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json");
 
-        placeurl.append("?location=" + latitude + "," + longitude);
-        placeurl.append("&radius=" + PROXIMITY);
-        placeurl.append("&type=" + nearbyPlace);
-        placeurl.append("&sensor=true");
-        placeurl.append("&key=" + "AIzaSyAEdRkdwVissmatsKvama28utF65K-4ZA8");
-        return placeurl.toString();
+            placeurl.append("?location=" + latitude + "," + longitude);
+            placeurl.append("&radius=" + PROXIMITY);
+            placeurl.append("&type=" + nearbyPlace);
+            placeurl.append("&sensor=true");
+            placeurl.append("&key=" + "AIzaSyAEdRkdwVissmatsKvama28utF65K-4ZA8");
+            return placeurl.toString();
     }
 
     private void getSearchedLocation(LatLng latLng) {
