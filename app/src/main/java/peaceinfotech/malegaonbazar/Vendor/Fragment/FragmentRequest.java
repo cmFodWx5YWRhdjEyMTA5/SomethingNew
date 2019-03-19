@@ -37,7 +37,7 @@ public class FragmentRequest extends Fragment {
 
 
         for(int i=0;i<5;i++){
-            requestList.add(new RequestListModel("Siddhant","100"));
+            requestList.add(new RequestListModel("Siddhant","100","Food"));
         }
 
         requestListAdapter = new RequestListAdapter(requestList,getActivity());

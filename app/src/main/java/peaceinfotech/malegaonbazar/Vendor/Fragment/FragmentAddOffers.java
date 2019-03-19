@@ -112,6 +112,13 @@ public class FragmentAddOffers extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString(),etstart.getText().toString(),etexpiry.getText().toString());
+                        ettitle.setText("");
+                        etdesc.setText("");
+                        etmin.setText("");
+                        etmax.setText("");
+                        etstart.setText("");
+                        etexpiry.setText("");
+                        etdetails.setText("");
                         Toast.makeText(getActivity(),"Offer Added Successfully",Toast.LENGTH_LONG).show();
                     }
                 });
@@ -126,6 +133,8 @@ public class FragmentAddOffers extends Fragment {
 
             }
         });
+
+
 
         return view;
     }

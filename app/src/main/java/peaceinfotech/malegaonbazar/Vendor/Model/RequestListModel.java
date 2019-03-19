@@ -2,11 +2,12 @@ package peaceinfotech.malegaonbazar.Vendor.Model;
 
 public class RequestListModel {
 
-    String name,price;
+    String name,price,product;
 
-    public RequestListModel(String name, String price) {
+    public RequestListModel(String name, String price,String product) {
         this.name = name;
         this.price = price;
+        this.product=product;
     }
 
     public String getName() {
@@ -25,4 +26,11 @@ public class RequestListModel {
         this.price = price;
     }
 
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
 }

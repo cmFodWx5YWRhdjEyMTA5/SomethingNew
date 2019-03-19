@@ -26,7 +26,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
     public class RequestViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name,price;
+        TextView name,price,product;
         Button accept,reject;
 
         public RequestViewHolder(@NonNull View view) {
@@ -34,6 +34,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
             name= view.findViewById(R.id.tv_custname);
             price=view.findViewById(R.id.tv_price);
+            product=view.findViewById(R.id.tv_product);
 
         }
     }
@@ -54,6 +55,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
         holder.name.setText(request.getName());
         holder.price.setText(request.getPrice());
+        holder.product.setText(request.getProduct());
 
     }
 
