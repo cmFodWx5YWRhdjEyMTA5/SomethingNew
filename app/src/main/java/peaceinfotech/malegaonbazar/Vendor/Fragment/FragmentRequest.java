@@ -36,7 +36,7 @@ public class FragmentRequest extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        for(int i=0;i<5;i++){
+        for(int i=0;i<3;i++){
             requestList.add(new RequestListModel("Siddhant","100","Food"));
         }
 
