@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
         TextView name,price,product;
         Button accept,reject;
+        RelativeLayout relayButton;
 
         public RequestViewHolder(@NonNull View view) {
             super(view);
@@ -35,7 +37,9 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             name= view.findViewById(R.id.tv_custname);
             price=view.findViewById(R.id.tv_price);
             product=view.findViewById(R.id.tv_product);
-
+            accept=view.findViewById(R.id.bt_accept);
+            reject=view.findViewById(R.id.bt_reject);
+            relayButton=view.findViewById(R.id.relay_accept_reject);
         }
     }
 
@@ -49,13 +53,27 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RequestViewHolder holder, int position) {
 
         RequestListModel request = requestList.get(position);
 
         holder.name.setText(request.getName());
         holder.price.setText(request.getPrice());
         holder.product.setText(request.getProduct());
+
+        holder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.relayButton.setVisibility(View.GONE);
+            }
+        });
+
+        holder.reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.relayButton.setVisibility(View.GONE);
+            }
+        });
 
     }
 

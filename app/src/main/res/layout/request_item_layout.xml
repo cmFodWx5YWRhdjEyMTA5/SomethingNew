@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:id="@+id/imgoffer"
@@ -98,21 +99,23 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="10dp"
-        android:background="#000000" />
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:id="@+id/relay_accept_reject">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="10dp"
+            android:background="@color/black"
+            android:id="@+id/line_horizontal_view"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/line_horizontal_view"
             android:id="@+id/bt_accept"
             android:background="@drawable/btsubmit_back"
             android:layout_alignParentStart="true"
@@ -127,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/line_horizontal_view"
             android:layout_marginRight="30dp"
             android:background="@drawable/btsubmit_back"
             android:text="Reject"
