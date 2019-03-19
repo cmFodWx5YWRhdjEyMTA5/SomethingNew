@@ -24,8 +24,7 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_user_profile,container,false);
-        TextView textView=view.findViewById(R.id.textView2);
-        TextView textView1=view.findViewById(R.id.textView4);
+
 
         return view;
     }
