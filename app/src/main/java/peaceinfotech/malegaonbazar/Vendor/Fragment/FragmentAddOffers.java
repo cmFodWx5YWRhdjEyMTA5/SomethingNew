@@ -30,7 +30,6 @@ public class FragmentAddOffers extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_vendor_add_offers,container,false);
 
-
         ettitle=view.findViewById(R.id.et_title);
         etdesc=view.findViewById(R.id.et_descp);
         etmin=view.findViewById(R.id.et_min);
@@ -133,8 +132,6 @@ public class FragmentAddOffers extends Fragment {
 
             }
         });
-
-
 
         return view;
     }

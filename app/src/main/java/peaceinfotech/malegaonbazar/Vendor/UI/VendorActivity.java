@@ -31,7 +31,6 @@ import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentRequest;
 public class VendorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Boolean request = false;
 
 
     @Override
