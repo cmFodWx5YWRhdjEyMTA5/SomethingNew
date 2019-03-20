@@ -74,16 +74,8 @@ public class UserActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
         menuItemsSelected(R.id.nav_profile);
     }
-
-
-
-
-
 
     private boolean checkMapServices(){
         if(isServicesOK()){
@@ -294,8 +286,4 @@ public class UserActivity extends AppCompatActivity
             getLocationPermission();
         }
     }
-
-
-
-
 }

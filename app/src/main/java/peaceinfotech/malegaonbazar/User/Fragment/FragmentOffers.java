@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,6 +106,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     List<OffersListModel> offersList = new ArrayList<>();
     RecyclerView recyclerView;
     OffersListAdapter offersListAdapter;
+    ScrollView scrollView;
 
 
     @Nullable
@@ -128,6 +130,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         layoffers = view.findViewById(R.id.offersup);
         tvboffer = view.findViewById(R.id.tvboffer);
         recyclerView = view.findViewById(R.id.recycler_offers);
+        scrollView=view.findViewById(R.id.scroll_lay);
         initGoogleMap(savedInstanceState);
 
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -456,9 +459,13 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 String vicinity = marker.getSnippet();
                 endlatlng = marker.getPosition();
 
+
                 if (title.equals("Current Location") || title.equals("Searched Location")) {
 
                 } else {
+
+                    scrollView.scrollTo(0,0);
+
                     infoup = AnimationUtils.loadAnimation(getActivity(), R.anim.up_info);
                     layup.setVisibility(View.VISIBLE);
                     layup.setAnimation(infoup);
@@ -651,6 +658,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
 
     public void onBackPressed() {
+
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener(new View.OnKeyListener() {
