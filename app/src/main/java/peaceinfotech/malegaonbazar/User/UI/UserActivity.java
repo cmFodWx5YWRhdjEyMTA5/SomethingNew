@@ -197,6 +197,7 @@ public class UserActivity extends AppCompatActivity
             super.onBackPressed();
             Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.frame_user);
         }
+
     }
 
     @Override
@@ -293,5 +294,8 @@ public class UserActivity extends AppCompatActivity
             getLocationPermission();
         }
     }
+
+
+
 
 }

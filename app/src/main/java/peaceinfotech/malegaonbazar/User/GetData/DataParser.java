@@ -17,7 +17,6 @@ public class DataParser {
         String vicinity="-NA-";
         String latitude="";
         String longitude="";
-        String reference="";
 
         try{
             if(!googlePlaceJson.isNull("name")){
