@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         warnmobile=findViewById(R.id.tvwmobile);
         warnotp=findViewById(R.id.warnotp);
         sendotp=findViewById(R.id.btotp);
-        layMobile=findViewById(R.id.laymobile);
+        layMobile=findViewById(R.id.lay_mobile);
         layotp=findViewById(R.id.layotp);
         pinview=findViewById(R.id.pinview);
         veruser=findViewById(R.id.btveruser);
@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-        BackLeft = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.back_left);
+
 
 
 
@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         LeftSwipe = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.left_swipe);
                         layMobile.startAnimation(LeftSwipe);
-                        layMobile.setVisibility(View.GONE);
+                        layMobile.setVisibility(View.INVISIBLE);
 
                         RightSwipe = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.right_swipe);
                         layotp.setVisibility(View.VISIBLE);
@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         LeftSwipe = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.left_swipe);
                         layMobile.startAnimation(LeftSwipe);
-                        layMobile.setVisibility(View.GONE);
+                        layMobile.setVisibility(View.INVISIBLE);
 
                         RightSwipe = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.right_swipe);
                         layotp.setVisibility(View.VISIBLE);
@@ -165,7 +165,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             BackRight = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.back_right);
             layotp.setAnimation(BackRight);
-            layotp.setVisibility(View.GONE);
+            layotp.setVisibility(View.INVISIBLE);
 
             BackLeft = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.back_left);
             layMobile.setVisibility(View.VISIBLE);

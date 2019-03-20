@@ -22,7 +22,7 @@
 
 
     <LinearLayout
-        android:id="@+id/laymobile"
+        android:id="@+id/lay_reference"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -31,7 +31,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:weightSum="3"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="320dp">
 
         <EditText
             android:id="@+id/et_rid"
@@ -64,9 +64,6 @@
             android:layout_weight="1"
             android:background="@drawable/btsubmit_back"
             android:layout_marginBottom="20dp"/>
-
-
     </LinearLayout>
-
 
 </RelativeLayout>
