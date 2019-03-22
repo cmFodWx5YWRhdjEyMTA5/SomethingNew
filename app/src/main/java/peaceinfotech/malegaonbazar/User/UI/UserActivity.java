@@ -279,7 +279,7 @@ public class UserActivity extends AppCompatActivity
         super.onResume();
         if(checkMapServices()){
             if(mLocationPermissionGranted){
-                return;
+                super.onResume();
             }
         }
         else {

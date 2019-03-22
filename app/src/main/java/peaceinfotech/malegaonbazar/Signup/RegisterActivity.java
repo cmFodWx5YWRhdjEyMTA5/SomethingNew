@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +18,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.util.Random;
 
 import peaceinfotech.malegaonbazar.R;
@@ -23,11 +34,14 @@ import peaceinfotech.malegaonbazar.SaveSharedPreference;
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
     Button btlogo,btban;
+    ImageView imgDemo;
     EditText etusername,etuserloc,etuserpass,etuserrepass;
     EditText etvenname,etvenloc,etvenbname,etvencat,etvenser,etvenmail,etvenpass,etvenrepass;
     String type;
     LinearLayout userlay;
     ScrollView vendorlay;
+    public final int LOGO=1;
+    public final int BAN=2;
 
     Random rand = new Random();
 
@@ -46,6 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
         etuserpass=findViewById(R.id.etuserpass);
         etuserrepass=findViewById(R.id.etuserrepass);
 
+        imgDemo=findViewById(R.id.img_demo);
+
         etvenname=findViewById(R.id.etvenname);
         etvenloc=findViewById(R.id.etvenloc);
         etvenbname=findViewById(R.id.etvenbname);
@@ -54,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
         etvenmail=findViewById(R.id.etvenmail);
         etvenpass=findViewById(R.id.etvenpass);
         etvenrepass=findViewById(R.id.etvenrepass);
+        btlogo=findViewById(R.id.btlogo);
+        btban=findViewById(R.id.btban);
         submitven=findViewById(R.id.btvensubmit);
 
         Intent getin =getIntent();
@@ -80,6 +98,23 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+        btlogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i,LOGO);
+            }
+        });
+
+
+        btban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i,BAN);
+            }
+        });
+
         submituser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,8 +126,18 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 if(name.isEmpty()||location.isEmpty()||pass.isEmpty()||repass.isEmpty()){
-
-                    Toast.makeText(RegisterActivity.this,"Please Eneter All the Fields",Toast.LENGTH_LONG).show();
+                    if(name.isEmpty()){
+                        etusername.setError("PLease enter this field");
+                    }
+                    if(location.isEmpty()){
+                        etuserloc.setError("Please enter this field");
+                    }
+                    if(pass.isEmpty()){
+                        etuserpass.setError("Please enter this field");
+                    }
+                    if(repass.isEmpty()){
+                        etuserrepass.setError("Please enter this field");
+                    }
                 }
                 else{
                     if(pass.equals(repass)){
@@ -101,7 +146,8 @@ public class RegisterActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                     else{
-                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
+                        etuserrepass.setError("Password Don't Match");
+//                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -124,7 +170,30 @@ public class RegisterActivity extends AppCompatActivity {
                 String repass=etvenrepass.getText().toString();
 
                 if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||service.isEmpty()||email.isEmpty()||pass.isEmpty()||repass.isEmpty()){
-                    Toast.makeText(RegisterActivity.this,"Please Eneter All the Fields",Toast.LENGTH_LONG).show();
+                    if(name.isEmpty()){
+                        etvenname.setError("Please Enter this Field");
+                    }
+                    if(location.isEmpty()){
+                        etvenloc.setError("Please Enter this Field");
+                    }
+                    if(brand.isEmpty()){
+                        etvenbname.setError("Please Enter this Field");
+                    }
+                    if(category.isEmpty()){
+                        etvencat.setError("Please Enter this Field");
+                    }
+                    if(service.isEmpty()){
+                        etvenser.setError("Please Enter this Field");
+                    }
+                    if(email.isEmpty()){
+                        etvenmail.setError("Please Enter this Field");
+                    }
+                    if(pass.isEmpty()){
+                        etvenpass.setError("Please Enter this Field");
+                    }
+                    if(repass.isEmpty()){
+                        etvenrepass.setError("Please Enter this Field");
+                    }
                 }
                 else{
                     if(pass.equals(repass)){
@@ -133,13 +202,45 @@ public class RegisterActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                     else{
-                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
+                        etvenrepass.setError("Password Don't Match");
+//                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
-
             }
         });
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == LOGO && resultCode == RESULT_OK && null != data){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            imgDemo.setImageURI(selectedImage);
+        }
+        if(requestCode == BAN && resultCode == RESULT_OK && null != data){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            imgDemo.setImageURI(selectedImage);
+        }
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor =
+                getContentResolver().openFileDescriptor(uri, "r");
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        parcelFileDescriptor.close();
+        return image;
     }
 }

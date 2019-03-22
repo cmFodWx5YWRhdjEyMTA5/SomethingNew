@@ -24,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -163,8 +164,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                // TODO Auto-generated method stub
-
                 if (spinner.getSelectedItem() == "Select a Category") {
 
                 } else {
@@ -361,9 +360,11 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
     private void getLocation() {
 
+
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+
         mfusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
@@ -380,7 +381,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 
                     orglatitude = clocation.getLatitude();
                     orglongitude = clocation.getLongitude();
-
+                    Log.d("location",orglatitude+"/"+orglongitude);
                     getGeocoder(orglatitude, orglongitude);
 
                 } else {

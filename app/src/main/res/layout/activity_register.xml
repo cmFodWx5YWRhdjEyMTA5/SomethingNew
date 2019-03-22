@@ -232,6 +232,11 @@
             android:inputType="textPassword"
             android:singleLine="true"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_demo" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
