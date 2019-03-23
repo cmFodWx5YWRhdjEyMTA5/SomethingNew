@@ -12,30 +12,6 @@
 
 
     <LinearLayout
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/search_back"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:id="@+id/spin_lay">
-
-        <Spinner
-            android:id="@+id/spin"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/laysearch"
         android:layout_width="310dp"
         android:layout_height="50dp"
@@ -65,6 +41,30 @@
             android:layout_width="46dp"
             android:layout_height="30dp"
             android:src="@drawable/search_location" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/search_back"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/spin_lay">
+
+        <Spinner
+            android:id="@+id/spin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 
@@ -113,7 +113,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="#ff207d94" />
+            android:background="@color/colorPrimary" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -211,7 +211,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="#ff207d94"
+            android:background="@color/colorPrimary"
             />
 
         <android.support.v7.widget.RecyclerView
