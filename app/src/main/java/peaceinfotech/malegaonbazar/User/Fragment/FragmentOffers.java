@@ -581,8 +581,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         }
         mMapView.onSaveInstanceState(mapViewBundle);
 
-        // do this for each or your Spinner
-        // You might consider using Bundle.putStringArray() instead
     }
 
 
