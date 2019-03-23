@@ -191,7 +191,8 @@
         android:orientation="vertical"
         android:visibility="gone"
         android:layout_below="@id/spin_lay"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:clickable="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
