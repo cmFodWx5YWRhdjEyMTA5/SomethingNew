@@ -56,15 +56,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
     public Cursor GetAllOffers(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res=db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
     }
 
+    public Cursor GetSpecificOffer(String id){
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+" where "+COL_1+"="+id,null);
+        if (res != null) {
+            res.moveToFirst();
+        }
+        return res;
+    }
+
     public int DeleteData(String id){
         SQLiteDatabase db=this.getWritableDatabase();
         return db.delete(TABLE_NAME,"ID = ?",new String[]{id});
+    }
+
+    public boolean UpdateData (String id,String title,String desc,String min,String max,String details,String startDate,String exDate){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(COL_2,title);
+        contentValues.put(COL_3,desc);
+        contentValues.put(COL_4,min);
+        contentValues.put(COL_5,max);
+        contentValues.put(COL_6,details);
+        contentValues.put(COL_7,startDate);
+        contentValues.put(COL_8,exDate);
+        int result= db.update(TABLE_NAME,contentValues,COL_1+"="+id,null);
+        if(result==0){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
 }

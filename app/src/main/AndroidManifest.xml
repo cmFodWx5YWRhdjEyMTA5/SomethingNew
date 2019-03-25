@@ -47,6 +47,7 @@
             android:name=".Vendor.UI.VendorActivity"
             android:label="@string/title_activity_vendor"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Vendor.UI.EditOfferActivity" />
 
     </application>
 

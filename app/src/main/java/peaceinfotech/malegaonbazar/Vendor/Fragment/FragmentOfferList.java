@@ -1,5 +1,6 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -71,9 +72,15 @@ public class FragmentOfferList extends Fragment {
     public void onResume() {
         super.onResume();
 
-      //  reloadRecycle();
+        offerPreviewAdapter.notifyDataSetChanged();
 
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==5){
+            Toast.makeText(getActivity(), "result found", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

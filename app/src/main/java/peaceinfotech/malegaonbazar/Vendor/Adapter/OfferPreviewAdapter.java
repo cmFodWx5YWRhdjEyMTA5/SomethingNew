@@ -2,7 +2,9 @@ package peaceinfotech.malegaonbazar.Vendor.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
+import peaceinfotech.malegaonbazar.Vendor.UI.EditOfferActivity;
 
 public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapter.PreviewHolder> {
 
@@ -34,10 +38,11 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer,min,max,delete,start,expiry;
+        public TextView offertitle,offer,min,max,delete,start,expiry,terms,termsCondition,edit;
         public ImageView image;
         public Button getbutton;
         public LinearLayout linearMain;
+        public RelativeLayout relayTerms;
 
         public PreviewHolder(@NonNull View view) {
             super(view);
@@ -52,6 +57,11 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             start=view.findViewById(R.id.tv_st_date);
             expiry=view.findViewById(R.id.tv_ex_date);
             linearMain=view.findViewById(R.id.linear_main);
+            relayTerms=view.findViewById(R.id.relay_terms);
+            terms=view.findViewById(R.id.tv_terms);
+            termsCondition=view.findViewById(R.id.tv_terms_condition);
+            edit=view.findViewById(R.id.tv_edit);
+
         }
     }
 
@@ -76,6 +86,9 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.max.setText(offers.getMax());
         holder.start.setText(offers.getStart_date());
         holder.expiry.setText(offers.getEnd_date());
+        holder.termsCondition.setText(offers.getDetails());
+
+
         final String uid=offers.getUid();
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +120,29 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                 alertDialog.show();
             }
         });
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent putIntent = new Intent(context, EditOfferActivity.class);
+                putIntent.putExtra("id",offers.getUid());
+                context.startActivity(putIntent);
+            }
+        });
+
+        holder.terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.relayTerms.getVisibility()==View.GONE){
+                    holder.relayTerms.setVisibility(View.VISIBLE);
+                }
+                else if(holder.relayTerms.getVisibility()==View.VISIBLE){
+                    holder.relayTerms.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
     }
 
     @Override
