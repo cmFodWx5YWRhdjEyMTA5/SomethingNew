@@ -2,8 +2,6 @@ package peaceinfotech.malegaonbazar.User.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -11,35 +9,26 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -65,14 +54,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import peaceinfotech.malegaonbazar.OnBackPressedListener;
 import peaceinfotech.malegaonbazar.R;
-import peaceinfotech.malegaonbazar.User.OffersListAdapter;
-import peaceinfotech.malegaonbazar.User.OffersListModel;
+import peaceinfotech.malegaonbazar.User.Adapter.OffersListAdapter;
+import peaceinfotech.malegaonbazar.User.Model.OffersListModel;
 import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
 import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
-import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 
 public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener {
 
@@ -98,8 +85,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     Geocoder geocoder;
     List<Address> addresses;
     LinearLayout layup, laysearch, layoffers;
+    RelativeLayout relayFav;
     Animation infoup, infodown;
-    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer;
+    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer,tvaddFav,tvremoveFav;
     LatLng endlatlng, orglatlng;
     LatLng searchLatlng;
     boolean searchout = false;
@@ -108,6 +96,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     RecyclerView recyclerView;
     OffersListAdapter offersListAdapter;
     ScrollView scrollView;
+    RatingBar ratingBar;
 
 
     @Nullable
@@ -132,6 +121,10 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         tvboffer = view.findViewById(R.id.tvboffer);
         recyclerView = view.findViewById(R.id.recycler_offers);
         scrollView=view.findViewById(R.id.scroll_lay);
+        ratingBar=view.findViewById(R.id.rating_star);
+        tvaddFav=view.findViewById(R.id.tv_add_fav);
+        tvremoveFav=view.findViewById(R.id.tv_remove_fav);
+        relayFav=view.findViewById(R.id.relay_fav);
         initGoogleMap(savedInstanceState);
 
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -285,7 +278,6 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 infodown = AnimationUtils.loadAnimation(getActivity(), R.anim.down_info);
                 layup.setVisibility(View.GONE);
                 layup.setAnimation(infodown);
-
                 //chnaging the color
                 spinner.setEnabled(true);
                 laysearch.setEnabled(true);
@@ -321,6 +313,19 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
             }
         });
 
+        relayFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tvaddFav.getVisibility()==View.VISIBLE){
+                    tvaddFav.setVisibility(View.GONE);
+                    tvremoveFav.setVisibility(View.VISIBLE);
+                }
+                else if(tvremoveFav.getVisibility()==View.VISIBLE){
+                    tvremoveFav.setVisibility(View.GONE);
+                    tvaddFav.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         return view;
     }
@@ -424,6 +429,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         mMap = googleMap;
 
 
+
+
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
@@ -476,6 +483,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     destName = title;
                     onMarkerclick = true;
 
+                    ratingBar.setRating(4.5f);
                     //change of color
                     spinner.setEnabled(false);
                     laysearch.setEnabled(false);

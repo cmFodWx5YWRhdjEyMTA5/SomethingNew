@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.User;
+package peaceinfotech.malegaonbazar.User.Model;
 
 public class OffersListModel {
 

@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.Marker;
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.User.Fragment.FragmentFavourites;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentWallet;
@@ -243,11 +244,14 @@ public class UserActivity extends AppCompatActivity
             case R.id.nav_wallet:
                 fragment = new FragmentWallet();
                 break;
-            case R.id.nav_logout:
-                alertDialog.show();
+            case R.id.nav_fav:
+                fragment = new FragmentFavourites();
                 break;
             case R.id.nav_share:
                 ShareOption();
+                break;
+            case R.id.nav_logout:
+                alertDialog.show();
         }
 
         if(fragment!=null){
