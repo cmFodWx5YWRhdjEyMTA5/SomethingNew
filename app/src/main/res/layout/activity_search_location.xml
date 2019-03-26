@@ -14,7 +14,9 @@
         android:background="@color/colorPrimary"
         android:id="@+id/toolb"
         app:titleTextColor="#ffffff"
-        android:theme="@style/Theme.MyFancyTheme"/>
+        android:theme="@style/Theme.MyFancyTheme">
+
+    </android.support.v7.widget.Toolbar>
 
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"

@@ -11,11 +11,10 @@
         android:layout_height="match_parent"
         android:clickable="true" />
 
-
     <LinearLayout
-        android:id="@+id/laysearch"
         android:layout_width="310dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
@@ -24,56 +23,65 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/search_back"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:id="@+id/linear_lay_search_spin"
+        android:elevation="10dp">
 
-        <TextView
-            android:id="@+id/tvlocation"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+        <LinearLayout
+            android:id="@+id/laysearch"
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/searchlocation"
-            android:layout_width="46dp"
-            android:layout_height="30dp"
-            android:src="@drawable/search_location" />
+            <TextView
+                android:id="@+id/tvlocation"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/searchlocation"
+                android:layout_width="46dp"
+                android:layout_height="30dp"
+                android:src="@drawable/search_location" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/spin_lay">
+
+            <Spinner
+                android:id="@+id/spin"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/search_back"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:id="@+id/spin_lay">
 
-        <Spinner
-            android:id="@+id/spin"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layup"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spin_lay"
+        android:layout_below="@id/linear_lay_search_spin"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -144,24 +152,20 @@
                         android:src="@drawable/profilephoto" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="95dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="23dp"
                         android:text="5 Offers"
                         android:textColor="@color/black"
                         android:textStyle="italic"
                         android:layout_below="@+id/img_logo"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/tvoffernum"/>
+                        android:id="@+id/tvoffernum"
+                        android:gravity="center"/>
 
                     <RelativeLayout
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvoffernum"
-                        android:gravity="center"
-                        android:paddingLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:id="@+id/relay_fav">
 
@@ -171,15 +175,17 @@
                             android:textColor="#0000FF"
                             android:text="+ Add To Favourites"
                             android:visibility="visible"
-                            android:id="@+id/tv_add_fav"/>
+                            android:id="@+id/tv_add_fav"
+                            android:gravity="center"/>
 
                         <TextView
-                            android:layout_width="95dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#ff0000"
                             android:text="- Remove From Favourites"
                             android:visibility="gone"
-                            android:id="@+id/tv_remove_fav"/>
+                            android:id="@+id/tv_remove_fav"
+                            android:gravity="center"/>
 
                     </RelativeLayout>
 
@@ -287,6 +293,37 @@
 
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Services"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp"
+                    android:text="1. Food Delivery. \n 2. Services. \n 3. Cheap Rate"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorPrimary" />
+
+
+
                 <TextView
                     android:id="@+id/tvviewoffers"
                     android:layout_width="wrap_content"
@@ -311,7 +348,7 @@
         android:background="@drawable/info_background"
         android:orientation="vertical"
         android:visibility="gone"
-        android:layout_below="@id/spin_lay"
+        android:layout_below="@id/linear_lay_search_spin"
         android:layout_marginTop="20dp"
         android:clickable="true">
 
