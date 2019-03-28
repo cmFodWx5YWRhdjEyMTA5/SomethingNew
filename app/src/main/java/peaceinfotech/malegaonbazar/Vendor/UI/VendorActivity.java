@@ -24,6 +24,8 @@ import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentBusiness;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentHistory;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOfferList;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentProfile;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentRequest;
@@ -64,7 +66,7 @@ public class VendorActivity extends AppCompatActivity
 
 
 
-        menuItemsSelected(R.id.nav_vendor_profile);
+        menuItemsSelected(R.id.nav_business);
     }
 
     @Override
@@ -123,6 +125,9 @@ public class VendorActivity extends AppCompatActivity
         Fragment fragment=null;
 
         switch (item){
+            case R.id.nav_business:
+                fragment = new FragmentBusiness();
+                break;
             case R.id.nav_vendor_profile:
                 fragment=new FragmentProfile();
                 break;
@@ -134,9 +139,12 @@ public class VendorActivity extends AppCompatActivity
                 break;
             case R.id.nav_request:
                 fragment = new FragmentRequest();
-                NavigationView navigationView = findViewById(R.id.nav_view);
-                TextView wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
-                wallet.setText("");
+//                NavigationView navigationView = findViewById(R.id.nav_view);
+//                TextView wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
+//                wallet.setText("");
+                break;
+            case R.id.nav_history:
+                fragment = new FragmentHistory();
                 break;
             case R.id.nav_logout:
                 alertDialog.show();
@@ -144,7 +152,7 @@ public class VendorActivity extends AppCompatActivity
 
         if(fragment!=null){
             FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_user,fragment);
+            ft.replace(R.id.frame_vendor,fragment);
             ft.commit();
         }
 

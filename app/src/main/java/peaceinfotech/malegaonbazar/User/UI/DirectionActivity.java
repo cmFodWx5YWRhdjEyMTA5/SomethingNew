@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import peaceinfotech.malegaonbazar.R;
@@ -49,6 +52,7 @@ public class DirectionActivity extends AppCompatActivity implements
     Double orglatitude,orglongitude,destlatitude,destlongitude;
     LatLng orglatlng,destlatlng;
     String destName;
+    Button navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class DirectionActivity extends AppCompatActivity implements
 
         mMapView=findViewById(R.id.mapViewDirec);
         toolbar=findViewById(R.id.toold);
+        navigation=findViewById(R.id.demo_button);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,6 +92,15 @@ public class DirectionActivity extends AppCompatActivity implements
         destlatitude=destlatlng.latitude;
         destlongitude=destlatlng.longitude;
 
+        navigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?saddr="+orglatitude+","+orglongitude+"&daddr="+destlatitude+","+destlongitude);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
 
 
     }
@@ -181,7 +195,7 @@ public class DirectionActivity extends AppCompatActivity implements
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
 
         mMap=googleMap;
 //        googleMap.clear();
@@ -200,6 +214,8 @@ public class DirectionActivity extends AppCompatActivity implements
         GetDirectionsData getDirectionsData = new GetDirectionsData(destlatlng);
         getDirectionsData.execute(dataTransfer);
         Toast.makeText(DirectionActivity.this, "Direction", Toast.LENGTH_LONG).show();
+
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
 
     }
 

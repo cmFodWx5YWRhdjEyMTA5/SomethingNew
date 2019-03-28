@@ -75,7 +75,7 @@ public class UserActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        menuItemsSelected(R.id.nav_profile);
+        menuItemsSelected(R.id.nav_offers);
     }
 
     private boolean checkMapServices(){
@@ -121,7 +121,7 @@ public class UserActivity extends AppCompatActivity
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true;
-            menuItemsSelected(R.id.nav_profile);
+            menuItemsSelected(R.id.nav_offers);
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -235,11 +235,11 @@ public class UserActivity extends AppCompatActivity
         Fragment fragment=null;
 
         switch (item){
-            case R.id.nav_profile:
-                fragment = new FragmentProfile();
-                break;
             case R.id.nav_offers:
                 fragment = new FragmentOffers();
+                break;
+            case R.id.nav_profile:
+                fragment = new FragmentProfile();
                 break;
             case R.id.nav_wallet:
                 fragment = new FragmentWallet();

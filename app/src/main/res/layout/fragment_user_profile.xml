@@ -1,18 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="User Activity"
-        android:textSize="40sp"/>
+        android:id="@+id/tv_user_name"
+        android:textSize="35sp"
+        android:text="Siddhant Jain"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Mobile No. : -"
+            android:paddingLeft="10dp"
+            android:id="@+id/tv_mob"/>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user_mobile"
+            android:textSize="20sp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_mob"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:maxLength="10"
+            android:text="1234567890"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reference Id : -"
+            android:textSize="25sp"
+            android:id="@+id/tv_ref"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_ref"
+            android:paddingRight="10dp"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:text="UserRef1234"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Id  : -"
+            android:textSize="25sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_email"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user_email"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/tv_email"
+            android:layout_marginLeft="30dp"
+            android:text="sid.j@gmail.com"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:id="@+id/tv_location"
+            android:layout_marginLeft="10dp"
+            android:text="Location : -"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_location"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            android:textSize="20sp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="Mumbai"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

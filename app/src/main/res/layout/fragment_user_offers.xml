@@ -56,24 +56,33 @@
             android:layout_height="4dp"
             android:background="@color/colorPrimary" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="310dp"
             android:layout_height="50dp"
             android:elevation="10dp"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:id="@+id/spin_lay">
+            android:id="@+id/spin_lay"
+            android:gravity="center">
 
-            <Spinner
-                android:id="@+id/spin"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/search_spinner"
+                app:SearchHintText="Select a Category"
+                android:saveEnabled="true"
+                android:clickable="true"/>
 
-        </LinearLayout>
-
-
+        </RelativeLayout>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:layout_below="@id/linear_lay_search_spin"
+        android:background="@color/white"/>
 
 
 
@@ -151,21 +160,37 @@
                         android:layout_alignParentLeft="true"
                         android:src="@drawable/profilephoto" />
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
-                        android:text="5 Offers"
-                        android:textColor="@color/black"
-                        android:textStyle="italic"
                         android:layout_below="@+id/img_logo"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/tvoffernum"
-                        android:gravity="center"/>
+                        android:id="@+id/relay_offers"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="23dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_offers"
+                            android:id="@+id/img_offer"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="5 Offers"
+                            android:textColor="@color/black"
+                            android:textStyle="italic"
+                            android:id="@+id/tvoffernum"
+                            android:gravity="center"
+                            android:layout_toRightOf="@+id/img_offer"
+                            android:layout_marginLeft="5dp"/>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tvoffernum"
+                        android:layout_below="@id/relay_offers"
                         android:layout_marginTop="5dp"
                         android:id="@+id/relay_fav">
 
