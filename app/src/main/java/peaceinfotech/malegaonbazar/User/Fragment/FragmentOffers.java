@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -87,9 +88,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     Geocoder geocoder;
     List<Address> addresses;
     LinearLayout layup, laysearch, layoffers;
-    RelativeLayout relayFav,relayOffers;
+    RelativeLayout relayFav,relayOffers,relaySpin;
     Animation infoup, infodown;
-    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer,tvaddFav,tvremoveFav;
+    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer,tvaddFav,tvremoveFav,tvCategories;
     LatLng endlatlng, orglatlng;
     LatLng searchLatlng;
     boolean searchout = false;
@@ -130,11 +131,13 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         relayFav=view.findViewById(R.id.relay_fav);
         searchableSpinner=view.findViewById(R.id.search_spinner);
         relayOffers=view.findViewById(R.id.relay_offers);
+        tvCategories=view.findViewById(R.id.tv_categories);
+        relaySpin=view.findViewById(R.id.spin_lay);
         initGoogleMap(savedInstanceState);
 
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        categories.add(0, "Select a Category");
+        categories.add(0,"Select a Category");
         categories.add(1, "Restaurant");
         categories.add(2, "School");
         categories.add(3, "Hospital");
@@ -156,9 +159,16 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchableSpinner.setAdapter(adapter);
 
+//        tvCategories.setText("Select a Category");
+//        tvCategories.setVisibility(View.VISIBLE);
+
+        searchableSpinner.setActivated(true);
+        searchableSpinner.setSelectedItem(0);
+
         searchableSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(View view, int position, long id) {
+
                 if (searchableSpinner.getSelectedItem() == "Restaurant") {
                     mMap.clear();
                         if (onSearchClick && searchout) {
@@ -172,6 +182,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         } else {
                             getLocation();
                             click = "restaurant";
@@ -183,6 +194,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         }
                     }
                     else if (searchableSpinner.getSelectedItem() == "Hospital") {
@@ -198,6 +210,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         } else {
                             getLocation();
                             click = "hospital";
@@ -209,6 +222,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         }
                     }
                     else if (searchableSpinner.getSelectedItem() == "School") {
@@ -224,6 +238,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         } else {
                             getLocation();
                             click = "school";
@@ -235,9 +250,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                             getNearbyPlacesData.execute(dataTransfer);
                             Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                            tvCategories.setText(searchableSpinner.getSelectedItem().toString());
                         }
                     }
-
             }
 
             @Override
@@ -261,7 +276,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 mMapView.setClickable(false);
 
                 for (int i = 0; i < 5; i++) {
-                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", "ss"));
+                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20,"ss",500));
                 }
 
                 offersListAdapter = new OffersListAdapter(offersList, getActivity());
@@ -285,7 +300,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 mMapView.setClickable(false);
 
                 for (int i = 0; i < 5; i++) {
-                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", "ss"));
+                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20," ",500));
                 }
 
                 offersListAdapter = new OffersListAdapter(offersList, getActivity());
@@ -303,6 +318,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layup.setVisibility(View.GONE);
                 layup.setAnimation(infodown);
                 //chnaging the color
+                searchableSpinner.setVisibility(View.VISIBLE);
+                tvCategories.setVisibility(View.GONE);
                 laysearch.setEnabled(true);
                 tvlocation.setTextColor(Color.parseColor("#000000"));
 
@@ -507,6 +524,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                     onMarkerclick = true;
 
                     ratingBar.setRating(4.5f);
+                    searchableSpinner.setVisibility(View.GONE);
+                    tvCategories.setVisibility(View.VISIBLE);
                     //change of color
                     laysearch.setEnabled(false);
                     tvlocation.setTextColor(Color.parseColor("#CBCBCB"));
@@ -528,6 +547,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 searchLatlng = new LatLng(lat, log);
                 mMap.clear();
                 layup.setVisibility(View.GONE);
+                searchableSpinner.setSelectedItem(0);
                 searchNewLocation(lat, log);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -535,8 +555,10 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 mMap.clear();
                 if (searchout) {
                     searchNewLocation(sorglat, sorglog);
+                    searchableSpinner.setSelectedItem(0);
                 } else {
                     getLocation();
+                    searchableSpinner.setSelectedItem(0);
                     searchout = false;
                 }
             }
@@ -709,6 +731,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                             layup.setVisibility(View.GONE);
                             layup.setAnimation(infodown);
 
+                            searchableSpinner.setVisibility(View.VISIBLE);
+                            tvCategories.setVisibility(View.GONE);
                             laysearch.setEnabled(true);
                             tvlocation.setTextColor(Color.parseColor("#000000"));
                         }

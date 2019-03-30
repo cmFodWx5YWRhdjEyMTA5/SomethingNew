@@ -110,7 +110,7 @@ public class SearchLocation extends AppCompatActivity implements
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if(addressList.size()==0){
+                    if(addressList.size()== 0){
                         Toast.makeText(SearchLocation.this,"Location not found, please enter the location again",Toast.LENGTH_LONG).show();
                     }
                     else {

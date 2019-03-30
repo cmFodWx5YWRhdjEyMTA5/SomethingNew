@@ -70,7 +70,20 @@
                 android:id="@+id/search_spinner"
                 app:SearchHintText="Select a Category"
                 android:saveEnabled="true"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:visibility="visible"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_categories"
+                android:visibility="gone"
+                android:enabled="true"
+                android:textColor="#CBCBCB"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="School"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -340,14 +353,11 @@
                     android:textSize="15sp"
                     android:text="1. Food Delivery. \n 2. Services. \n 3. Cheap Rate"/>
 
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_margin="10dp"
                     android:background="@color/colorPrimary" />
-
-
 
                 <TextView
                     android:id="@+id/tvviewoffers"

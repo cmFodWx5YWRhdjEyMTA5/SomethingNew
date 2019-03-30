@@ -2,17 +2,38 @@ package peaceinfotech.malegaonbazar.Vendor.Model;
 
 public class OfferPreviewModel  {
 
-    String offersName,offer,details,min,max,uid,start_date,end_date;
+    String offersName,offer,details,min,max,uid,start_date,end_date,offerPrice,discPercent;
 
-    public OfferPreviewModel(String uid,String offersName, String offer,String min,String max,String details,String start_date,String end_date ) {
+
+    public OfferPreviewModel(String uid,String offersName, String offer,String offerPrice,String discPercent,String min,String max,String details,String start_date,String end_date ) {
         this.offersName = offersName;
         this.offer = offer;
+        this.offerPrice=offerPrice;
+        this.discPercent=discPercent;
         this.details = details;
         this.min=min;
         this.max=max;
         this.uid=uid;
         this.start_date=start_date;
         this.end_date=end_date;
+
+
+    }
+
+    public String getOfferPrice() {
+        return offerPrice;
+    }
+
+    public void setOfferPrice(String offerPrice) {
+        this.offerPrice = offerPrice;
+    }
+
+    public String getDiscPercent() {
+        return discPercent;
+    }
+
+    public void setDiscPercent(String discPercent) {
+        this.discPercent = discPercent;
     }
 
     public String getUid() {

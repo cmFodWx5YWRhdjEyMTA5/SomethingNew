@@ -24,8 +24,6 @@ import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
 
 public class FragmentOfferList extends Fragment {
 
-
-
     List<OfferPreviewModel> offerList=new ArrayList<>();
     RecyclerView recyclerView;
     OfferPreviewAdapter offerPreviewAdapter;
@@ -52,7 +50,7 @@ public class FragmentOfferList extends Fragment {
         }
         else {
             while (res.moveToNext()) {
-                offerList.add(new OfferPreviewModel(res.getString(0),res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7)));
+                offerList.add(new OfferPreviewModel(res.getString(0),res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8),res.getString(9)));
             }
             offerPreviewAdapter = new OfferPreviewAdapter(offerList, getActivity());
             recyclerView.setAdapter(offerPreviewAdapter);

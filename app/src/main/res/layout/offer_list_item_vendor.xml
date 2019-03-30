@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:elevation="10dp"
     android:layout_margin="10dp"
-    android:background="@drawable/offers_list_background"
+    android:background="@drawable/list_background"
     android:id="@+id/linear_main">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="20dp"
@@ -34,7 +34,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -42,10 +42,60 @@
                 tools:text="@tools:sample/first_names"/>
 
             <TextView
-                android:layout_width="126dp"
-                android:layout_height="53dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/tvoffer"
                 tools:text="@tools:sample/cities"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_pr"
+                    android:layout_alignParentStart="true"
+                    android:text="Offer Price : "
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_pr"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="\u20B9 500"
+                    android:id="@+id/tv_ven_offer_price"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    app:backGroundColor="@color/colorAccent"
+                    app:initialNumber="0"
+                    app:textColor="@color/white"
+                    app:backgroundDrawable="@drawable/quantity_back"
+                    android:id="@+id/eln_ven_quantity"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@+id/eln_quantity"
+                    android:gravity="center"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/tv_ven_final_price"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="126dp"
@@ -170,11 +220,11 @@
 
     </RelativeLayout>
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2dp"-->
-        <!--android:background="#000000"-->
-        <!--android:layout_margin="10dp"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_margin="10dp"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

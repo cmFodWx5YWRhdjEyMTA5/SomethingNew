@@ -139,9 +139,9 @@ public class VendorActivity extends AppCompatActivity
                 break;
             case R.id.nav_request:
                 fragment = new FragmentRequest();
-//                NavigationView navigationView = findViewById(R.id.nav_view);
-//                TextView wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
-//                wallet.setText("");
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                TextView wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
+                wallet.setText("");
                 break;
             case R.id.nav_history:
                 fragment = new FragmentHistory();

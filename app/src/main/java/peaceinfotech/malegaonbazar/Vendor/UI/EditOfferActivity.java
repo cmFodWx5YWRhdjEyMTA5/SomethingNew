@@ -24,7 +24,7 @@ import peaceinfotech.malegaonbazar.R;
 
 public class EditOfferActivity extends AppCompatActivity {
 
-    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry;
+    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry,etOfferPrice,etdiscountPercent;
     DatabaseHelper myDb;
     Button btEdit;
     Toolbar toolbar;
@@ -43,6 +43,8 @@ public class EditOfferActivity extends AppCompatActivity {
         etdetails=findViewById(R.id.et_edit_details);
         etstart=findViewById(R.id.et_edit_date_start);
         etexpiry=findViewById(R.id.et_edit_date_end);
+        etOfferPrice=findViewById(R.id.et_edit_offer_price);
+        etdiscountPercent=findViewById(R.id.et_edit_disc_percent);
         btEdit=findViewById(R.id.bt_edit_offer);
         toolbar=findViewById(R.id.tool_edit_offer);
         myDb=new DatabaseHelper(EditOfferActivity.this);
@@ -65,11 +67,13 @@ public class EditOfferActivity extends AppCompatActivity {
 
         ettitle.setText(res.getString(1));
         etdesc.setText(res.getString(2));
-        etmin.setText(res.getString(3));
-        etmax.setText(res.getString(4));
-        etdetails.setText(res.getString(5));
-        etstart.setText(res.getString(6));
-        etexpiry.setText(res.getString(7));
+        etOfferPrice.setText(res.getString(3));
+        etdiscountPercent.setText(res.getString(4));
+        etmin.setText(res.getString(5));
+        etmax.setText(res.getString(6));
+        etdetails.setText(res.getString(7));
+        etstart.setText(res.getString(8));
+        etexpiry.setText(res.getString(9));
 
         etstart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +140,8 @@ public class EditOfferActivity extends AppCompatActivity {
                         myDb.UpdateData(id,
                                 ettitle.getText().toString(),
                                 etdesc.getText().toString(),
+                                etOfferPrice.getText().toString(),
+                                etdiscountPercent.getText().toString(),
                                 etmin.getText().toString(),
                                 etmax.getText().toString(),
                                 etdetails.getText().toString(),

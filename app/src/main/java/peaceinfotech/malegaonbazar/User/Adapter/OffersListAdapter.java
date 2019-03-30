@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+
 import java.util.List;
 
 import peaceinfotech.malegaonbazar.R;
@@ -28,10 +30,11 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
 
     public class MyviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer,min,max,terms;
+        public TextView offertitle,offer,min,max,terms,finalPrice,offerPrice;
         public ImageView image;
         public Button getbutton;
         public RelativeLayout relayTerms;
+        public ElegantNumberButton quantity;
 
 
         public MyviewHolder(@NonNull View view) {
@@ -44,6 +47,9 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
             max=view.findViewById(R.id.et_max);
             terms=view.findViewById(R.id.tv_terms);
             relayTerms=view.findViewById(R.id.relay_terms);
+            finalPrice=view.findViewById(R.id.tv_final_price);
+            offerPrice=view.findViewById(R.id.tv_offer_price);
+            quantity=view.findViewById(R.id.eln_quantity);
         }
     }
 
@@ -64,7 +70,7 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
 
         holder.offertitle.setText(offers.getOffersName());
         holder.offer.setText(offers.getOffer());
-
+        holder.offerPrice.setText("\u20B9 "+offers.getOffersPrice());
         holder.terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +80,21 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
                 }
                 else if(holder.relayTerms.getVisibility()==View.GONE){
                     holder.relayTerms.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        holder.quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+            @Override
+            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+                if(newValue>0){
+                    int amount = newValue*offers.getOffersPrice();
+                    int discount = amount*offers.getOfferPercent()/100;
+                    int finalAmount = amount - discount;
+                    holder.finalPrice.setText("\u20b9 "+finalAmount);
+                }
+                else if(newValue == 0){
+                    holder.finalPrice.setText("");
                 }
             }
         });

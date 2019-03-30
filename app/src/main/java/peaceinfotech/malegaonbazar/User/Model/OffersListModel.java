@@ -4,10 +4,30 @@ public class OffersListModel {
 
     String offersName,offer,imageurl;
 
-    public OffersListModel(String offersName, String offer, String imageurl) {
+    int offerPercent,offersPrice;
+
+    public OffersListModel(String offersName, String offer, int offerPercent,String imageurl,int offersPrice) {
         this.offersName = offersName;
         this.offer = offer;
         this.imageurl = imageurl;
+        this.offersPrice=offersPrice;
+        this.offerPercent=offerPercent;
+    }
+
+    public int getOfferPercent() {
+        return offerPercent;
+    }
+
+    public void setOfferPercent(int offerPercent) {
+        this.offerPercent = offerPercent;
+    }
+
+    public int getOffersPrice() {
+        return offersPrice;
+    }
+
+    public void setOffersPrice(int offersPrice) {
+        this.offersPrice = offersPrice;
     }
 
     public String getOffersName() {

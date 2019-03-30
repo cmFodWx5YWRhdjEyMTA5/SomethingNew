@@ -75,7 +75,7 @@ public class UserActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        menuItemsSelected(R.id.nav_offers);
+        menuItemsSelected(R.id.nav_profile);
     }
 
     private boolean checkMapServices(){
@@ -121,7 +121,7 @@ public class UserActivity extends AppCompatActivity
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true;
-            menuItemsSelected(R.id.nav_offers);
+            menuItemsSelected(R.id.nav_profile);
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -283,7 +283,8 @@ public class UserActivity extends AppCompatActivity
         super.onResume();
         if(checkMapServices()){
             if(mLocationPermissionGranted){
-                super.onResume();
+//                super.onResume();
+
             }
         }
         else {

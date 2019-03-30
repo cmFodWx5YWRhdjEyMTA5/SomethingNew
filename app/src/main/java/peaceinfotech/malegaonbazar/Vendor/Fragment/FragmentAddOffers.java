@@ -21,7 +21,7 @@ import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
 
 public class FragmentAddOffers extends Fragment {
-    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry;
+    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry,etofferPrice,etdiscPer;
     DatabaseHelper myDb;
 
     Button preview,add;
@@ -38,6 +38,8 @@ public class FragmentAddOffers extends Fragment {
         add=view.findViewById(R.id.bt_add_offer);
         etstart=view.findViewById(R.id.et_date_start);
         etexpiry=view.findViewById(R.id.et_date_end);
+        etofferPrice=view.findViewById(R.id.et_offer_price);
+        etdiscPer=view.findViewById(R.id.et_disc_percent);
 
         myDb=new DatabaseHelper(getActivity());
 
@@ -100,19 +102,16 @@ public class FragmentAddOffers extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final String title=ettitle.getText().toString();
-                final String desc=etdesc.getText().toString();
-                final String min=etmin.getText().toString();
-                final String max=etmax.getText().toString();
-
                 AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                 builder.setMessage("Are you sure you want to add the offers");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString(),etstart.getText().toString(),etexpiry.getText().toString());
+                        myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etofferPrice.getText().toString(),etdiscPer.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString(),etstart.getText().toString(),etexpiry.getText().toString());
                         ettitle.setText("");
                         etdesc.setText("");
+                        etofferPrice.setText("");
+                        etdiscPer.setText("");
                         etmin.setText("");
                         etmax.setText("");
                         etstart.setText("");

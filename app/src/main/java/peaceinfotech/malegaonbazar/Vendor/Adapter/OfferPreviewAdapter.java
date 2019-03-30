@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+
 import java.util.List;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
@@ -38,17 +40,20 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer,min,max,delete,start,expiry,terms,termsCondition,edit;
+        public TextView offertitle,offer,offerPrice,finalPrice,min,max,delete,start,expiry,terms,termsCondition,edit;
         public ImageView image;
         public Button getbutton;
         public LinearLayout linearMain;
         public RelativeLayout relayTerms;
+        public ElegantNumberButton quantity;
 
         public PreviewHolder(@NonNull View view) {
             super(view);
 
             offertitle=view.findViewById(R.id.tvoffertitle);
             offer=view.findViewById(R.id.tvoffer);
+            offerPrice=view.findViewById(R.id.tv_ven_offer_price);
+            finalPrice=view.findViewById(R.id.tv_ven_final_price);
             image=view.findViewById(R.id.imgoffer);
             min=view.findViewById(R.id.tv_min);
             max=view.findViewById(R.id.tv_max);
@@ -61,7 +66,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             terms=view.findViewById(R.id.tv_terms);
             termsCondition=view.findViewById(R.id.tv_terms_condition);
             edit=view.findViewById(R.id.tv_edit);
-
+            quantity=view.findViewById(R.id.eln_ven_quantity);
         }
     }
 
@@ -87,6 +92,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.start.setText(offers.getStart_date());
         holder.expiry.setText(offers.getEnd_date());
         holder.termsCondition.setText(offers.getDetails());
+        holder.offerPrice.setText("\u20b9 "+offers.getOfferPrice());
 
 
         final String uid=offers.getUid();
@@ -139,6 +145,21 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                 else if(holder.relayTerms.getVisibility()==View.VISIBLE){
                     holder.relayTerms.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        holder.quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+            @Override
+            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+                if(newValue>0){
+                    int amount = Integer.parseInt(offers.getOfferPrice())*newValue;
+                    int discount = amount*Integer.parseInt(offers.getDiscPercent())/100;
+                    int finalPrice=amount-discount;
+
+                    holder.finalPrice.setText("\u20b9 "+finalPrice);
+                }
+                else if(newValue==0)
+                    holder.finalPrice.setText("");
             }
         });
 
