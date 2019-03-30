@@ -70,7 +70,7 @@ public class FragmentOfferList extends Fragment {
     public void onResume() {
         super.onResume();
 
-        offerPreviewAdapter.notifyDataSetChanged();
+    //    offerPreviewAdapter.notifyDataSetChanged();
 
     }
 
