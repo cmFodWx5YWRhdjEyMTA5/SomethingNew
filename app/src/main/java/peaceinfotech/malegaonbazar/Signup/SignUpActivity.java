@@ -20,12 +20,14 @@ import android.widget.Toast;
 import com.goodiebag.pinview.Pinview;
 
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
+import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
     TextView warnmobile,warnotp;
     EditText mobile;
-    Button sendotp,veruser,vervendor;
+    Button sendotp,btVerify;
     Pinview pinview;
     Animation RightSwipe,LeftSwipe,BackRight,BackLeft;
     LinearLayout layMobile,layotp;
@@ -47,12 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         layMobile=findViewById(R.id.lay_mobile);
         layotp=findViewById(R.id.layotp);
         pinview=findViewById(R.id.pinview);
-        veruser=findViewById(R.id.btveruser);
-        vervendor=findViewById(R.id.btverven);
-
-
-
-
+        btVerify=findViewById(R.id.btverify);
 
 
 
@@ -97,41 +94,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        veruser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String otp = pinview.getValue();
-                type = "user";
-                if (otp.isEmpty() || otp.length() != 4) {
-//                    Toast.makeText(SignUpActivity.this,"Plese Enter the Correct Otp",Toast.LENGTH_LONG).show();
-                    warnotp.setVisibility(View.VISIBLE);
-                }
-                else {
-
-                    if (warnotp.getVisibility() == View.VISIBLE) {
-                        warnotp.setVisibility(View.GONE);
-                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
-                        in.putExtra("type", type);
-                        startActivity(in);
-                        finish();
-                    }
-                    else{
-                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
-                        in.putExtra("type", type);
-                        startActivity(in);
-                        finish();
-                    }
-                }
-            }
-        });
-
-        vervendor.setOnClickListener(new View.OnClickListener() {
+        btVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String otp=pinview.getValue();
-                type="vendor";
+
                 if (otp.isEmpty()||otp.length()!=4)
                 {
                    // Toast.makeText(SignUpActivity.this,"Plese Enter the Correct Otp",Toast.LENGTH_LONG).show();
@@ -141,14 +110,12 @@ public class SignUpActivity extends AppCompatActivity {
                 else{
                     if (warnotp.getVisibility() == View.VISIBLE) {
                         warnotp.setVisibility(View.GONE);
-                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
-                        in.putExtra("type", type);
+                        Intent in = new Intent(SignUpActivity.this, SelectionActivity.class);
                         startActivity(in);
                         finish();
                     }
                     else{
-                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
-                        in.putExtra("type", type);
+                        Intent in = new Intent(SignUpActivity.this, SelectionActivity.class);
                         startActivity(in);
                         finish();
                     }
@@ -175,7 +142,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         }
         else {
-            super.onBackPressed();
+            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            finish();
         }
     }
 

@@ -30,13 +30,16 @@ import java.util.Random;
 
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
+import peaceinfotech.malegaonbazar.User.UI.UserActivity;
+import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
     Button btlogo,btban;
     ImageView imgDemo;
     EditText etusername,etuserloc,etuserpass,etuserrepass;
-    EditText etvenname,etvenloc,etvenbname,etvencat,etvenser,etvenmail,etvenpass,etvenrepass;
+    EditText etvenname,etvenloc,etvenbname,etvencat,etvenmail,etvenpass,etvenrepass;
     String type;
     LinearLayout userlay;
     ScrollView vendorlay;
@@ -66,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         etvenloc=findViewById(R.id.etvenloc);
         etvenbname=findViewById(R.id.etvenbname);
         etvencat=findViewById(R.id.etvencat);
-        etvenser=findViewById(R.id.etvenser);
+
         etvenmail=findViewById(R.id.etvenmail);
         etvenpass=findViewById(R.id.etvenpass);
         etvenrepass=findViewById(R.id.etvenrepass);
@@ -83,20 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
         else if(type.equalsIgnoreCase("vendor")){
             vendorlay.setVisibility(View.VISIBLE);
         }
-
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setMessage("Registered Successfully");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-
-                finish();
-            }
-        });
-        final AlertDialog alertDialog=builder.create();
-
-
 
         btlogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(pass.equals(repass)){
                         String userReferenceId="userref"+rand.nextInt(10000);
                         SaveSharedPreference.setUserReference(RegisterActivity.this,userReferenceId);
-                        alertDialog.show();
+                        AlertDialog("user");
                     }
                     else{
                         etuserrepass.setError("Password Don't Match");
@@ -164,12 +153,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String location=etvenloc.getText().toString();
                 String brand=etvenbname.getText().toString();
                 String category=etvencat.getText().toString();
-                String service=etvenser.getText().toString();
                 String email=etvenmail.getText().toString();
                 String pass=etvenpass.getText().toString();
                 String repass=etvenrepass.getText().toString();
 
-                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||service.isEmpty()||email.isEmpty()||pass.isEmpty()||repass.isEmpty()){
+                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||email.isEmpty()||pass.isEmpty()||repass.isEmpty()){
                     if(name.isEmpty()){
                         etvenname.setError("Please Enter this Field");
                     }
@@ -181,9 +169,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     if(category.isEmpty()){
                         etvencat.setError("Please Enter this Field");
-                    }
-                    if(service.isEmpty()){
-                        etvenser.setError("Please Enter this Field");
                     }
                     if(email.isEmpty()){
                         etvenmail.setError("Please Enter this Field");
@@ -199,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(pass.equals(repass)){
                         String vendorReferenceId="venref"+rand.nextInt(10000);;
                         SaveSharedPreference.setVendorReference(RegisterActivity.this,vendorReferenceId);
-                        alertDialog.show();
+                        AlertDialog("vendor");
                     }
                     else{
                         etvenrepass.setError("Password Don't Match");
@@ -242,5 +227,36 @@ public class RegisterActivity extends AppCompatActivity {
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        startActivity(new Intent(RegisterActivity.this, SelectionActivity.class));
+        finish();
+
+    }
+
+    public void AlertDialog(final String type){
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("Registered Successfully");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(type.equals("user")){
+                    startActivity(new Intent(RegisterActivity.this, UserActivity.class));
+                    finish();
+                }
+                else if(type.equals("vendor")){
+                    startActivity(new Intent(RegisterActivity.this, VendorActivity.class));
+                    finish();
+                }
+            }
+        });
+        final AlertDialog alertDialog=builder.create();
+
+        alertDialog.show();
     }
 }

@@ -19,8 +19,8 @@ import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 public class LoginActivity extends AppCompatActivity {
 
     EditText etmob,etpass;
-    TextView warn;
-    Button btsignin,btsignup;
+    TextView warn,tvSignUp;
+    Button btsignin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         etmob=findViewById(R.id.etmob);
         etpass=findViewById(R.id.etpass);
         btsignin=findViewById(R.id.btsignin);
-        btsignup=findViewById(R.id.btsignup);
+        tvSignUp=findViewById(R.id.tv_signup);
         warn=findViewById(R.id.tvwarn);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())){
-            startActivity(new Intent(LoginActivity.this,UserActivity.class));
+            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
             finish();
         }
 
@@ -60,12 +60,12 @@ public class LoginActivity extends AppCompatActivity {
                         if(warn.getVisibility()==View.VISIBLE){
                             warn.setVisibility(View.GONE);
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this,UserActivity.class));
+                            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
                             finish();
                         }
                         else {
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this,UserActivity.class));
+                            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
                             finish();
                         }
                     }
@@ -73,10 +73,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btsignup.setOnClickListener(new View.OnClickListener() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                finish();
             }
         });
 

@@ -67,6 +67,27 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select a Discount Category"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            style="@style/InputLabel"
+            android:layout_marginTop="16dp"/>
+
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:id="@+id/spinner_discount"
+            android:background="@drawable/spinner_background"/>
+
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -75,7 +96,7 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Discount Percentage"
+                android:hint="Discount"
                 android:padding="10dp"
                 android:textSize="20sp"
                 android:id="@+id/et_disc_percent"

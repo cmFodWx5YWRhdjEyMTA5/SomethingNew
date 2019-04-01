@@ -11,11 +11,16 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
@@ -23,6 +28,8 @@ import peaceinfotech.malegaonbazar.R;
 public class FragmentAddOffers extends Fragment {
     TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry,etofferPrice,etdiscPer;
     DatabaseHelper myDb;
+    Spinner spinDiscount;
+    List<String> discount = new ArrayList<String>();
 
     Button preview,add;
     @Nullable
@@ -40,8 +47,18 @@ public class FragmentAddOffers extends Fragment {
         etexpiry=view.findViewById(R.id.et_date_end);
         etofferPrice=view.findViewById(R.id.et_offer_price);
         etdiscPer=view.findViewById(R.id.et_disc_percent);
+        spinDiscount=view.findViewById(R.id.spinner_discount);
 
         myDb=new DatabaseHelper(getActivity());
+
+        discount.add(0,"Percentage");
+        discount.add(1,"Fixed Value");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,discount);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinDiscount.setAdapter(adapter);
+
+        spinDiscount.setSelection(0);
 
         etstart.setOnClickListener(new View.OnClickListener() {
             @Override
