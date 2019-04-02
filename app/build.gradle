@@ -42,4 +42,6 @@ dependencies {
     implementation 'gr.escsoft.michaelprimez.searchablespinner:SearchableSpinner:1.0.9'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 }

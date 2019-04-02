@@ -1,5 +1,6 @@
 package peaceinfotech.malegaonbazar.Signup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,13 +28,27 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesListModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.HomeModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.UserRegisterModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.VendorRegisterModel;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Multipart;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
@@ -45,6 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
     ScrollView vendorlay;
     public final int LOGO=1;
     public final int BAN=2;
+    MultipartBody.Part userFileToUpload,vendorFileToUpload;
+    RequestBody userFileName,vendorFileName;
+    List<String> categoryName;
+    List<String> categoryId;
+
+
 
     Random rand = new Random();
 
@@ -77,6 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
         btban=findViewById(R.id.btban);
         submitven=findViewById(R.id.btvensubmit);
 
+        categoryName=new ArrayList<>();
+        categoryId=new ArrayList<>();
+
         Intent getin =getIntent();
         type=getin.getStringExtra("type");
 
@@ -86,6 +111,30 @@ public class RegisterActivity extends AppCompatActivity {
         else if(type.equalsIgnoreCase("vendor")){
             vendorlay.setVisibility(View.VISIBLE);
         }
+
+        ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<HomeModel>() {
+            @Override
+            public void onResponse(Call<HomeModel> call, Response<HomeModel> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        for(int i=0;i<response.body().getCategoriesListModels().size();i++){
+                            categoryName.add(response.body().getCategoriesListModels().get(i).getCatName());
+                            categoryId.add(response.body().getCategoriesListModels().get(i).getCatId());
+                        }
+                    }
+                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HomeModel> call, Throwable t) {
+
+            }
+        });
+
+
 
         btlogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,15 +181,13 @@ public class RegisterActivity extends AppCompatActivity {
                     if(pass.equals(repass)){
                         String userReferenceId="userref"+rand.nextInt(10000);
                         SaveSharedPreference.setUserReference(RegisterActivity.this,userReferenceId);
-                        AlertDialog("user");
+                        UserRegister("2",name,location,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
                     }
                     else{
                         etuserrepass.setError("Password Don't Match");
 //                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
-
-
             }
         });
 
@@ -157,7 +204,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String pass=etvenpass.getText().toString();
                 String repass=etvenrepass.getText().toString();
 
-                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||email.isEmpty()||pass.isEmpty()||repass.isEmpty()){
+                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||pass.isEmpty()||repass.isEmpty()){
                     if(name.isEmpty()){
                         etvenname.setError("Please Enter this Field");
                     }
@@ -170,9 +217,6 @@ public class RegisterActivity extends AppCompatActivity {
                     if(category.isEmpty()){
                         etvencat.setError("Please Enter this Field");
                     }
-                    if(email.isEmpty()){
-                        etvenmail.setError("Please Enter this Field");
-                    }
                     if(pass.isEmpty()){
                         etvenpass.setError("Please Enter this Field");
                     }
@@ -182,9 +226,17 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(pass.equals(repass)){
-                        String vendorReferenceId="venref"+rand.nextInt(10000);;
+                        String vendorReferenceId="venref"+rand.nextInt(10000);
+                        String finalEmail;
+                        if(email.isEmpty()){
+                            finalEmail = " ";
+                        }
+                        else{
+                            finalEmail=email;
+                        }
+
                         SaveSharedPreference.setVendorReference(RegisterActivity.this,vendorReferenceId);
-                        AlertDialog("vendor");
+                        VendorRegister("3",name,location,brand,category,email,repass,userFileToUpload,userFileName,vendorFileToUpload,vendorFileName);
                     }
                     else{
                         etvenrepass.setError("Password Don't Match");
@@ -200,23 +252,39 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == LOGO && resultCode == RESULT_OK && null != data){
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            imgDemo.setImageURI(selectedImage);
+//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//            imgDemo.setImageURI(selectedImage);
+            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
+            File file = new File(filePath);
+            //Log.d(TAG, "Filename " + file.getName());
+            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
+            userFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
+            userFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
         }
         if(requestCode == BAN && resultCode == RESULT_OK && null != data){
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            imgDemo.setImageURI(selectedImage);
+//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//            imgDemo.setImageURI(selectedImage);
+            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
+            File file = new File(filePath);
+            //Log.d(TAG, "Filename " + file.getName());
+            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
+            vendorFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
+            vendorFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
         }
     }
 
@@ -237,6 +305,49 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public void UserRegister(String roleId,String fullname,String location,String mobile,String password){
+        ApiUtils.getServiceClass().userRegister(roleId,fullname,location,mobile,password).enqueue(new Callback<UserRegisterModel>() {
+            @Override
+            public void onResponse(Call<UserRegisterModel> call, Response<UserRegisterModel> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        AlertDialog("user");
+                    }
+                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+                        Toast.makeText(RegisterActivity.this, "Something Went Wrong Please Try Again Later !!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserRegisterModel> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void VendorRegister(String roleId, String fullName, String location, String brand, String category, String emailId, String password, MultipartBody.Part userFileUpload,RequestBody userFilename,MultipartBody.Part vendorFileUpload,RequestBody vendorFilename){
+        ApiUtils.getServiceClass().vendorRegister(roleId,fullName,location,brand,category,emailId,password,userFileUpload,userFilename,vendorFileUpload,vendorFilename).enqueue(new Callback<VendorRegisterModel>() {
+            @Override
+            public void onResponse(Call<VendorRegisterModel> call, Response<VendorRegisterModel> response) {
+                if(response.isSuccessful()){
+                    Log.d("vendorreg",response.body().getResponse());
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        AlertDialog("vendor");
+                    }
+                    else  if(response.body().getResponse().equalsIgnoreCase("response")){
+                        Toast.makeText(RegisterActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VendorRegisterModel> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void AlertDialog(final String type){
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -244,7 +355,6 @@ public class RegisterActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 if(type.equals("user")){
                     startActivity(new Intent(RegisterActivity.this, UserActivity.class));
                     finish();
@@ -259,4 +369,16 @@ public class RegisterActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
+
+    private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
+        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+
 }

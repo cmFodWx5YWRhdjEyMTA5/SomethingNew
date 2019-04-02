@@ -18,6 +18,8 @@ public class SaveSharedPreference {
     final public static String KEY_USERREF="userref";
     final public static String KEY_VENREF="venref";
     final public static String KEY_FIRST_TIME="first_time";
+    final public static String KEY_OTP="otp";
+    final public static String KEY_MOBILE="mobile";
 
     public static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -41,6 +43,8 @@ public class SaveSharedPreference {
         editor.putString(KEY_MAX,max);
         editor.apply();
     }
+
+
 
     public static List<String> getNewOffers(Context context){
 
@@ -85,6 +89,27 @@ public class SaveSharedPreference {
     public static boolean getFirstTimeLaunch(Context context){
         return getPreferences(context).getBoolean(KEY_FIRST_TIME,false);
     }
+
+    public static void setOTP(Context context,int otp){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putInt(KEY_OTP,otp);
+        editor.apply();
+    }
+
+    public static  int getOTP(Context context){
+        return  getPreferences(context).getInt(KEY_OTP,0);
+    }
+
+    public static void setMobile(Context context,String mob){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_MOBILE,mob);
+        editor.apply();
+    }
+
+    public static String getMobile(Context context){
+        return getPreferences(context).getString(KEY_MOBILE,"");
+    }
+
 
 
 }

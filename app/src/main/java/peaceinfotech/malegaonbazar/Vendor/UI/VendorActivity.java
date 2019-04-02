@@ -24,6 +24,7 @@ import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddServices;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentBusiness;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentHistory;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentOfferList;
@@ -136,6 +137,9 @@ public class VendorActivity extends AppCompatActivity
                 break;
             case R.id.nav_offers_list:
                 fragment=new FragmentOfferList();
+                break;
+            case R.id.nav_add_services:
+                fragment=new FragmentAddServices();
                 break;
             case R.id.nav_request:
                 fragment = new FragmentRequest();

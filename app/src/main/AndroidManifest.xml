@@ -29,6 +29,7 @@
         </activity>
         <activity android:name=".StartUI.LoginActivity" />
         <activity android:name=".Signup.SignUpActivity" />
+        <activity android:name=".StartUI.SelectionActivity"/>
         <activity android:name=".Signup.RegisterActivity" />
         <activity
             android:name=".User.UI.UserActivity"
@@ -49,7 +50,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Vendor.UI.EditOfferActivity" />
         <activity android:name=".Vendor.UI.DemoActcivity" />
-        <activity android:name=".StartUI.SelectionActivity"/>
+
 
     </application>
 
