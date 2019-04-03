@@ -1,10 +1,10 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel;
+package peaceinfotech.malegaonbazar.RetrofitModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserRegisterModel {
 
+public class LogInModel {
     @SerializedName("response")
     @Expose
     private String response;
@@ -12,6 +12,11 @@ public class UserRegisterModel {
     @SerializedName("message")
     @Expose
     private String message;
+
+    @SerializedName("details")
+    @Expose
+    private LoginDetailsModel detailsModels =new LoginDetailsModel();
+
 
     public String getResponse() {
         return response;
@@ -27,5 +32,13 @@ public class UserRegisterModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public LoginDetailsModel getDetailsModels() {
+        return detailsModels;
+    }
+
+    public void setDetailsModels(LoginDetailsModel detailsModels) {
+        this.detailsModels = detailsModels;
     }
 }

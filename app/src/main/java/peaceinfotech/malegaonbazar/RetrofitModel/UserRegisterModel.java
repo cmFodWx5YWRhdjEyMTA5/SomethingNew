@@ -1,9 +1,9 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel;
+package peaceinfotech.malegaonbazar.RetrofitModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VendorRegisterModel {
+public class UserRegisterModel {
 
     @SerializedName("response")
     @Expose
@@ -28,5 +28,4 @@ public class VendorRegisterModel {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

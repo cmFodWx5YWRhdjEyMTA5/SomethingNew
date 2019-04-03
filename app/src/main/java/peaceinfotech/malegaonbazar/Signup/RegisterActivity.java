@@ -1,7 +1,5 @@
 package peaceinfotech.malegaonbazar.Signup;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,14 +18,12 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +39,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,15 +47,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesModel.HomeModel;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.UserRegisterModel;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.VendorRegisterModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
@@ -140,9 +133,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<HomeModel>() {
+        ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<CategoriesHomeModel>() {
             @Override
-            public void onResponse(Call<HomeModel> call, Response<HomeModel> response) {
+            public void onResponse(Call<CategoriesHomeModel> call, Response<CategoriesHomeModel> response) {
                 if(response.isSuccessful()){
                     if(response.body().getResponse().equalsIgnoreCase("success")){
                         for(int i=0;i<response.body().getCategoriesListModels().size();i++){
@@ -158,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<HomeModel> call, Throwable t) {
+            public void onFailure(Call<CategoriesHomeModel> call, Throwable t) {
 
             }
         });

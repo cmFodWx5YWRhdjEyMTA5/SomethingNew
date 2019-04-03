@@ -37,7 +37,13 @@ public class SaveSharedPreference {
     final public static String KEY_VENDOR_NAME = "vendor_name";
     final public static String KEY_VENDOR_LOCATION = "vendor_location";
     final public static String KEY_VENDOR_MOBILE = "vendor_mobile";
-    final public static String KEY_VENDOR_REFER_ID = "vendor_reference_id";
+    final public static String KEY_VENDOR_BRAND = "vendor_brand";
+    final public static String KEY_VENDOR_IMGLOGO = "vendor_img_logo";
+    final public static String KEY_VENDOR_IMGBAN = "vendor_img_ban";
+    final public static String KEY_VENDOR_EMAIL = "vendor_email";
+
+
+
 
 
 
@@ -130,15 +136,39 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_MOBILE,"");
     }
 
-    public static void setVendorProfileData(Context context,String roleName ){
+    public static void setRole(Context context,String roleId,String roleName){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_ROLE_ID,roleId);
+        editor.putString(KEY_ROLE_NAME,roleName);
+        editor.apply();
+    }
 
+    public static String getRole (Context context){
+        return getPreferences(context).getString(KEY_ROLE_NAME,"");
+    }
 
+    public static void setUserProfileData(Context context,String id,String name,String location,String mobile,String referenceId){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_USER_ID,id);
+        editor.putString(KEY_USER_NAME,name);
+        editor.putString(KEY_USER_LOCATION,location);
+        editor.putString(KEY_USER_MOBILE,mobile);
+        editor.putString(KEY_USER_REFER_ID,referenceId);
+        editor.apply();
     }
 
 
-
-
-    public static void setUserProfileData(Context context,String roleName ){
+    public static void setVendorProfileData(Context context,String id,String name,String location,String mobile,String brand,String imgLogo,String imgBan,String email){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_VENDOR_ID,id);
+        editor.putString(KEY_VENDOR_NAME,name);
+        editor.putString(KEY_VENDOR_LOCATION,location);
+        editor.putString(KEY_VENDOR_MOBILE,mobile);
+        editor.putString(KEY_VENDOR_BRAND,brand);
+        editor.putString(KEY_VENDOR_IMGLOGO,imgLogo);
+        editor.putString(KEY_VENDOR_IMGBAN,imgBan);
+        editor.putString(KEY_VENDOR_EMAIL,email);
+        editor.apply();
 
     }
 

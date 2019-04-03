@@ -1,13 +1,9 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel.LogInModels;
+package peaceinfotech.malegaonbazar.RetrofitModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class LoginModel {
-
-
+public class VendorRegisterModel {
 
     @SerializedName("response")
     @Expose
@@ -16,11 +12,6 @@ public class LoginModel {
     @SerializedName("message")
     @Expose
     private String message;
-
-    @SerializedName("details")
-    @Expose
-    private List<DetailsModel> detailsModels = (List<DetailsModel>) new DetailsModel();
-
 
     public String getResponse() {
         return response;
@@ -38,12 +29,4 @@ public class LoginModel {
         this.message = message;
     }
 
-    public List<DetailsModel> getDetailsModels() {
-        return detailsModels;
-    }
-
-    public void setDetailsModels(List<DetailsModel> detailsModels) {
-        this.detailsModels = detailsModels;
-    }
 }
-

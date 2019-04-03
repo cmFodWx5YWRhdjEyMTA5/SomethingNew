@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesModel;
+package peaceinfotech.malegaonbazar.RetrofitModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

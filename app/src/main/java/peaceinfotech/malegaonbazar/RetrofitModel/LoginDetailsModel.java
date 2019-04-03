@@ -1,9 +1,12 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel.LogInModels;
+package peaceinfotech.malegaonbazar.RetrofitModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DetailsModel{
+public class LoginDetailsModel {
+
+
+
 
     @SerializedName("user_id")
     @Expose
@@ -52,6 +55,7 @@ public class DetailsModel{
     @SerializedName("email")
     @Expose
     String email;
+
 
     public String getVendorId() {
         return vendorId;
@@ -149,3 +153,4 @@ public class DetailsModel{
         this.referenceId = referenceId;
     }
 }
+

@@ -3,6 +3,7 @@ package peaceinfotech.malegaonbazar.StartUI;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,8 +14,9 @@ import android.widget.Toast;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.LogInModels.LoginModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
+import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,8 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         warn=findViewById(R.id.tvwarn);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())){
-            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
-            finish();
+            if(SaveSharedPreference.getRole(LoginActivity.this).equalsIgnoreCase("user")){
+                startActivity(new Intent(LoginActivity.this,UserActivity.class));
+                finish();
+            }
+            else if(SaveSharedPreference.getRole(LoginActivity.this).equalsIgnoreCase("vendor")){
+                startActivity(new Intent(LoginActivity.this, VendorActivity.class));
+                finish();
+            }
         }
 
         btsignin.setOnClickListener(new View.OnClickListener() {
@@ -63,14 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                     else {
                         if(warn.getVisibility()==View.VISIBLE){
                             warn.setVisibility(View.GONE);
-                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
-                            finish();
+                            LogIn(mobile,pass);
                         }
                         else {
-                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                            startActivity(new Intent(LoginActivity.this,VendorActivity.class));
-                            finish();
+                            LogIn(mobile,pass);
                         }
                     }
                 }
@@ -91,29 +95,69 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void LogIn (String mobile,String password){
-       ApiUtils.getServiceClass().logIn(mobile,password).enqueue(new Callback<LoginModel>() {
+
+
+       ApiUtils.getServiceClass().logIn(mobile,password).enqueue(new Callback<LogInModel>() {
            @Override
-           public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
-               if(response.isSuccessful()){
+           public void onResponse(Call<LogInModel> call, Response<LogInModel> response) {
+               if(response.isSuccessful())
+               {
+                   Log.d("login",response.body().getResponse());
                    if(response.body().getResponse().equalsIgnoreCase("success")){
-                       if(response.body().getDetailsModels().get(0).getRoleName().equalsIgnoreCase("user")){
 
+                       if(response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")){
+
+                           SaveSharedPreference.setRole(LoginActivity.this,
+                                   response.body().getDetailsModels().getRoleId(),
+                                   response.body().getDetailsModels().getRoleName());
+
+                           SaveSharedPreference.setUserProfileData(LoginActivity.this,
+                                   response.body().getDetailsModels().getUserId(),
+                                   response.body().getDetailsModels().getFullName(),
+                                   response.body().getDetailsModels().getLocation(),
+                                   response.body().getDetailsModels().getMobile(),
+                                   response.body().getDetailsModels().getReferenceId());
+
+                           SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+                           startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                           finish();
                        }
-                       else if(response.body().getDetailsModels().get(0).getRoleName().equalsIgnoreCase("vendor")){
+                       else if(response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")){
+                           SaveSharedPreference.setRole(LoginActivity.this,
+                                   response.body().getDetailsModels().getRoleId(),
+                                   response.body().getDetailsModels().getRoleName());
 
+                           SaveSharedPreference.setVendorProfileData(LoginActivity.this,
+                                   response.body().getDetailsModels().getVendorId(),
+                                   response.body().getDetailsModels().getFullName(),
+                                   response.body().getDetailsModels().getLocation(),
+                                   response.body().getDetailsModels().getMobile(),
+                                   response.body().getDetailsModels().getBrand(),
+                                   response.body().getDetailsModels().getImgLogoUrl(),
+                                   response.body().getDetailsModels().getImgBannerUrl(),
+                                   response.body().getDetailsModels().getEmail());
+
+                           SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+                           startActivity(new Intent(LoginActivity.this, VendorActivity.class));
+                           finish();
                        }
                    }
                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
-
+                       Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                    }
                }
            }
 
            @Override
-           public void onFailure(Call<LoginModel> call, Throwable t) {
+           public void onFailure(Call<LogInModel> call, Throwable t) {
 
+
+
+               Log.d("loginfail", "onFailure: "+t);
            }
        });
+
+
     }
 
 }
