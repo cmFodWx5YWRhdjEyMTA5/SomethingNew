@@ -21,6 +21,26 @@ public class SaveSharedPreference {
     final public static String KEY_OTP="otp";
     final public static String KEY_MOBILE="mobile";
 
+    //Role Data
+    final public static String KEY_ROLE_NAME="role_name";
+    final public static String KEY_ROLE_ID="role_id";
+
+    //User Profile
+    final public static String KEY_USER_ID = "user_id";
+    final public static String KEY_USER_NAME = "user_name";
+    final public static String KEY_USER_LOCATION = "user_location";
+    final public static String KEY_USER_MOBILE = "user_mobile";
+    final public static String KEY_USER_REFER_ID = "user_reference_id";
+
+    //Vendor Profile
+    final public static String KEY_VENDOR_ID = "vendor_id";
+    final public static String KEY_VENDOR_NAME = "vendor_name";
+    final public static String KEY_VENDOR_LOCATION = "vendor_location";
+    final public static String KEY_VENDOR_MOBILE = "vendor_mobile";
+    final public static String KEY_VENDOR_REFER_ID = "vendor_reference_id";
+
+
+
     public static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -110,7 +130,17 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_MOBILE,"");
     }
 
+    public static void setVendorProfileData(Context context,String roleName ){
 
+
+    }
+
+
+
+
+    public static void setUserProfileData(Context context,String roleName ){
+
+    }
 
 }
 

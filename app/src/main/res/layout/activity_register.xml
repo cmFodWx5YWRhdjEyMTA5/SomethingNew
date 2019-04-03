@@ -85,176 +85,175 @@
         android:background="@drawable/background"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/vendorlay">
 
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:elevation="40dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_marginTop="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="* Fields which are Mandatory"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:hint="Full Name *"
-            android:layout_marginTop="20dp"
-            android:id="@+id/etvenname"
-            android:singleLine="true"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Location *"
-            android:id="@+id/etvenloc"
-            android:singleLine="true"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Brand Name *"
-            android:singleLine="true"
-            android:id="@+id/etvenbname"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Category *"
-            android:singleLine="true"
-            android:id="@+id/etvencat"
-            android:visibility="gone"/>
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Select a Category"
-            style="@style/InputLabel"
-            android:layout_marginTop="20dp"/>
-
-        <Spinner
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_discount"
-            android:background="@drawable/spinner_background"/>
-
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:elevation="40dp"
             android:gravity="center"
-            android:weightSum="2">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logo   "
-                android:textSize="20sp"
-                android:layout_weight="1" />
-
-            <Button
-                android:layout_width="63dp"
-                android:layout_height="28dp"
-                android:layout_weight="1"
-                android:background="@drawable/btsubmit_back"
-                android:text="Choose\nImage"
-                android:textColor="#ffffff"
-                android:id="@+id/btlogo"
-                android:textSize="10sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:weightSum="2">
+                android:layout_marginTop="20dp"
+                android:text="Register"
+                android:textColor="#000000"
+                android:textSize="30sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Banner"
+                android:layout_marginTop="10dp"
+                android:text="* Fields which are Mandatory" />
+
+            <EditText
+                android:id="@+id/etvenname"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Full Name *"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etvenloc"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Location *"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etvenbname"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Brand Name *"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/tv_cat_hint"
+                style="@style/InputLabel"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a Category" />
+
+            <com.isapanah.awesomespinner.AwesomeSpinner
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_category"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:layout_weight="1"/>
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_demo"
+                android:text="demo"/>
+
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Logo   "
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btlogo"
+                    android:layout_width="63dp"
+                    android:layout_height="28dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btsubmit_back"
+                    android:text="Choose\nImage"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Banner"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btban"
+                    android:layout_width="63dp"
+                    android:layout_height="28dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btsubmit_back"
+                    android:text="Choose\nImage"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/etvenpass"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Password *"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etvenrepass"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Confirm-Password *"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etvenmail"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Email-Id (Optional)"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/img_demo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <Button
-                android:layout_width="63dp"
-                android:layout_height="28dp"
-                android:layout_weight="1"
+                android:id="@+id/btvensubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/btsubmit_back"
-                android:text="Choose\nImage"
-                android:textColor="#ffffff"
-                android:id="@+id/btban"
-                android:textSize="10sp"/>
-
+                android:text="sumbit"
+                android:textColor="#ffffff" />
         </LinearLayout>
-
-
-
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Password *"
-            android:id="@+id/etvenpass"
-            android:inputType="textPassword"
-            android:singleLine="true" />
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Confirm-Password *"
-            android:id="@+id/etvenrepass"
-            android:inputType="textPassword"
-            android:singleLine="true"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Email-Id (Optional)"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:id="@+id/etvenmail"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/img_demo" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sumbit"
-            android:layout_marginTop="20dp"
-            android:id="@+id/btvensubmit"
-            android:background="@drawable/btsubmit_back"
-            android:textColor="#ffffff"
-            android:layout_marginBottom="20dp"/>
-    </LinearLayout>
 
     </ScrollView>
 </RelativeLayout>

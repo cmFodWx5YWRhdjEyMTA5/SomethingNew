@@ -1,4 +1,4 @@
-package peaceinfotech.malegaonbazar.Signup.RetrofitModel;
+package peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -24,6 +24,7 @@ public class CategoriesListModel {
     @SerializedName("createdDate")
     @Expose
     private String catCrDate;
+
 
     public String getCatUid() {
         return catUid;

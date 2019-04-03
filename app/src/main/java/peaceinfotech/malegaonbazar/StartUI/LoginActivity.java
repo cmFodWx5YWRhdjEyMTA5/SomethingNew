@@ -11,10 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.LogInModels.LoginModel;
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
-import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,11 +80,40 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
                 finish();
+
+//                startActivity(new Intent(LoginActivity.this,SelectionActivity.class));
+//                finish();
             }
         });
 
+    }
+
+    private void LogIn (String mobile,String password){
+       ApiUtils.getServiceClass().logIn(mobile,password).enqueue(new Callback<LoginModel>() {
+           @Override
+           public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+               if(response.isSuccessful()){
+                   if(response.body().getResponse().equalsIgnoreCase("success")){
+                       if(response.body().getDetailsModels().get(0).getRoleName().equalsIgnoreCase("user")){
+
+                       }
+                       else if(response.body().getDetailsModels().get(0).getRoleName().equalsIgnoreCase("vendor")){
+
+                       }
+                   }
+                   else if(response.body().getResponse().equalsIgnoreCase("failed")){
+
+                   }
+               }
+           }
+
+           @Override
+           public void onFailure(Call<LoginModel> call, Throwable t) {
+
+           }
+       });
     }
 
 }

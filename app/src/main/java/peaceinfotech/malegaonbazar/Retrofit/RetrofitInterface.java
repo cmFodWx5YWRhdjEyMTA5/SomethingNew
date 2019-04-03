@@ -1,11 +1,9 @@
 package peaceinfotech.malegaonbazar.Retrofit;
 
-import java.util.List;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesListModel;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.HomeModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesModel.HomeModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.LogInModels.LoginModel;
 import peaceinfotech.malegaonbazar.Signup.RetrofitModel.SendOTPModel;
 import peaceinfotech.malegaonbazar.Signup.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.Signup.RetrofitModel.VendorRegisterModel;
@@ -17,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface RetrofitInterface {
 
@@ -38,22 +37,29 @@ public interface RetrofitInterface {
                                          @Field("Mobile")String mobile,
                                          @Field("Password")String password);
 
+
     @Multipart
     @POST("vendorsignup/")
-    Call<VendorRegisterModel> vendorRegister(@Part("Roleid")String roleId,
-                                             @Part("Fullname")String fullName,
-                                             @Part("Location")String location,
-                                             @Part("Brand")String brand,
-                                             @Part("Category")String category,
-                                             @Part("EmailId")String emailId,
-                                             @Part("Password")String password,
+    Call<VendorRegisterModel> vendorRegister(@Field("Roleid") String roleId,
+                                             @Field("Fullname") String fullName,
+                                             @Field("Location")String location,
+                                             @Field("Brand")String brand,
+                                             @Field("Mobile")int mobile,
+                                             @Field("Category")String category,
+                                             @Field("Emailid")String emailId,
+                                             @Field("Password")String password,
                                              @Part MultipartBody.Part logoFile,
-                                             @Part("Logo") RequestBody logo,
-                                             @Part MultipartBody.Part bannerFile,
-                                             @Part("Banner") RequestBody banner);
+                                             @Part("Logo") RequestBody logo);
+//                                             @Part MultipartBody.Part bannerFile,
+//                                             @Part("Banner") RequestBody banner);
 
 
     @GET("category/")
     Call<HomeModel> categoriesRegister();
+
+    @FormUrlEncoded
+    @POST("login/")
+    Call<LoginModel> logIn(@Field("mobile")String mobile, @Field("password")String password);
+
 }
 

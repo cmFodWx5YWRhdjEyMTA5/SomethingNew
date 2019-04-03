@@ -1,13 +1,13 @@
 package peaceinfotech.malegaonbazar.Signup;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
@@ -15,21 +15,41 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.isapanah.awesomespinner.AwesomeSpinner;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import okhttp3.MediaType;
@@ -38,8 +58,7 @@ import okhttp3.RequestBody;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesListModel;
-import peaceinfotech.malegaonbazar.Signup.RetrofitModel.HomeModel;
+import peaceinfotech.malegaonbazar.Signup.RetrofitModel.CategoriesModel.HomeModel;
 import peaceinfotech.malegaonbazar.Signup.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.Signup.RetrofitModel.VendorRegisterModel;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
@@ -48,7 +67,6 @@ import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
@@ -61,10 +79,15 @@ public class RegisterActivity extends AppCompatActivity {
     ScrollView vendorlay;
     public final int LOGO=1;
     public final int BAN=2;
-    MultipartBody.Part userFileToUpload,vendorFileToUpload;
-    RequestBody userFileName,vendorFileName;
-    List<String> categoryName;
-    List<String> categoryId;
+    MultipartBody.Part logoFileToUpload,banFileToUpload;
+    RequestBody logoFileName,banFileName;
+    List<String> categoryName = new ArrayList<>();
+    List<String> categoryId = new ArrayList<>();
+    AwesomeSpinner spinCat;
+    TextView tvCatHint,tvDemo;
+    String catid="";
+    private RequestQueue requestQueue;
+    Bitmap bitmapLogo,bitmapBan;
 
 
 
@@ -85,12 +108,14 @@ public class RegisterActivity extends AppCompatActivity {
         etuserpass=findViewById(R.id.etuserpass);
         etuserrepass=findViewById(R.id.etuserrepass);
 
+        tvCatHint=findViewById(R.id.tv_cat_hint);
+        tvDemo=findViewById(R.id.tv_demo);
         imgDemo=findViewById(R.id.img_demo);
 
+        spinCat=findViewById(R.id.spinner_category);
         etvenname=findViewById(R.id.etvenname);
         etvenloc=findViewById(R.id.etvenloc);
         etvenbname=findViewById(R.id.etvenbname);
-        etvencat=findViewById(R.id.etvencat);
 
         etvenmail=findViewById(R.id.etvenmail);
         etvenpass=findViewById(R.id.etvenpass);
@@ -99,8 +124,9 @@ public class RegisterActivity extends AppCompatActivity {
         btban=findViewById(R.id.btban);
         submitven=findViewById(R.id.btvensubmit);
 
-        categoryName=new ArrayList<>();
-        categoryId=new ArrayList<>();
+
+        bitmapLogo = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
+        bitmapBan = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.new_ban);
 
         Intent getin =getIntent();
         type=getin.getStringExtra("type");
@@ -111,6 +137,8 @@ public class RegisterActivity extends AppCompatActivity {
         else if(type.equalsIgnoreCase("vendor")){
             vendorlay.setVisibility(View.VISIBLE);
         }
+
+
 
         ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<HomeModel>() {
             @Override
@@ -128,9 +156,24 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onFailure(Call<HomeModel> call, Throwable t) {
 
+            }
+        });
+
+
+
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryName);
+        spinCat.setAdapter(categoriesAdapter);
+        categoriesAdapter.notifyDataSetChanged();
+
+        spinCat.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+            @Override
+            public void onItemSelected(int position, String itemAtPosition) {
+                catid=categoryId.get(position);
+                tvDemo.setText(catid);
             }
         });
 
@@ -179,8 +222,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(pass.equals(repass)){
-                        String userReferenceId="userref"+rand.nextInt(10000);
-                        SaveSharedPreference.setUserReference(RegisterActivity.this,userReferenceId);
                         UserRegister("2",name,location,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
                     }
                     else{
@@ -196,15 +237,17 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+//                requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+//                vendorUploadBitmap(bitmapLogo,bitmapBan);
+
                 String name=etvenname.getText().toString();
                 String location=etvenloc.getText().toString();
                 String brand=etvenbname.getText().toString();
-                String category=etvencat.getText().toString();
                 String email=etvenmail.getText().toString();
                 String pass=etvenpass.getText().toString();
                 String repass=etvenrepass.getText().toString();
 
-                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||category.isEmpty()||pass.isEmpty()||repass.isEmpty()){
+                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||catid.isEmpty()||pass.isEmpty()||repass.isEmpty()){
                     if(name.isEmpty()){
                         etvenname.setError("Please Enter this Field");
                     }
@@ -214,76 +257,87 @@ public class RegisterActivity extends AppCompatActivity {
                     if(brand.isEmpty()){
                         etvenbname.setError("Please Enter this Field");
                     }
-                    if(category.isEmpty()){
-                        etvencat.setError("Please Enter this Field");
-                    }
                     if(pass.isEmpty()){
                         etvenpass.setError("Please Enter this Field");
                     }
                     if(repass.isEmpty()){
                         etvenrepass.setError("Please Enter this Field");
                     }
+                    if(catid.isEmpty()){
+                        Toast.makeText(RegisterActivity.this, "Select a category", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
                 else{
-                    if(pass.equals(repass)){
-                        String vendorReferenceId="venref"+rand.nextInt(10000);
-                        String finalEmail;
-                        if(email.isEmpty()){
-                            finalEmail = " ";
+                    if(isValidEmail(email)){
+                        if(pass.equals(repass)){
+                            requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+                            vendorUploadBitmap(bitmapLogo,bitmapBan,name,location,brand,catid,repass,email);
                         }
                         else{
-                            finalEmail=email;
-                        }
-
-                        SaveSharedPreference.setVendorReference(RegisterActivity.this,vendorReferenceId);
-                        VendorRegister("3",name,location,brand,category,email,repass,userFileToUpload,userFileName,vendorFileToUpload,vendorFileName);
-                    }
-                    else{
-                        etvenrepass.setError("Password Don't Match");
+                            etvenrepass.setError("Password Don't Match");
 //                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
+                        }
                     }
+                    else {
+                        etvenmail.setError("Enter Valid Email id");
+                    }
+
                 }
             }
         });
 
     }
 
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == LOGO && resultCode == RESULT_OK && null != data){
             Uri selectedImage = data.getData();
-//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-//            imgDemo.setImageURI(selectedImage);
-            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
-            File file = new File(filePath);
-            //Log.d(TAG, "Filename " + file.getName());
-            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
-            userFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
-            userFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            imgDemo.setImageURI(selectedImage);
+            bitmapLogo = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+//            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
+//            File file = new File(filePath);
+//            //Log.d(TAG, "Filename " + file.getName());
+//            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
+//            logoFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
+//            logoFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+//
+//            Log.d("image file",logoFileToUpload.toString()+"/"+logoFileName);
 
         }
         if(requestCode == BAN && resultCode == RESULT_OK && null != data){
             Uri selectedImage = data.getData();
-//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-//            imgDemo.setImageURI(selectedImage);
-            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
-            File file = new File(filePath);
-            //Log.d(TAG, "Filename " + file.getName());
-            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
-            vendorFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
-            vendorFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            imgDemo.setImageURI(selectedImage);
+            bitmapBan = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+ //           imgDemo.setImageURI(selectedImage);
+//            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
+//            File file = new File(filePath);
+//            //Log.d(TAG, "Filename " + file.getName());
+//            //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
+//            banFileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
+//            banFileName = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+//
+//            Log.d("image file1",banFileToUpload.toString()+"/"+banFileName);
 
         }
     }
@@ -326,27 +380,27 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void VendorRegister(String roleId, String fullName, String location, String brand, String category, String emailId, String password, MultipartBody.Part userFileUpload,RequestBody userFilename,MultipartBody.Part vendorFileUpload,RequestBody vendorFilename){
-        ApiUtils.getServiceClass().vendorRegister(roleId,fullName,location,brand,category,emailId,password,userFileUpload,userFilename,vendorFileUpload,vendorFilename).enqueue(new Callback<VendorRegisterModel>() {
-            @Override
-            public void onResponse(Call<VendorRegisterModel> call, Response<VendorRegisterModel> response) {
-                if(response.isSuccessful()){
-                    Log.d("vendorreg",response.body().getResponse());
-                    if(response.body().getResponse().equalsIgnoreCase("success")){
-                        AlertDialog("vendor");
-                    }
-                    else  if(response.body().getResponse().equalsIgnoreCase("response")){
-                        Toast.makeText(RegisterActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<VendorRegisterModel> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void VendorRegister(String roleId,String fullName, String location, String mobile,String brand, String category, String emailId, String password){
+//        ApiUtils.getServiceClass().vendorRegister(roleId,fullName,location,brand,mobile,category,emailId,password,logoFileToUpload,logoFileName,banFileToUpload,banFileName).enqueue(new Callback<VendorRegisterModel>() {
+//            @Override
+//            public void onResponse(Call<VendorRegisterModel> call, Response<VendorRegisterModel> response) {
+//                if(response.isSuccessful()){
+//                    Log.d("vendorreg",response.body().getResponse());
+//                    if(response.body().getResponse().equalsIgnoreCase("success")){
+//                        AlertDialog("vendor");
+//                    }
+//                    else  if(response.body().getResponse().equalsIgnoreCase("response")){
+//                        Toast.makeText(RegisterActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<VendorRegisterModel> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     public void AlertDialog(final String type){
 
@@ -370,15 +424,98 @@ public class RegisterActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
-        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) {
-            return contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
-        }
+
+    private void vendorUploadBitmap(final Bitmap bitmapLogo, final Bitmap bitmapBan, final String name, final String location, final String brand, final String catid, final String password, final String email ) {
+
+
+        //our custom volley request
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST," http://autoreplyz.com/Malegaon/Api/Userapi/vendorsignup",
+                new com.android.volley.Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            JSONObject obj = new JSONObject(new String(response.data));
+//                            JSONObject o=jsonResponse.getJSONObject("details");
+                            Log.d("SID", "onResponse: " + obj.getString("response"));
+                            //If it is success
+                            if (obj.getString("response").equalsIgnoreCase("success")) {
+
+                                AlertDialog("vendor");
+
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Some error", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
+            /*
+             * If you want to add more parameters with the image
+             * you can do it here
+             * here we have only one parameter with the image
+             * which is tags
+             * */
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("Roleid","3");
+                params.put("Fullname",name);
+                params.put("Location",location);
+                params.put("Brand",brand);
+                params.put("Mobile",SaveSharedPreference.getMobile(RegisterActivity.this));
+                params.put("Category",catid);
+                params.put("Emailid",email);
+                params.put("Password",password);
+
+                return params;
+            }
+
+            /*
+             * Here we are passing image by renaming it with a unique name
+             * */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long logoImageName = System.currentTimeMillis();
+                params.put("Logo", new DataPart(logoImageName + ".png", getFileDataFromDrawable(bitmapLogo)));
+
+                long banImageName = System.currentTimeMillis();
+                params.put("Banner",new DataPart(banImageName + ".png", getFileDataFromDrawable(bitmapBan)));
+                return params;
+            }
+        };
+
+        //adding the request to volley
+        //idi requestQueue.add(stringRequest);
+        requestQueue.add(volleyMultipartRequest);
+    }
+
+
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
 }
+
+//   private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
+//        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+//        if (cursor == null) {
+//            return contentURI.getPath();
+//        } else {
+//            cursor.moveToFirst();
+//            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+//            return cursor.getString(idx);
+//        }
+//    }
