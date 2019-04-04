@@ -1,8 +1,10 @@
 package peaceinfotech.malegaonbazar.Retrofit;
 
+import peaceinfotech.malegaonbazar.RetrofitModel.AddServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.SendOTPModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.ServiceHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.VerifyOTPModel;
 import retrofit2.Call;
@@ -10,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RetrofitInterface {
 
@@ -40,6 +43,12 @@ public interface RetrofitInterface {
     @GET("category/")
     Call<CategoriesHomeModel> categoriesRegister();
 
+    @FormUrlEncoded
+    @POST("addservice/")
+    Call<AddServiceModel> addService(@Field("vendor_id")String id, @Field("service_name")String name,@Field("service_description")String desc);
+
+    @GET("services/")
+    Call<ServiceHomeModel> getServices(@Query("vendor_id")String id);
 
 }
 

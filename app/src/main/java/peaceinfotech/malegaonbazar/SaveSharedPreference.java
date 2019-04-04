@@ -157,6 +157,18 @@ public class SaveSharedPreference {
         editor.apply();
     }
 
+    public static List<String> getUserProfileData(Context context){
+        List<String> data = new ArrayList<>();
+
+        data.add(0,getPreferences(context).getString(KEY_USER_ID,""));
+        data.add(2,getPreferences(context).getString(KEY_USER_NAME,""));
+        data.add(3,getPreferences(context).getString(KEY_USER_LOCATION,""));
+        data.add(4,getPreferences(context).getString(KEY_USER_MOBILE,""));
+        data.add(5,getPreferences(context).getString(KEY_USER_REFER_ID,""));
+
+        return data;
+    }
+
 
     public static void setVendorProfileData(Context context,String id,String name,String location,String mobile,String brand,String imgLogo,String imgBan,String email){
         SharedPreferences.Editor editor = getPreferences(context).edit();
@@ -170,6 +182,26 @@ public class SaveSharedPreference {
         editor.putString(KEY_VENDOR_EMAIL,email);
         editor.apply();
 
+    }
+
+    public static List<String> getVendorProfileData(Context context){
+        List<String> data = new ArrayList<>();
+
+        data.add(0,getPreferences(context).getString(KEY_VENDOR_ID,""));
+        data.add(1,getPreferences(context).getString(KEY_VENDOR_NAME,""));
+        data.add(2,getPreferences(context).getString(KEY_VENDOR_LOCATION,""));
+        data.add(3,getPreferences(context).getString(KEY_VENDOR_MOBILE,""));
+        data.add(4,getPreferences(context).getString(KEY_VENDOR_BRAND,""));
+        data.add(5,getPreferences(context).getString(KEY_VENDOR_EMAIL,""));
+        data.add(6,getPreferences(context).getString(KEY_VENDOR_IMGLOGO,""));
+        data.add(7,getPreferences(context).getString(KEY_VENDOR_IMGBAN,""));
+
+        return data;
+
+    }
+
+    public static String getKeyVendorId(Context context){
+        return getPreferences(context).getString(KEY_VENDOR_ID,"");
     }
 
 }

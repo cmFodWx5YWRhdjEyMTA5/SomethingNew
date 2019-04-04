@@ -32,7 +32,8 @@
             app:civ_border_width="4dp"
             app:civ_shadow="true"
             app:civ_shadow_color="#000000"
-            app:civ_shadow_radius="10" />
+            app:civ_shadow_radius="10"
+            android:id="@+id/img_logo"/>
 
     </RelativeLayout>
 
@@ -59,7 +60,8 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text="Siddhant Jain"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:id="@+id/tv_vendor_name"/>
 
     </RelativeLayout>
 

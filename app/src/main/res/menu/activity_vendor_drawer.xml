@@ -19,7 +19,7 @@
             android:title="Offers List"/>
         <item
             android:id="@+id/nav_add_services"
-            android:title="Add Services"/>
+            android:title="Services"/>
         <item
             android:id="@+id/nav_request"
             android:title="Requests"
