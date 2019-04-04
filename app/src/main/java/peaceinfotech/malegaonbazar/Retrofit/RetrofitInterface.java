@@ -3,8 +3,11 @@ package peaceinfotech.malegaonbazar.Retrofit;
 import peaceinfotech.malegaonbazar.RetrofitModel.AddServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.OfferRetroListModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.ResponseMessageModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.SendOTPModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.ServiceHomeModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.UpdateServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.VerifyOTPModel;
 import retrofit2.Call;
@@ -49,6 +52,19 @@ public interface RetrofitInterface {
 
     @GET("services/")
     Call<ServiceHomeModel> getServices(@Query("vendor_id")String id);
+
+    @FormUrlEncoded
+    @POST("updateservices/")
+    Call<UpdateServiceModel> editServices(@Field("serviceid")String id,@Field("service_name")String name,@Field("service_description")String desc);
+
+    @FormUrlEncoded
+    @POST("deleteservices/")
+    Call<ResponseMessageModel> deleteServices(@Field("serviceid")String id);
+
+    @GET("addoffer/")
+    Call<OfferRetroListModel> getOffers(@Query("vendor_id")String id);
+
+
 
 }
 

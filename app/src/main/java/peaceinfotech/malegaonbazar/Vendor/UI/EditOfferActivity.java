@@ -12,20 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import java.util.Calendar;
-
-import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
 
 public class EditOfferActivity extends AppCompatActivity {
 
     TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry,etOfferPrice,etdiscountPercent;
-    DatabaseHelper myDb;
     Button btEdit;
     Toolbar toolbar;
     Boolean updateDone;
@@ -47,7 +41,7 @@ public class EditOfferActivity extends AppCompatActivity {
         etdiscountPercent=findViewById(R.id.et_edit_disc_percent);
         btEdit=findViewById(R.id.bt_edit_offer);
         toolbar=findViewById(R.id.tool_edit_offer);
-        myDb=new DatabaseHelper(EditOfferActivity.this);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -63,17 +57,7 @@ public class EditOfferActivity extends AppCompatActivity {
         Intent get = getIntent();
         final String id = get.getStringExtra("id");
 
-        Cursor res=myDb.GetSpecificOffer(id);
 
-        ettitle.setText(res.getString(1));
-        etdesc.setText(res.getString(2));
-        etOfferPrice.setText(res.getString(3));
-        etdiscountPercent.setText(res.getString(4));
-        etmin.setText(res.getString(5));
-        etmax.setText(res.getString(6));
-        etdetails.setText(res.getString(7));
-        etstart.setText(res.getString(8));
-        etexpiry.setText(res.getString(9));
 
         etstart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,16 +121,7 @@ public class EditOfferActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        myDb.UpdateData(id,
-                                ettitle.getText().toString(),
-                                etdesc.getText().toString(),
-                                etOfferPrice.getText().toString(),
-                                etdiscountPercent.getText().toString(),
-                                etmin.getText().toString(),
-                                etmax.getText().toString(),
-                                etdetails.getText().toString(),
-                                etstart.getText().toString(),
-                                etexpiry.getText().toString());
+
                         finish();
                     }
                 });

@@ -1,63 +1,52 @@
 package peaceinfotech.malegaonbazar.Vendor.Model;
 
-public class OfferPreviewModel  {
+public class OfferPreviewModel {
 
-    String offersName,offer,details,min,max,uid,start_date,end_date,offerPrice,discPercent;
+    String offerId,offerTitle,offerDesc,productPrice,min,max,start_date,end_date,terms,offerType,discount;
 
-
-    public OfferPreviewModel(String uid,String offersName, String offer,String offerPrice,String discPercent,String min,String max,String details,String start_date,String end_date ) {
-        this.offersName = offersName;
-        this.offer = offer;
-        this.offerPrice=offerPrice;
-        this.discPercent=discPercent;
-        this.details = details;
-        this.min=min;
-        this.max=max;
-        this.uid=uid;
-        this.start_date=start_date;
-        this.end_date=end_date;
-
-
+    public OfferPreviewModel(String offerId, String offerTitle, String offerDesc, String min, String max, String start_date, String end_date, String terms, String offerType, String discount) {
+        this.offerId = offerId;
+        this.offerTitle = offerTitle;
+        this.offerDesc = offerDesc;
+        this.min = min;
+        this.max = max;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.terms = terms;
+        this.offerType = offerType;
+        this.discount = discount;
     }
 
-    public String getOfferPrice() {
-        return offerPrice;
+    public String getOfferId() {
+        return offerId;
     }
 
-    public void setOfferPrice(String offerPrice) {
-        this.offerPrice = offerPrice;
+    public void setOfferId(String offerId) {
+        this.offerId = offerId;
     }
 
-    public String getDiscPercent() {
-        return discPercent;
+    public String getOfferTitle() {
+        return offerTitle;
     }
 
-    public void setDiscPercent(String discPercent) {
-        this.discPercent = discPercent;
+    public void setOfferTitle(String offerTitle) {
+        this.offerTitle = offerTitle;
     }
 
-    public String getUid() {
-        return uid;
+    public String getOfferDesc() {
+        return offerDesc;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setOfferDesc(String offerDesc) {
+        this.offerDesc = offerDesc;
     }
 
-    public String getOffersName() {
-        return offersName;
+    public String getProductPrice() {
+        return productPrice;
     }
 
-    public void setOffersName(String offersName) {
-        this.offersName = offersName;
-    }
-
-    public String getOffer() {
-        return offer;
-    }
-
-    public void setOffer(String offer) {
-        this.offer = offer;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
     }
 
     public String getMin() {
@@ -76,14 +65,6 @@ public class OfferPreviewModel  {
         this.max = max;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
     public String getStart_date() {
         return start_date;
     }
@@ -98,5 +79,29 @@ public class OfferPreviewModel  {
 
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
+    }
+
+    public String getTerms() {
+        return terms;
+    }
+
+    public void setTerms(String terms) {
+        this.terms = terms;
+    }
+
+    public String getOfferType() {
+        return offerType;
+    }
+
+    public void setOfferType(String offerType) {
+        this.offerType = offerType;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 }

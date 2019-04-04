@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_pr"
                     android:layout_alignParentStart="true"
-                    android:text="Offer Price : "
+                    android:text="Product Price : "
                     android:gravity="center"
                     android:textColor="#ff0000"/>
 

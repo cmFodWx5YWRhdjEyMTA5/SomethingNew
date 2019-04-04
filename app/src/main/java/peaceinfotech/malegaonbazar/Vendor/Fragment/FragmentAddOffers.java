@@ -17,17 +17,14 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
 
 public class FragmentAddOffers extends Fragment {
-    TextInputEditText ettitle,etdesc,etmin,etmax,etdetails,etstart,etexpiry,etofferPrice,etdiscPer;
-    DatabaseHelper myDb;
+    TextInputEditText ettitle,etdesc,etmin,etmax,etterms,etstart,etexpiry,etofferPrice,etdiscPer;
     Spinner spinDiscount;
     List<String> discount = new ArrayList<String>();
 
@@ -41,7 +38,7 @@ public class FragmentAddOffers extends Fragment {
         etdesc=view.findViewById(R.id.et_descp);
         etmin=view.findViewById(R.id.et_min);
         etmax=view.findViewById(R.id.et_max);
-        etdetails=view.findViewById(R.id.et_details);
+        etterms=view.findViewById(R.id.et_details);
         add=view.findViewById(R.id.bt_add_offer);
         etstart=view.findViewById(R.id.et_date_start);
         etexpiry=view.findViewById(R.id.et_date_end);
@@ -49,7 +46,6 @@ public class FragmentAddOffers extends Fragment {
         etdiscPer=view.findViewById(R.id.et_disc_percent);
         spinDiscount=view.findViewById(R.id.spinner_discount);
 
-        myDb=new DatabaseHelper(getActivity());
 
         discount.add(0,"Percentage");
         discount.add(1,"Fixed Value");
@@ -119,32 +115,9 @@ public class FragmentAddOffers extends Fragment {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                builder.setMessage("Are you sure you want to add the offers");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        myDb.InsertData(ettitle.getText().toString(),etdesc.getText().toString(),etofferPrice.getText().toString(),etdiscPer.getText().toString(),etmin.getText().toString(),etmax.getText().toString(),etdetails.getText().toString(),etstart.getText().toString(),etexpiry.getText().toString());
-                        ettitle.setText("");
-                        etdesc.setText("");
-                        etofferPrice.setText("");
-                        etdiscPer.setText("");
-                        etmin.setText("");
-                        etmax.setText("");
-                        etstart.setText("");
-                        etexpiry.setText("");
-                        etdetails.setText("");
-                        Toast.makeText(getActivity(),"Offer Added Successfully",Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                if(ettitle.getText().toString().isEmpty()||etdesc.getText().toString().isEmpty()){
 
-                    }
-                });
-                final AlertDialog alert = builder.create();
-                alert.show();
+                }
 
             }
         });
@@ -156,5 +129,40 @@ public class FragmentAddOffers extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Add Offers");
+    }
+
+
+
+
+    public void AddOffer(){
+
+    }
+
+    private void AlertDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        builder.setMessage("Are you sure you want to add the offers");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ettitle.setText("");
+                etdesc.setText("");
+                etofferPrice.setText("");
+                etdiscPer.setText("");
+                etmin.setText("");
+                etmax.setText("");
+                etstart.setText("");
+                etexpiry.setText("");
+                etterms.setText("");
+                Toast.makeText(getActivity(),"Offer Added Successfully",Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 }

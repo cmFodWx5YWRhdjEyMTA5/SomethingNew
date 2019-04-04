@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 
 import java.util.List;
 
-import peaceinfotech.malegaonbazar.DatabaseHelper;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
 import peaceinfotech.malegaonbazar.Vendor.UI.EditOfferActivity;
@@ -31,7 +29,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     List<OfferPreviewModel> offerPreviewList;
     Context context;
-    Boolean deleteClick=false;
+
 
     public OfferPreviewAdapter(List<OfferPreviewModel> offerPreviewList, Context context) {
         this.offerPreviewList = offerPreviewList;
@@ -83,19 +81,18 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     public void onBindViewHolder(@NonNull final PreviewHolder holder, final int i) {
 
         final OfferPreviewModel offers = offerPreviewList.get(i);
-        final DatabaseHelper mdb=new DatabaseHelper(context);
 
-        holder.offertitle.setText(offers.getOffersName());
-        holder.offer.setText(offers.getOffer());
+        holder.offertitle.setText(offers.getOfferTitle());
+        holder.offer.setText(offers.getOfferDesc());
         holder.min.setText(offers.getMin());
         holder.max.setText(offers.getMax());
         holder.start.setText(offers.getStart_date());
         holder.expiry.setText(offers.getEnd_date());
-        holder.termsCondition.setText(offers.getDetails());
-        holder.offerPrice.setText("\u20b9 "+offers.getOfferPrice());
+        holder.termsCondition.setText(offers.getTerms());
 
-
-        final String uid=offers.getUid();
+//
+//
+//        final String uid=offers.getUid();
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +108,6 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                         holder.linearMain.startAnimation(exit);
                         holder.linearMain.setVisibility(View.GONE);
                         offerPreviewList.remove(i);
-                        mdb.DeleteData(uid);
                         notifyItemRemoved(i);
                         notifyDataSetChanged();
                     }
@@ -131,7 +127,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             @Override
             public void onClick(View v) {
                 Intent putIntent = new Intent(context, EditOfferActivity.class);
-                putIntent.putExtra("id",offers.getUid());
+                putIntent.putExtra("id","dfg");
                 context.startActivity(putIntent);
             }
         });
@@ -151,15 +147,15 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                if(newValue>0){
-                    int amount = Integer.parseInt(offers.getOfferPrice())*newValue;
-                    int discount = amount*Integer.parseInt(offers.getDiscPercent())/100;
-                    int finalPrice=amount-discount;
-
-                    holder.finalPrice.setText("\u20b9 "+finalPrice);
-                }
-                else if(newValue==0)
-                    holder.finalPrice.setText("");
+//                if(newValue>0){
+//                    int amount = Integer.parseInt(offers.getOfferPrice())*newValue;
+//                    int discount = amount*Integer.parseInt(offers.getDiscPercent())/100;
+//                    int finalPrice=amount-discount;
+//
+//                    holder.finalPrice.setText("\u20b9 "+finalPrice);
+//                }
+//                else if(newValue==0)
+//                    holder.finalPrice.setText("");
             }
         });
 

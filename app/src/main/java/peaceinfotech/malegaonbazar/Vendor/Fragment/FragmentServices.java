@@ -36,6 +36,7 @@ public class FragmentServices extends Fragment {
     Button btAddService;
     List<ServicesListModel> serviceList;
     ServicesListAdapter servicesListAdapter;
+    ServicesListAdapter listAdapter = new ServicesListAdapter();
     RecyclerView recyclerView;
 
     @Nullable
@@ -94,6 +95,10 @@ public class FragmentServices extends Fragment {
                 if(response.isSuccessful()){
                     if(response.body().getResponse().equalsIgnoreCase("success")){
                         Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        etServiceName.setText("");
+                        etServiceDesc.setText("");
+
+                        getServices();
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
                         Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,7 +138,7 @@ public class FragmentServices extends Fragment {
 
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
-                        Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"No services to show please add a service.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -145,4 +150,9 @@ public class FragmentServices extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 }
