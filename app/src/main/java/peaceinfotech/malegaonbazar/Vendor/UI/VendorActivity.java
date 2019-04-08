@@ -36,17 +36,17 @@ public class VendorActivity extends AppCompatActivity
 
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        TextView wallet ;
-        wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
-        wallet.setGravity(Gravity.CENTER_VERTICAL);
-        wallet.setTypeface(null, Typeface.BOLD);
-        wallet.setTextColor(getResources().getColor(R.color.colorPrimary));
-        wallet.setText("3");
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+//        TextView wallet ;
+//        wallet = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_request));
+//        wallet.setGravity(Gravity.CENTER_VERTICAL);
+//        wallet.setTypeface(null, Typeface.BOLD);
+//        wallet.setTextColor(getResources().getColor(R.color.colorPrimary));
+//        wallet.setText("3");
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class VendorActivity extends AppCompatActivity
 
 
 
-        menuItemsSelected(R.id.nav_business);
+        menuItemsSelected(R.id.nav_vendor_profile);
     }
 
     @Override

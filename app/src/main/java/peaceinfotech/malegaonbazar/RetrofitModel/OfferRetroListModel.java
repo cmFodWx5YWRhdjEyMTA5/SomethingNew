@@ -74,6 +74,10 @@ public class OfferRetroListModel {
         @Expose
         private String offerDiscount;
 
+        @SerializedName("price")
+        @Expose
+        private String price;
+
 
         public String getOfferId() {
             return offerId;
@@ -153,6 +157,14 @@ public class OfferRetroListModel {
 
         public void setOfferDiscount(String offerDiscount) {
             this.offerDiscount = offerDiscount;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
         }
     }
 }

@@ -2,11 +2,13 @@ package peaceinfotech.malegaonbazar.Retrofit;
 
 import peaceinfotech.malegaonbazar.RetrofitModel.AddServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.CityListModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.OfferRetroListModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.ResponseMessageModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.SendOTPModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.ServiceHomeModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.StateListModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UpdateServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.VerifyOTPModel;
@@ -46,6 +48,13 @@ public interface RetrofitInterface {
     @GET("category/")
     Call<CategoriesHomeModel> categoriesRegister();
 
+    @GET("states/")
+    Call<StateListModel> stateListRegister();
+
+    @GET("cities/")
+    Call<CityListModel> cityListRegister(@Query("state_name")String stateName);
+
+
     @FormUrlEncoded
     @POST("addservice/")
     Call<AddServiceModel> addService(@Field("vendor_id")String id, @Field("service_name")String name,@Field("service_description")String desc);
@@ -61,10 +70,41 @@ public interface RetrofitInterface {
     @POST("deleteservices/")
     Call<ResponseMessageModel> deleteServices(@Field("serviceid")String id);
 
-    @GET("addoffer/")
+    @GET("offers/")
     Call<OfferRetroListModel> getOffers(@Query("vendor_id")String id);
 
+    @FormUrlEncoded
+    @POST("addoffer/")
+    Call<ResponseMessageModel> addOffers(@Field("vendor_id")String vendorId,
+                                         @Field("title")String offerTile,
+                                         @Field("description")String offerDescription,
+                                         @Field("product_price")String offerPrice,
+                                         @Field("min_trans")String offerMinTrans,
+                                         @Field("max_trans")String offerMaxTrans,
+                                         @Field("start_date")String offerStartDate,
+                                         @Field("end_date")String offerEndDate,
+                                         @Field("termcondition")String offerTermCond,
+                                         @Field("offertype")String offerType,
+                                         @Field("discount")String offerDiscount);
 
+    @FormUrlEncoded
+    @POST("updateoffers/")
+    Call<ResponseMessageModel> editOffers(@Field("offerid")String offerId,
+                                          @Field("title")String offerTile,
+                                          @Field("description")String offerDescription,
+                                          @Field("product_price")String offerPrice,
+                                          @Field("min_trans")String offerMinTrans,
+                                          @Field("max_trans")String offerMaxTrans,
+                                          @Field("start_date")String offerStartDate,
+                                          @Field("end_date")String offerEndDate,
+                                          @Field("termcondition")String offerTermCond,
+                                          @Field("offertype")String offerType,
+                                          @Field("discount")String offerDiscount);
+
+
+    @FormUrlEncoded
+    @POST("deleteoffers/")
+    Call<ResponseMessageModel> deleteOffers(@Field("offerid")String offerId);
 
 }
 

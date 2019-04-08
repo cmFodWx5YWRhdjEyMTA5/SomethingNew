@@ -4,7 +4,7 @@ public class OfferPreviewModel {
 
     String offerId,offerTitle,offerDesc,productPrice,min,max,start_date,end_date,terms,offerType,discount;
 
-    public OfferPreviewModel(String offerId, String offerTitle, String offerDesc, String min, String max, String start_date, String end_date, String terms, String offerType, String discount) {
+    public OfferPreviewModel(String offerId, String offerTitle, String offerDesc,String productPrice,String min, String max, String start_date, String end_date, String terms, String offerType, String discount) {
         this.offerId = offerId;
         this.offerTitle = offerTitle;
         this.offerDesc = offerDesc;
@@ -15,6 +15,7 @@ public class OfferPreviewModel {
         this.terms = terms;
         this.offerType = offerType;
         this.discount = discount;
+        this.productPrice=productPrice;
     }
 
     public String getOfferId() {

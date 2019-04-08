@@ -41,4 +41,188 @@ public class LogInModel {
     public void setDetailsModels(LoginDetailsModel detailsModels) {
         this.detailsModels = detailsModels;
     }
+
+    public class LoginDetailsModel{
+
+        @SerializedName("vendor_id")
+        @Expose
+        public String vendorId;
+
+        @SerializedName("user_id")
+        @Expose
+        public String userId;
+
+        @SerializedName("role_id")
+        @Expose
+        public String roleID;
+
+        @SerializedName("role_name")
+        @Expose
+        public String roleName;
+
+        @SerializedName("category_id")
+        @Expose
+        public String catID;
+
+        @SerializedName("category_name")
+        @Expose
+        public String catName;
+
+        @SerializedName("fullname")
+        @Expose
+        public String fullName;
+
+        @SerializedName("location")
+        @Expose
+        public  String location;
+
+        @SerializedName("mobile")
+        @Expose
+        public String mobile;
+
+        @SerializedName("brand")
+        @Expose
+        public String brand;
+
+        @SerializedName("logo")
+        @Expose
+        public String imgLogoURL;
+
+        @SerializedName("banner")
+        @Expose
+        public String imgBanURL;
+
+        @SerializedName("email")
+        @Expose
+        public String email;
+
+        @SerializedName("state")
+        @Expose
+        public String state;
+
+        @SerializedName("city")
+        @Expose
+        public String city;
+
+        public String getVendorId() {
+            return vendorId;
+        }
+
+        public void setVendorId(String vendorId) {
+            this.vendorId = vendorId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getRoleID() {
+            return roleID;
+        }
+
+        public void setRoleID(String roleID) {
+            this.roleID = roleID;
+        }
+
+        public String getRoleName() {
+            return roleName;
+        }
+
+        public void setRoleName(String roleName) {
+            this.roleName = roleName;
+        }
+
+        public String getCatID() {
+            return catID;
+        }
+
+        public void setCatID(String catID) {
+            this.catID = catID;
+        }
+
+        public String getCatName() {
+            return catName;
+        }
+
+        public void setCatName(String catName) {
+            this.catName = catName;
+        }
+
+        public String getFullName() {
+            return fullName;
+        }
+
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public String getImgLogoURL() {
+            return imgLogoURL;
+        }
+
+        public void setImgLogoURL(String imgLogoURL) {
+            this.imgLogoURL = imgLogoURL;
+        }
+
+        public String getImgBanURL() {
+            return imgBanURL;
+        }
+
+        public void setImgBanURL(String imgBanURL) {
+            this.imgBanURL = imgBanURL;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+    }
+
 }

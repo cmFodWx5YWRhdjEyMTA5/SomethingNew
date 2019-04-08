@@ -85,7 +85,7 @@
         android:background="@drawable/background"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/vendorlay">
 
         <LinearLayout
@@ -123,8 +123,50 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Location *"
-                android:singleLine="true" />
+                android:hint="Address *"/>
+
+            <!--<EditText-->
+                <!--android:id="@+id/etvencity"-->
+                <!--android:layout_width="200dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:hint="City *"-->
+                <!--android:maxLines="1"/>-->
+
+            <TextView
+                android:id="@+id/tv_state_hint"
+                style="@style/InputLabel"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a State *"
+                android:visibility="visible" />
+
+            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:spinnerHint="Select a State"
+                android:id="@+id/spin_state"
+                android:background="@drawable/viewoffers_background"
+                app:SpinnerExpandHeight="200dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_city_hint"
+                style="@style/InputLabel"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a City *"
+                android:visibility="visible" />
+            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:spinnerHint="Select a City"
+                android:id="@+id/spin_city"
+                android:background="@drawable/viewoffers_background"
+                app:SpinnerExpandHeight="200dp"/>
+
 
             <EditText
                 android:id="@+id/etvenbname"
@@ -140,12 +182,17 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Select a Category" />
+                android:text="Select a Category"
+                android:visibility="gone" />
 
             <com.isapanah.awesomespinner.AwesomeSpinner
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_category"/>
+                android:id="@+id/spinner_category"
+                app:spinnerHint="Select a category"
+                android:layout_marginTop="20dp"
+                android:visibility="visible"/>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,7 +200,8 @@
                 android:textSize="20sp"
                 android:layout_marginTop="20dp"
                 android:id="@+id/tv_demo"
-                android:text="demo"/>
+                android:text="demo"
+                android:visibility="gone"/>
 
 
             <LinearLayout

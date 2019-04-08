@@ -23,6 +23,7 @@ import peaceinfotech.malegaonbazar.RetrofitModel.SendOTPModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.VerifyOTPModel;
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
+import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -181,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.d("verify", "onResponse: " + response.body().getReponse() + "/" + response.body().getMessage());
                     if(response.body().getReponse().equalsIgnoreCase("success")) {
 
-                        Intent in = new Intent(SignUpActivity.this, SelectionActivity.class);
+                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
                         startActivity(in);
                         finish();
                     }

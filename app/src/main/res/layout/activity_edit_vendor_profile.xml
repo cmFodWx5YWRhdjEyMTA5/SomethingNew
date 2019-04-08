@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
+        android:theme="@style/Theme.MyFancyTheme"
+        android:id="@+id/tool_edit_ven_profile"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:id="@+id/vendorlay"
+        android:layout_below="@+id/tool_edit_ven_profile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:elevation="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="* Fields which are Mandatory" />
+
+            <EditText
+                android:id="@+id/et_ven_edit_name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Full Name *"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_ven_edit_loc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Address *"/>
+
+            <TextView
+                android:id="@+id/tv_state_hint"
+                style="@style/InputLabel"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a State *"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/tv_edit_state"
+                    android:text="state"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:padding="5dp"/>
+
+                <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    app:spinnerHint="Select a State"
+                    android:id="@+id/spin_edit_state"
+                    android:background="@drawable/viewoffers_background"
+                    app:SpinnerExpandHeight="200dp"
+                    android:visibility="visible"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/tv_city_hint"
+                style="@style/InputLabel"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a City *"
+                android:visibility="visible" />
+            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                app:spinnerHint="Select a City"
+                android:id="@+id/spin_edit_city"
+                android:background="@drawable/viewoffers_background"
+                app:SpinnerExpandHeight="200dp"/>
+
+            <!--<EditText-->
+            <!--android:id="@+id/etvencity"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:hint="City *"-->
+            <!--android:maxLines="1"/>-->
+
+
+            <EditText
+                android:id="@+id/etvenstate"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="State *"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/et_ven_edit_bname"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Brand Name *"
+                android:singleLine="true" />
+
+
+            <com.isapanah.awesomespinner.AwesomeSpinner
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_edit_category"
+                app:spinnerHint="Select a category"
+                android:layout_marginTop="20dp"
+                android:visibility="visible"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_demo"
+                android:text="demo"
+                android:visibility="gone"/>
+
+
+            <EditText
+                android:id="@+id/et_ven_edit_mail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Email-Id (Optional)"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Logo   "
+                    android:textSize="20sp"
+                    android:id="@+id/tv_logo"
+                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/view_edit_center"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/view_edit_center"/>
+
+                <Button
+                    android:id="@+id/bt_edit_logo"
+                    android:layout_width="63dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/btsubmit_back"
+                    android:text="Choose  Image"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    android:layout_toRightOf="@+id/view_edit_center"
+                    android:layout_marginLeft="50dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Banner"
+                    android:textSize="20sp"
+                    android:id="@+id/tv_ban"
+                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/view_edi_center"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/view_edi_center"/>
+
+                <Button
+                    android:id="@+id/bt_edit_ban"
+                    android:layout_width="63dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/btsubmit_back"
+                    android:text="Choose Image"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    android:layout_toRightOf="@+id/view_edi_center"
+                    android:layout_marginLeft="50dp"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_demo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/bt_ven_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btsubmit_back"
+                android:text="edit profile"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

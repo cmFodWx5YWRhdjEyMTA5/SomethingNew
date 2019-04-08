@@ -153,6 +153,5 @@ public class FragmentServices extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 }

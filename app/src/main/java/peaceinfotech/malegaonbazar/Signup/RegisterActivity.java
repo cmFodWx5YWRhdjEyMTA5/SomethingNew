@@ -47,13 +47,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
+import gr.escsoft.michaelprimez.searchablespinner.interfaces.OnItemSelectedListener;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
+import peaceinfotech.malegaonbazar.RetrofitModel.CityListModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.StateListModel;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
+import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
@@ -74,13 +80,20 @@ public class RegisterActivity extends AppCompatActivity {
     public final int BAN=2;
     MultipartBody.Part logoFileToUpload,banFileToUpload;
     RequestBody logoFileName,banFileName;
-    List<String> categoryName = new ArrayList<>();
-    List<String> categoryId = new ArrayList<>();
+    List<String> categoryName;
+    List<String> categoryId;
+    List<String> catState;
+    List<String> catCity;
     AwesomeSpinner spinCat;
+    SearchableSpinner spinState,spinCity;
     TextView tvCatHint,tvDemo;
     String catid="";
+    String state = "";
+    String city = "";
+    String id = "";
     private RequestQueue requestQueue;
     Bitmap bitmapLogo,bitmapBan;
+    SearchableSpinner spinDemo;
 
 
 
@@ -105,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
         tvDemo=findViewById(R.id.tv_demo);
         imgDemo=findViewById(R.id.img_demo);
 
+        spinState=findViewById(R.id.spin_state);
+        spinCity=findViewById(R.id.spin_city);
         spinCat=findViewById(R.id.spinner_category);
         etvenname=findViewById(R.id.etvenname);
         etvenloc=findViewById(R.id.etvenloc);
@@ -118,49 +133,24 @@ public class RegisterActivity extends AppCompatActivity {
         submitven=findViewById(R.id.btvensubmit);
 
 
+
+
         bitmapLogo = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
         bitmapBan = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.new_ban);
 
-        Intent getin =getIntent();
-        type=getin.getStringExtra("type");
-
-        if(type.equalsIgnoreCase("user")){
-            userlay.setVisibility(View.VISIBLE);
-        }
-        else if(type.equalsIgnoreCase("vendor")){
-            vendorlay.setVisibility(View.VISIBLE);
-        }
-
-
-
-        ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<CategoriesHomeModel>() {
-            @Override
-            public void onResponse(Call<CategoriesHomeModel> call, Response<CategoriesHomeModel> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getResponse().equalsIgnoreCase("success")){
-                        for(int i=0;i<response.body().getCategoriesListModels().size();i++){
-                            categoryName.add(response.body().getCategoriesListModels().get(i).getCatName());
-                            categoryId.add(response.body().getCategoriesListModels().get(i).getCatId());
-                        }
-                    }
-                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
-
-                    }
-                }
-            }
+//        Intent getin =getIntent();
+//        type=getin.getStringExtra("type");
+//
+//        if(type.equalsIgnoreCase("user")){
+//            userlay.setVisibility(View.VISIBLE);
+//        }
+//        else if(type.equalsIgnoreCase("vendor")){
+//            vendorlay.setVisibility(View.VISIBLE);
+//        }
+        getCategoriesList();
+        getStateList();
 
 
-            @Override
-            public void onFailure(Call<CategoriesHomeModel> call, Throwable t) {
-
-            }
-        });
-
-
-
-        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryName);
-        spinCat.setAdapter(categoriesAdapter);
-        categoriesAdapter.notifyDataSetChanged();
 
         spinCat.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -171,6 +161,30 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+        spinState.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(View view, int position, long id) {
+                getCityList(spinState.getSelectedItem().toString());
+                state=spinState.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        spinCity.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(View view, int position, long id) {
+                city = spinCity.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         btlogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +254,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String pass=etvenpass.getText().toString();
                 String repass=etvenrepass.getText().toString();
 
-                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||catid.isEmpty()||pass.isEmpty()||repass.isEmpty()){
+                if(name.isEmpty()||location.isEmpty()||brand.isEmpty()||catid.isEmpty()||pass.isEmpty()||repass.isEmpty()||state.isEmpty()||city.isEmpty()){
                     if(name.isEmpty()){
                         etvenname.setError("Please Enter this Field");
                     }
@@ -259,13 +273,20 @@ public class RegisterActivity extends AppCompatActivity {
                     if(catid.isEmpty()){
                         Toast.makeText(RegisterActivity.this, "Select a category", Toast.LENGTH_SHORT).show();
                     }
+                    if(state.isEmpty()){
+                        Toast.makeText(RegisterActivity.this, "Select State", Toast.LENGTH_SHORT).show();
+                    }
+                    if(city.isEmpty()){
+                        Toast.makeText(RegisterActivity.this, "Select City", Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
                 else{
                     if(isValidEmail(email)){
                         if(pass.equals(repass)){
                             requestQueue = Volley.newRequestQueue(RegisterActivity.this);
-                            vendorUploadBitmap(bitmapLogo,bitmapBan,name,location,brand,catid,repass,email);
+                            vendorUploadBitmap(bitmapLogo,bitmapBan,name,location,brand,catid,repass,email,state,city);
                         }
                         else{
                             etvenrepass.setError("Password Don't Match");
@@ -284,7 +305,14 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public static boolean isValidEmail(CharSequence target) {
-        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+
+        if(target.toString().isEmpty()){
+            return true;
+        }
+        else{
+            return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+        }
+
     }
 
 
@@ -347,18 +375,18 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        startActivity(new Intent(RegisterActivity.this, SelectionActivity.class));
+        startActivity(new Intent(RegisterActivity.this, SignUpActivity.class));
         finish();
 
     }
 
-    public void UserRegister(String roleId,String fullname,String location,String mobile,String password){
+    public void UserRegister(String roleId, String fullname, String location, String mobile, final String password){
         ApiUtils.getServiceClass().userRegister(roleId,fullname,location,mobile,password).enqueue(new Callback<UserRegisterModel>() {
             @Override
             public void onResponse(Call<UserRegisterModel> call, Response<UserRegisterModel> response) {
                 if(response.isSuccessful()){
                     if(response.body().getResponse().equalsIgnoreCase("success")){
-                        AlertDialog("user");
+                        AlertDialog("user",password);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
                         Toast.makeText(RegisterActivity.this, "Something Went Wrong Please Try Again Later !!", Toast.LENGTH_SHORT).show();
@@ -373,29 +401,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-//    public void VendorRegister(String roleId,String fullName, String location, String mobile,String brand, String category, String emailId, String password){
-//        ApiUtils.getServiceClass().vendorRegister(roleId,fullName,location,brand,mobile,category,emailId,password,logoFileToUpload,logoFileName,banFileToUpload,banFileName).enqueue(new Callback<VendorRegisterModel>() {
-//            @Override
-//            public void onResponse(Call<VendorRegisterModel> call, Response<VendorRegisterModel> response) {
-//                if(response.isSuccessful()){
-//                    Log.d("vendorreg",response.body().getResponse());
-//                    if(response.body().getResponse().equalsIgnoreCase("success")){
-//                        AlertDialog("vendor");
-//                    }
-//                    else  if(response.body().getResponse().equalsIgnoreCase("response")){
-//                        Toast.makeText(RegisterActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<VendorRegisterModel> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 
-    public void AlertDialog(final String type){
+    public void AlertDialog(final String type, final String password){
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage("Registered Successfully");
@@ -403,12 +410,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(type.equals("user")){
-                    startActivity(new Intent(RegisterActivity.this, UserActivity.class));
-                    finish();
+                    LogIn(SaveSharedPreference.getMobile(RegisterActivity.this),password);
                 }
                 else if(type.equals("vendor")){
-                    startActivity(new Intent(RegisterActivity.this, VendorActivity.class));
-                    finish();
+                    LogIn(SaveSharedPreference.getMobile(RegisterActivity.this),password);
                 }
             }
         });
@@ -418,7 +423,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void vendorUploadBitmap(final Bitmap bitmapLogo, final Bitmap bitmapBan, final String name, final String location, final String brand, final String catid, final String password, final String email ) {
+    private void vendorUploadBitmap(final Bitmap bitmapLogo,
+                                    final Bitmap bitmapBan,
+                                    final String name,
+                                    final String location,
+                                    final String brand,
+                                    final String catid,
+                                    final String password,
+                                    final String email,
+                                    final String state,
+                                    final String city) {
 
 
         //our custom volley request
@@ -433,7 +447,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //If it is success
                             if (obj.getString("response").equalsIgnoreCase("success")) {
 
-                                AlertDialog("vendor");
+                                AlertDialog("vendor",password);
 
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Some error", Toast.LENGTH_LONG).show();
@@ -468,6 +482,8 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("Category",catid);
                 params.put("Emailid",email);
                 params.put("Password",password);
+                params.put("state_name",state);
+                params.put("city_name",city);
 
                 return params;
             }
@@ -499,6 +515,170 @@ public class RegisterActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
+
+    public void LogIn (String mobile,String password) {
+
+
+        ApiUtils.getServiceClass().logIn(mobile, password).enqueue(new Callback<LogInModel>() {
+            @Override
+            public void onResponse(Call<LogInModel> call, Response<LogInModel> response) {
+                if (response.isSuccessful()) {
+                    Log.d("login", response.body().getResponse());
+                    if (response.body().getResponse().equalsIgnoreCase("success")) {
+
+                        if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")) {
+
+//                            SaveSharedPreference.setRole(RegisterActivity.this,
+//                                    response.body().getDetailsModels().getRoleId(),
+//                                    response.body().getDetailsModels().getRoleName());
+//
+//                            SaveSharedPreference.setUserProfileData(RegisterActivity.this,
+//                                    response.body().getDetailsModels().getUserId(),
+//                                    response.body().getDetailsModels().getFullName(),
+//                                    response.body().getDetailsModels().getLocation(),
+//                                    response.body().getDetailsModels().getMobile(),
+//                                    response.body().getDetailsModels().getReferenceId());
+
+//                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+//                            startActivity(new Intent(RegisterActivity.this, UserActivity.class));
+//                            finish();
+                        } else if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")) {
+                            SaveSharedPreference.setRole(RegisterActivity.this,
+                                    response.body().getDetailsModels().getRoleID(),
+                                    response.body().getDetailsModels().getRoleName());
+
+                            SaveSharedPreference.setVendorProfileData(RegisterActivity.this,
+                                    response.body().getDetailsModels().getVendorId(),
+                                    response.body().getDetailsModels().getFullName(),
+                                    response.body().getDetailsModels().getLocation(),
+                                    response.body().getDetailsModels().getMobile(),
+                                    response.body().getDetailsModels().getBrand(),
+                                    response.body().getDetailsModels().getImgLogoURL(),
+                                    response.body().getDetailsModels().getImgBanURL(),
+                                    response.body().getDetailsModels().getEmail(),
+                                    response.body().getDetailsModels().getCatName(),
+                                    response.body().getDetailsModels().getCatID(),
+                                    response.body().getDetailsModels().getState(),
+                                    response.body().getDetailsModels().getCity());
+
+
+
+                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+                            startActivity(new Intent(RegisterActivity.this, VendorActivity.class));
+                            finish();
+                        }
+                    } else if (response.body().getResponse().equalsIgnoreCase("failed")) {
+                        Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LogInModel> call, Throwable t) {
+
+
+                Log.d("loginfail", "onFailure: " + t);
+            }
+        });
+
+    }
+
+
+    public void getCategoriesList(){
+
+
+
+        ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<CategoriesHomeModel>() {
+            @Override
+            public void onResponse(Call<CategoriesHomeModel> call, Response<CategoriesHomeModel> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        categoryName = new ArrayList<>();
+                        categoryId = new ArrayList<>();
+                        for(int i=0;i<response.body().getCategoriesListModels().size();i++){
+                            categoryName.add(i,response.body().getCategoriesListModels().get(i).getCatName());
+                            categoryId.add(i,response.body().getCategoriesListModels().get(i).getCatId());
+                        }
+                        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(RegisterActivity.this, android.R.layout.simple_spinner_item,categoryName);
+                        categoriesAdapter.notifyDataSetChanged();
+                        spinCat.setAdapter(categoriesAdapter);
+                    }
+                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<CategoriesHomeModel> call, Throwable t) {
+
+            }
+        });
+
+
+        // categoriesAdapter.notifyDataSetChanged();
+
+    }
+
+    public void getStateList(){
+
+        ApiUtils.getServiceClass().stateListRegister().enqueue(new Callback<StateListModel>() {
+            @Override
+            public void onResponse(Call<StateListModel> call, Response<StateListModel> response) {
+
+                if(response.isSuccessful()){
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        catState = new ArrayList<>();
+                        for(int i=0;i<response.body().getStateLists().size();i++){
+                            catState.add(i,response.body().getStateLists().get(i).getStateName());
+                        }
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_item,catState);
+                        stateAdapter.notifyDataSetChanged();
+                        spinState.setAdapter(stateAdapter);
+                    }
+                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<StateListModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getCityList(String stateName){
+
+        ApiUtils.getServiceClass().cityListRegister(stateName).enqueue(new Callback<CityListModel>() {
+            @Override
+            public void onResponse(Call<CityListModel> call, Response<CityListModel> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getResponse().equalsIgnoreCase("success")){
+                        catCity = new ArrayList<>();
+
+                        for(int i=0;i<response.body().getCityLists().size();i++){
+                            catCity.add(i,response.body().getCityLists().get(i).getName());
+                        }
+
+                        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_item,catCity);
+                        cityAdapter.notifyDataSetChanged();
+                        spinCity.setAdapter(cityAdapter);
+                    }
+                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityListModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 
 }
 

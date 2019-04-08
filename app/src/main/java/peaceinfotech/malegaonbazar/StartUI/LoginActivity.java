@@ -1,6 +1,7 @@
 package peaceinfotech.malegaonbazar.StartUI;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +16,10 @@ import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
+import peaceinfotech.malegaonbazar.Signup.RegisterActivity;
 import peaceinfotech.malegaonbazar.Signup.SignUpActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentProfile;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,14 +90,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
                 finish();
 
-//                startActivity(new Intent(LoginActivity.this,SelectionActivity.class));
+//                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
 //                finish();
             }
         });
 
     }
 
-    private void LogIn (String mobile,String password){
+    public void LogIn (final String mobile, final String password){
 
 
        ApiUtils.getServiceClass().logIn(mobile,password).enqueue(new Callback<LogInModel>() {
@@ -107,25 +110,28 @@ public class LoginActivity extends AppCompatActivity {
 
                        if(response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")){
 
-                           SaveSharedPreference.setRole(LoginActivity.this,
-                                   response.body().getDetailsModels().getRoleId(),
-                                   response.body().getDetailsModels().getRoleName());
-
-                           SaveSharedPreference.setUserProfileData(LoginActivity.this,
-                                   response.body().getDetailsModels().getUserId(),
-                                   response.body().getDetailsModels().getFullName(),
-                                   response.body().getDetailsModels().getLocation(),
-                                   response.body().getDetailsModels().getMobile(),
-                                   response.body().getDetailsModels().getReferenceId());
-
-                           SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                           startActivity(new Intent(LoginActivity.this, UserActivity.class));
-                           finish();
+                           Toast.makeText(LoginActivity.this, "This Service is Not Yet Available", Toast.LENGTH_SHORT).show();
+//                           SaveSharedPreference.setRole(LoginActivity.this,
+//                                   response.body().getDetailsModels().getRoleId(),
+//                                   response.body().getDetailsModels().getRoleName());
+//
+//                           SaveSharedPreference.setUserProfileData(LoginActivity.this,
+//                                   response.body().getDetailsModels().getUserId(),
+//                                   response.body().getDetailsModels().getFullName(),
+//                                   response.body().getDetailsModels().getLocation(),
+//                                   response.body().getDetailsModels().getMobile(),
+//                                   response.body().getDetailsModels().getReferenceId());
+//
+//                           SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+//                           startActivity(new Intent(LoginActivity.this, UserActivity.class));
+//                           finish();
                        }
                        else if(response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")){
                            SaveSharedPreference.setRole(LoginActivity.this,
-                                   response.body().getDetailsModels().getRoleId(),
+                                   response.body().getDetailsModels().getRoleID(),
                                    response.body().getDetailsModels().getRoleName());
+
+                           SaveSharedPreference.setMobileAndPassword(LoginActivity.this,mobile,password);
 
                            SaveSharedPreference.setVendorProfileData(LoginActivity.this,
                                    response.body().getDetailsModels().getVendorId(),
@@ -133,12 +139,19 @@ public class LoginActivity extends AppCompatActivity {
                                    response.body().getDetailsModels().getLocation(),
                                    response.body().getDetailsModels().getMobile(),
                                    response.body().getDetailsModels().getBrand(),
-                                   response.body().getDetailsModels().getImgLogoUrl(),
-                                   response.body().getDetailsModels().getImgBannerUrl(),
-                                   response.body().getDetailsModels().getEmail());
+                                   response.body().getDetailsModels().getImgLogoURL(),
+                                   response.body().getDetailsModels().getImgBanURL(),
+                                   response.body().getDetailsModels().getEmail(),
+                                   response.body().getDetailsModels().getCatName(),
+                                   response.body().getDetailsModels().getCatID(),
+                                   response.body().getDetailsModels().getState(),
+                                   response.body().getDetailsModels().getCity());
+
+                           Log.d("idemail", "onResponse: "+response.body().getDetailsModels().getEmail()+" / "+response.body().getDetailsModels().getCity()+" / "+response.body().getDetailsModels().getState());
 
                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-                           startActivity(new Intent(LoginActivity.this, VendorActivity.class));
+                           Intent putIntent = new Intent(LoginActivity.this, VendorActivity.class);
+                           startActivity(putIntent);
                            finish();
                        }
                    }

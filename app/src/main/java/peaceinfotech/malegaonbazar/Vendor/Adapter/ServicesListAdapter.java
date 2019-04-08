@@ -40,7 +40,7 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
     public class ServicesViewHolder extends RecyclerView.ViewHolder{
 
         public TextView tvName,tvDesc;
-        public Button btDelete,btEdit;
+        public TextView btDelete,btEdit;
 
 
         public ServicesViewHolder(@NonNull View view) {
@@ -86,8 +86,8 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
                     public void onResponse(Call<ResponseMessageModel> call, Response<ResponseMessageModel> response) {
                         if(response.isSuccessful()){
                             if(response.body().getResponse().equalsIgnoreCase("success")){
-                                serviceList.remove(i);
                                 notifyItemRemoved(i);
+                                serviceList.remove(i);
                             }
                         }
                     }

@@ -7,176 +7,292 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/img_banner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-           android:background="@drawable/new_ban" />
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/profilephoto"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="4dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#000000"
-            app:civ_shadow_radius="10"
-            android:id="@+id/img_logo"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_name"
-            android:text="Name : -"
-            android:textSize="25sp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_name"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:text="Siddhant Jain"
-            android:textColor="@color/black"
-            android:id="@+id/tv_vendor_name"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/img_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:src="@drawable/new_ban"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="70dp"
+                    android:src="@drawable/profilephoto"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="4dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_color="#000000"
+                    app:civ_shadow_radius="10"
+                    android:id="@+id/img_logo"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_bname"
-            android:text="Brand Name : -"
-            android:textSize="25sp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"/>
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_vendor_bname"
-            android:layout_toRightOf="@id/tv_bname"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="Peace Infotech"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_name"
+                    android:text="Name : -"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_name"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="Siddhant Jain"
+                    android:textColor="@color/black"
+                    android:id="@+id/tv_vendor_name"
+                    android:layout_marginLeft="75dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_loc"
-            android:text="Location : -"
-            android:textSize="25sp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"/>
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_vendor_location"
-            android:layout_toRightOf="@id/tv_loc"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="Bhandup"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_bname"
+                    android:text="Brand Name : -"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_bname"
+                    android:layout_toRightOf="@id/tv_bname"
+                    android:layout_marginTop="6dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/black"
+                    android:text="Peace Infotech"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:text="Mobile : -"
-            android:id="@+id/tv_mobile"/>
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_vendor_mobile"
-            android:layout_toRightOf="@id/tv_mobile"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="0123456789"
-            android:maxLength="10"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_loc"
+                    android:text="Address : -"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_location"
+                    android:layout_toRightOf="@id/tv_loc"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="50dp"
+                    android:text="Bhandup"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:id="@+id/tv_mail"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:text="Email-Id : -"/>
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_vendor_email"
-            android:layout_toRightOf="@id/tv_mail"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="sid.j23@gmail.com"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_city"
+                    android:text="City : -"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_city"
+                    android:layout_toRightOf="@id/tv_city"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="98dp"
+                    android:text="Bhandup"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_state"
+                    android:text="State : -"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_state"
+                    android:layout_toRightOf="@id/tv_state"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="83dp"
+                    android:text="Bhandup"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:text="Mobile : -"
+                    android:id="@+id/tv_mobile"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_mobile"
+                    android:layout_toRightOf="@id/tv_mobile"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="68dp"
+                    android:text="0123456789"
+                    android:maxLength="10"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:id="@+id/tv_mail"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:text="Email-Id : -"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_vendor_email"
+                    android:layout_toRightOf="@id/tv_mail"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="53dp"
+                    android:textColor="@color/black"
+                    android:text="sid.j23@gmail.com"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:id="@+id/tv_cat"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:text="Category : -" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_cat"
+                    android:id="@+id/tv_cat_name"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="43dp"
+                    android:textColor="@color/black"
+                    android:text="Trading"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btsubmit_back"
+                    android:textColor="@color/white"
+                    android:text="Edit Profile"
+                    android:id="@+id/bt_ven_edit_profile" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 

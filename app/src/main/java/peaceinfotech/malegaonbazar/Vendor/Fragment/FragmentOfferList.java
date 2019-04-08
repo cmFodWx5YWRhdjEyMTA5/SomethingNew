@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,11 +59,6 @@ public class FragmentOfferList extends Fragment {
         getActivity().setTitle("Offers List");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
     public void getOffersList(){
 
         ApiUtils.getServiceClass().getOffers(SaveSharedPreference.getKeyVendorId(getActivity())).enqueue(new Callback<OfferRetroListModel>() {
@@ -70,14 +66,17 @@ public class FragmentOfferList extends Fragment {
             public void onResponse(Call<OfferRetroListModel> call, Response<OfferRetroListModel> response) {
 
                 if(response.isSuccessful()){
+                    Log.d("offers", "onResponse: "+response.body().getResponse());
+
                     if(response.body().getResponse().equalsIgnoreCase("success")){
 
                         offerList = new ArrayList<>();
                         for(int i=0;i<response.body().getOfferlistModels().size();i++){
-
-                            offerList.add(i,new OfferPreviewModel(response.body().getOfferlistModels().get(i).getOfferId(),
+                            offerList.add(i,new OfferPreviewModel(
+                                    response.body().getOfferlistModels().get(i).getOfferId(),
                                     response.body().getOfferlistModels().get(i).getOfferTitle(),
                                     response.body().getOfferlistModels().get(i).getOfferDesc(),
+                                    response.body().getOfferlistModels().get(i).getPrice(),
                                     response.body().getOfferlistModels().get(i).getOfferMinTrans(),
                                     response.body().getOfferlistModels().get(i).getOfferMaxTrans(),
                                     response.body().getOfferlistModels().get(i).getOfferStartDate(),
@@ -86,6 +85,7 @@ public class FragmentOfferList extends Fragment {
                                     response.body().getOfferlistModels().get(i).getOfferType(),
                                     response.body().getOfferlistModels().get(i).getOfferDiscount()));
 
+                            Log.d("offerlist", "onBindViewHolder: "+response.body().getOfferlistModels().get(i).getPrice()+"/"+i);
 
                         }
                         offerPreviewAdapter = new OfferPreviewAdapter(offerList,getActivity());
@@ -102,8 +102,19 @@ public class FragmentOfferList extends Fragment {
             @Override
             public void onFailure(Call<OfferRetroListModel> call, Throwable t) {
 
+                Log.d("offerf", "onFailure: "+t);
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOffersList();
+    }
+
+
+
+
 
 }

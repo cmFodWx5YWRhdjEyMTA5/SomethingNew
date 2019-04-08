@@ -6,11 +6,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_business"
-            android:title="Business"/>
-        <item
             android:id="@+id/nav_vendor_profile"
             android:title="Profile" />
+        <item
+            android:id="@+id/nav_business"
+            android:title="Business"/>
         <item
             android:id="@+id/nav_add_offers"
             android:title="Add Offers"/>

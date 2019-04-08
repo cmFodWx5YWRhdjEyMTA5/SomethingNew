@@ -2,8 +2,10 @@ package peaceinfotech.malegaonbazar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -33,6 +35,7 @@ public class SaveSharedPreference {
     final public static String KEY_USER_REFER_ID = "user_reference_id";
 
     //Vendor Profile
+    final public static String KEY_VENDOR_PASSWORD = "vendor_pass";
     final public static String KEY_VENDOR_ID = "vendor_id";
     final public static String KEY_VENDOR_NAME = "vendor_name";
     final public static String KEY_VENDOR_LOCATION = "vendor_location";
@@ -40,9 +43,11 @@ public class SaveSharedPreference {
     final public static String KEY_VENDOR_BRAND = "vendor_brand";
     final public static String KEY_VENDOR_IMGLOGO = "vendor_img_logo";
     final public static String KEY_VENDOR_IMGBAN = "vendor_img_ban";
-    final public static String KEY_VENDOR_EMAIL = "vendor_email";
-
-
+    final public static String KEY_VENDOR_CATNAME = "vendor_catName";
+    final public static String KEY_VENDOR_CATID = "vendor_email";
+    final public static String KEY_VENDOR_STATE = "vendor_state";
+    final public static String KEY_VENDOR_CITY = "vendor_city";
+    final public static String Key_vendor_email="email";
 
 
 
@@ -136,6 +141,22 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_MOBILE,"");
     }
 
+    public static void setMobileAndPassword(Context context,String mobile,String password){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_VENDOR_MOBILE,mobile);
+        editor.putString(KEY_VENDOR_PASSWORD,password);
+        editor.apply();
+    }
+
+    public static List<String> getMobileAndPassword(Context context){
+        List<String> data = new ArrayList<>();
+
+        data.add(0,getPreferences(context).getString(KEY_VENDOR_MOBILE,""));
+        data.add(1,getPreferences(context).getString(KEY_VENDOR_PASSWORD,""));
+
+        return data;
+    }
+
     public static void setRole(Context context,String roleId,String roleName){
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(KEY_ROLE_ID,roleId);
@@ -170,7 +191,19 @@ public class SaveSharedPreference {
     }
 
 
-    public static void setVendorProfileData(Context context,String id,String name,String location,String mobile,String brand,String imgLogo,String imgBan,String email){
+    public static void setVendorProfileData(Context context,
+                                            String id,
+                                            String name,
+                                            String location,
+                                            String mobile,
+                                            String brand,
+                                            String imgLogo,
+                                            String imgBan,
+                                            String email,
+                                            String catName,
+                                            String catId,
+                                            String state,
+                                            String city){
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(KEY_VENDOR_ID,id);
         editor.putString(KEY_VENDOR_NAME,name);
@@ -179,22 +212,34 @@ public class SaveSharedPreference {
         editor.putString(KEY_VENDOR_BRAND,brand);
         editor.putString(KEY_VENDOR_IMGLOGO,imgLogo);
         editor.putString(KEY_VENDOR_IMGBAN,imgBan);
-        editor.putString(KEY_VENDOR_EMAIL,email);
+        editor.putString(Key_vendor_email,email);
+        editor.putString(KEY_VENDOR_CATNAME,catName);
+        editor.putString(KEY_VENDOR_CATID,catId);
+        editor.putString(KEY_VENDOR_STATE,state);
+        editor.putString(KEY_VENDOR_CITY,city);
         editor.apply();
 
+        Log.d("setshare", "setVendorProfileData: "+email);
     }
 
     public static List<String> getVendorProfileData(Context context){
         List<String> data = new ArrayList<>();
 
-        data.add(0,getPreferences(context).getString(KEY_VENDOR_ID,""));
-        data.add(1,getPreferences(context).getString(KEY_VENDOR_NAME,""));
-        data.add(2,getPreferences(context).getString(KEY_VENDOR_LOCATION,""));
-        data.add(3,getPreferences(context).getString(KEY_VENDOR_MOBILE,""));
-        data.add(4,getPreferences(context).getString(KEY_VENDOR_BRAND,""));
-        data.add(5,getPreferences(context).getString(KEY_VENDOR_EMAIL,""));
-        data.add(6,getPreferences(context).getString(KEY_VENDOR_IMGLOGO,""));
-        data.add(7,getPreferences(context).getString(KEY_VENDOR_IMGBAN,""));
+       data.add(0,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_ID,""));
+       data.add(1,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_NAME,""));
+       data.add(2,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_LOCATION,""));
+       data.add(3,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_MOBILE,""));
+       data.add(4,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_BRAND,""));
+       data.add(5,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_CATNAME,""));
+       data.add(6,SaveSharedPreference.getPreferences(context).getString(Key_vendor_email,""));
+       data.add(7,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_CATID,""));
+       data.add(8,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_IMGLOGO,""));
+       data.add(9,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_IMGBAN,""));
+       data.add(10,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_STATE,""));
+       data.add(11,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_CITY,""));
+
+        Log.d("setshare1", "getVendorProfileData: "+SaveSharedPreference.getPreferences(context).getString(Key_vendor_email,""));
+
 
         return data;
 
@@ -203,6 +248,8 @@ public class SaveSharedPreference {
     public static String getKeyVendorId(Context context){
         return getPreferences(context).getString(KEY_VENDOR_ID,"");
     }
+
+
 
 }
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 
 import java.util.List;
 
 import peaceinfotech.malegaonbazar.R;
+import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
+import peaceinfotech.malegaonbazar.RetrofitModel.ResponseMessageModel;
 import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
 import peaceinfotech.malegaonbazar.Vendor.UI.EditOfferActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapter.PreviewHolder> {
 
@@ -81,6 +88,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
     public void onBindViewHolder(@NonNull final PreviewHolder holder, final int i) {
 
         final OfferPreviewModel offers = offerPreviewList.get(i);
+        String discValue;
 
         holder.offertitle.setText(offers.getOfferTitle());
         holder.offer.setText(offers.getOfferDesc());
@@ -89,10 +97,33 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.start.setText(offers.getStart_date());
         holder.expiry.setText(offers.getEnd_date());
         holder.termsCondition.setText(offers.getTerms());
+        holder.offerPrice.setText("\u20b9 "+offers.getProductPrice());
+
+        discValue=offers.getDiscount();
+
+        Log.d("adapteroffer", "onBindViewHolder: "+offers.getProductPrice()+"/"+i);
 
 //
 //
 //        final String uid=offers.getUid();
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent putIntent = new Intent(context, EditOfferActivity.class);
+                putIntent.putExtra("id",offers.getOfferId());
+                putIntent.putExtra("title",offers.getOfferTitle());
+                putIntent.putExtra("desc",offers.getOfferDesc());
+                putIntent.putExtra("min",offers.getMin());
+                putIntent.putExtra("max",offers.getMax());
+                putIntent.putExtra("start",offers.getStart_date());
+                putIntent.putExtra("end",offers.getEnd_date());
+                putIntent.putExtra("terms",offers.getTerms());
+                putIntent.putExtra("price",offers.getProductPrice());
+                putIntent.putExtra("offertype",offers.getOfferType());
+                putIntent.putExtra("discount",offers.getDiscount());
+                context.startActivity(putIntent);
+            }
+        });
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,12 +135,32 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Animation exit= AnimationUtils.loadAnimation(context,R.anim.left_swipe);
-                        holder.linearMain.startAnimation(exit);
-                        holder.linearMain.setVisibility(View.GONE);
-                        offerPreviewList.remove(i);
-                        notifyItemRemoved(i);
-                        notifyDataSetChanged();
+//                        Animation exit= AnimationUtils.loadAnimation(context,R.anim.left_swipe);
+//                        holder.linearMain.startAnimation(exit);
+//                        holder.linearMain.setVisibility(View.GONE);
+
+                        ApiUtils.getServiceClass().deleteOffers(offers.getOfferId()).enqueue(new Callback<ResponseMessageModel>() {
+                            @Override
+                            public void onResponse(Call<ResponseMessageModel> call, Response<ResponseMessageModel> response) {
+                                if(response.isSuccessful()){
+                                    if(response.body().getResponse().equalsIgnoreCase("success")){
+
+                                        offerPreviewList.remove(i);
+                                        notifyItemRemoved(i);
+                                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+                                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseMessageModel> call, Throwable t) {
+                                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -123,14 +174,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             }
         });
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent putIntent = new Intent(context, EditOfferActivity.class);
-                putIntent.putExtra("id","dfg");
-                context.startActivity(putIntent);
-            }
-        });
+
 
         holder.terms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,20 +191,29 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
         holder.quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-//                if(newValue>0){
-//                    int amount = Integer.parseInt(offers.getOfferPrice())*newValue;
-//                    int discount = amount*Integer.parseInt(offers.getDiscPercent())/100;
-//                    int finalPrice=amount-discount;
-//
-//                    holder.finalPrice.setText("\u20b9 "+finalPrice);
-//                }
-//                else if(newValue==0)
-//                    holder.finalPrice.setText("");
+                if(newValue>0){
+
+                    if(offers.getOfferType().equalsIgnoreCase("percentage")){
+                        int amount = Integer.parseInt(offers.getProductPrice())*newValue;
+                        int discount = amount*Integer.parseInt(offers.getDiscount())/100;
+                        int finalPrice=amount-discount;
+                        holder.finalPrice.setText("\u20b9 "+finalPrice);
+                    }
+                    else if(offers.getOfferType().equalsIgnoreCase("fixed")){
+                        int amount = Integer.parseInt(offers.getProductPrice())*newValue;
+                        int discount = Integer.parseInt(offers.getDiscount());
+                        holder.finalPrice.setText("\u20b9"+(amount-discount));
+                    }
+
+                }
+                else if(newValue==0)
+                    holder.finalPrice.setText("");
             }
         });
 
 
     }
+
 
     @Override
     public int getItemCount() {

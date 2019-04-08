@@ -3,11 +3,136 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="go"
-        android:id="@+id/bt_go"/>
+        android:orientation="vertical"
+        android:id="@+id/linear_start_date"
+        android:layout_margin="20dp"
+        android:layout_toLeftOf="@+id/view_bus">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            style="@style/InputLabel"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/et_bus_date_start"
+            android:singleLine="true"
+            android:inputType="date"
+            android:focusable="false"
+            android:background="@drawable/background_date"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/view_bus"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linear_end_date"
+        android:layout_toRightOf="@+id/view_bus"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+            style="@style/InputLabel"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/et_bus_date_end"
+            android:singleLine="true"
+            android:inputType="date"
+            android:focusable="false"
+            android:background="@drawable/background_date"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_earning"
+        android:orientation="vertical"
+        android:layout_below="@+id/linear_start_date"
+        android:layout_toLeftOf="@+id/view_bus"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Earning"
+            style="@style/InputLabel"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/et_bus_earning"
+            android:singleLine="true"
+            android:inputType="number"
+            android:background="@drawable/background_date"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_discount"
+        android:orientation="vertical"
+        android:layout_below="@+id/linear_start_date"
+        android:layout_toRightOf="@+id/view_bus"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Discount Given"
+            style="@style/InputLabel"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/et_bus_discount"
+            android:singleLine="true"
+            android:inputType="number"
+            android:background="@drawable/background_date"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@id/linear_earning"
+        android:id="@+id/view_bus_vertical"
+        android:layout_marginTop="20dp"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view_bus_vertical"
+        android:layout_marginTop="20dp"
+        android:id="@+id/pie_bus">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+
 
 </RelativeLayout>

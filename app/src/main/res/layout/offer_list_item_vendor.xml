@@ -97,12 +97,20 @@
                     android:layout_alignParentStart="true"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_toRightOf="@+id/eln_ven_quantity"
+                    android:text=" Total Price:"
+                    android:gravity="center"
+                    android:id="@+id/tv_ven_show"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_toRightOf="@+id/tv_ven_show"
                     android:gravity="center"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/tv_ven_final_price"/>
+                    android:id="@+id/tv_ven_final_price" />
 
             </RelativeLayout>
 
