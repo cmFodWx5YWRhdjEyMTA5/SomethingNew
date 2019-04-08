@@ -1,6 +1,7 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +28,7 @@ import peaceinfotech.malegaonbazar.R;
 
 public class FragmentBusiness extends Fragment {
 
-    EditText etStart,etEnd;
+    EditText etStart,etEnd,etEarning,etDiscount;
     PieChart mChart;
 
     private int[] yValues = {21, 2, 2};
@@ -50,17 +51,19 @@ public class FragmentBusiness extends Fragment {
         etStart=view.findViewById(R.id.et_bus_date_start);
         etEnd=view.findViewById(R.id.et_bus_date_end);
         mChart=view.findViewById(R.id.pie_bus);
+        etEarning=view.findViewById(R.id.et_bus_earning);
+        etDiscount=view.findViewById(R.id.et_bus_discount);
 
         List<PieEntry> entries = new ArrayList<>();
 
        colors.add(Color.GREEN);
-       colors.add(Color.YELLOW);
+       colors.add(Color.RED);
 //       colors.add(Color.RED);
 //       colors.add(Color.BLUE);
 
 
-       int earnings = 1000;
-       int discount = 2000;
+//       int earnings = Integer.parseInt(etEarning.getText().toString());
+//       int discount = Integer.parseInt(etDiscount.getText().toString());
 
        float discPercent = 2000*100/30000;
        float earnPercent = (30000-2000)*100/30000;
@@ -71,9 +74,16 @@ public class FragmentBusiness extends Fragment {
        entries.add(new PieEntry(discPercent, "Discount"));
 
 
-       PieDataSet set = new PieDataSet(entries, "Election Results");
+       PieDataSet set = new PieDataSet(entries,"Earning Data");
        PieData data = new PieData(set);
        set.setColors(colors);
+       set.setValueTextSize(30f);
+
+
+       mChart.setEntryLabelTextSize(20f);
+       mChart.setEntryLabelColor(Color.BLACK);
+       mChart.setRotationEnabled(false);
+       mChart.getDescription().setText(" ");
        mChart.setData(data);
        mChart.invalidate();
        mChart.setDrawHoleEnabled(false);

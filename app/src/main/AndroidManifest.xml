@@ -31,6 +31,8 @@
         <activity android:name=".Signup.SignUpActivity" />
         <activity android:name=".StartUI.SelectionActivity"/>
         <activity android:name=".Signup.RegisterActivity" />
+        <activity android:name=".StartUI.ChangePasswordActivity"/>
+        <activity android:name=".StartUI.PasswordOTPVerification"/>
         <activity
             android:name=".User.UI.UserActivity"
             android:label="@string/title_activity_user"

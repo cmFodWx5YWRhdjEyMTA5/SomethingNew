@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     EditText etmob,etpass;
-    TextView warn,tvSignUp;
+    TextView warn,tvSignUp,tvForgetPass;
     Button btsignin;
 
     @Override
@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         etpass=findViewById(R.id.etpass);
         btsignin=findViewById(R.id.btsignin);
         tvSignUp=findViewById(R.id.tv_signup);
+        tvForgetPass=findViewById(R.id.tv_forget_pass);
         warn=findViewById(R.id.tvwarn);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())){
@@ -87,11 +88,20 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                Intent putIntent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(putIntent);
                 finish();
 
 //                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
 //                finish();
+            }
+        });
+
+        tvForgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,PasswordOTPVerification.class));
+                finish();
             }
         });
 

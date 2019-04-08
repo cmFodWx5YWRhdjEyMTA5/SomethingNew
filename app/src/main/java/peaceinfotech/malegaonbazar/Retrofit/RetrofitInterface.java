@@ -3,6 +3,7 @@ package peaceinfotech.malegaonbazar.Retrofit;
 import peaceinfotech.malegaonbazar.RetrofitModel.AddServiceModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.CityListModel;
+import peaceinfotech.malegaonbazar.RetrofitModel.ForgetSendOtpModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.LogInModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.OfferRetroListModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.ResponseMessageModel;
@@ -35,6 +36,21 @@ public interface RetrofitInterface {
     Call<VerifyOTPModel> verifyOTP(@Field("mobile")String mobile,
                                    @Field("ActualOtp")int orgOTP,
                                    @Field("EnteredOtp")String entOTP);
+
+    @FormUrlEncoded
+    @POST("forgetsendotp/")
+    Call<ForgetSendOtpModel> forgetSendOTP(@Field("mobile")String mobile);
+
+    @FormUrlEncoded
+    @POST("forgetotpverify/")
+    Call<VerifyOTPModel> forgetVerifyOTP(@Field("mobile")String mobile,
+                                   @Field("ActualOtp")int orgOTP,
+                                   @Field("EnteredOtp")String entOTP);
+
+    @FormUrlEncoded
+    @POST(("passwordchange/"))
+    Call<ResponseMessageModel> passwordChange(@Field("mobile")String mobile,
+                                              @Field("password")String password);
 
     @FormUrlEncoded
     @POST("usersignup/")
@@ -105,6 +121,10 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     @POST("deleteoffers/")
     Call<ResponseMessageModel> deleteOffers(@Field("offerid")String offerId);
+
+    @FormUrlEncoded
+    @POST("changepassword/")
+    Call<ResponseMessageModel> changePassword(@Field("mobile")String mobile,@Field("OldPassword")String oldPass,@Field("NewPassword")String newPass);
 
 }
 

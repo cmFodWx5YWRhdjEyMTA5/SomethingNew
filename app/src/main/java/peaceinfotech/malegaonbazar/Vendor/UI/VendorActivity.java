@@ -3,6 +3,8 @@ package peaceinfotech.malegaonbazar.Vendor.UI;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,10 +22,13 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.List;
+
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentAddOffers;
+import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentChangePassword;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentServices;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentBusiness;
 import peaceinfotech.malegaonbazar.Vendor.Fragment.FragmentHistory;
@@ -150,6 +155,9 @@ public class VendorActivity extends AppCompatActivity
             case R.id.nav_history:
                 fragment = new FragmentHistory();
                 break;
+            case R.id.nav_change_password:
+                fragment = new FragmentChangePassword();
+                break;
             case R.id.nav_logout:
                 alertDialog.show();
         }
@@ -163,4 +171,26 @@ public class VendorActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
+//    public GeoPoint getLocationFromAddress(String strAddress){
+//
+//        Geocoder coder = new Geocoder(this);
+//        List<Address> address;
+//        GeoPoint p1 = null;
+//
+//        try {
+//            address = coder.getFromLocationName(strAddress,5);
+//            if (address==null) {
+//                return null;
+//            }
+//            Address location=address.get(0);
+//            location.getLatitude();
+//            location.getLongitude();
+//
+//            p1 = new GeoPoint((double) (location.getLatitude() * 1E6),
+//                    (double) (location.getLongitude() * 1E6));
+//
+//            return p1;
+//        }
+//    }
 }

@@ -84,7 +84,8 @@
             android:id="@+id/et_bus_earning"
             android:singleLine="true"
             android:inputType="number"
-            android:background="@drawable/background_date"/>
+            android:background="@drawable/background_date"
+            android:padding="10dp"/>
 
     </LinearLayout>
 
@@ -111,7 +112,8 @@
             android:id="@+id/et_bus_discount"
             android:singleLine="true"
             android:inputType="number"
-            android:background="@drawable/background_date"/>
+            android:background="@drawable/background_date"
+            android:padding="10dp"/>
 
     </LinearLayout>
 

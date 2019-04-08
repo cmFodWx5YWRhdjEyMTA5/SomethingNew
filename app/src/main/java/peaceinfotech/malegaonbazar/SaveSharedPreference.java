@@ -137,6 +137,12 @@ public class SaveSharedPreference {
         editor.apply();
     }
 
+    public static void setPasswordMobile(Context context,String mob){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_MOBILE,mob);
+        editor.apply();
+    }
+
     public static String getMobile(Context context){
         return getPreferences(context).getString(KEY_MOBILE,"");
     }
@@ -249,6 +255,11 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_VENDOR_ID,"");
     }
 
+    public static void changePassword(Context context,String password){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_VENDOR_PASSWORD,password);
+        editor.apply();
+    }
 
 
 }
