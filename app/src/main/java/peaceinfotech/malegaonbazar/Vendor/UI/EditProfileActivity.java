@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,6 +30,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 
 import org.json.JSONException;
@@ -37,6 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
@@ -50,6 +54,7 @@ import peaceinfotech.malegaonbazar.RetrofitModel.StateListModel;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Signup.RegisterActivity;
 import peaceinfotech.malegaonbazar.Signup.VolleyMultipartRequest;
+import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,6 +80,8 @@ public class EditProfileActivity extends AppCompatActivity {
     String state = "";
     String city = "";
     private RequestQueue requestQueue;
+    Double latitude,longitude;
+    String strLat,strLng;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -218,6 +225,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 else{
                     if(isValidEmail(etEmail.getText().toString())){
                         requestQueue = Volley.newRequestQueue(EditProfileActivity.this);
+                        getLocationFromAddress(etLocation.getText().toString()+","+city+","+state);
                         vendorEditBitmap(bitmapLogo,bitmapBan,
                                 etName.getText().toString(),
                                 etLocation.getText().toString(),
@@ -468,7 +476,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 params.put("city_name",city);
                 params.put("oldLogo",SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(8));
                 params.put("oldBanner",SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(9));
+                params.put("latitude",strLat);
+                params.put("longitude",strLng);
+
+
                 return params;
+
             }
 
             /*
@@ -566,6 +579,10 @@ public class EditProfileActivity extends AppCompatActivity {
                                     response.body().getDetailsModels().getState(),
                                     response.body().getDetailsModels().getCity());
 
+                            SaveSharedPreference.setVendorLatLng(EditProfileActivity.this,
+                                    response.body().getDetailsModels().getLat(),
+                                    response.body().getDetailsModels().getLng());
+
                             Log.d("idemail", "onResponse: "+response.body().getDetailsModels().getEmail()+" / "+response.body().getDetailsModels().getCity()+" / "+response.body().getDetailsModels().getState());
 
                         }
@@ -584,7 +601,35 @@ public class EditProfileActivity extends AppCompatActivity {
                 Log.d("loginfail", "onFailure: "+t);
             }
         });
-
-
     }
+
+    public LatLng getLocationFromAddress(String strAddress) {
+
+        Geocoder coder = new Geocoder(EditProfileActivity.this, Locale.getDefault());
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+
+
+            strLat=Double.toString(latitude);
+            strLng=Double.toString(longitude);
+
+            Log.d("latlng", "getLocationFromAddress: "+location.getLatitude()+location.getLongitude());
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
+            return p1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p1;
+    }
+
 }

@@ -48,6 +48,9 @@ public class SaveSharedPreference {
     final public static String KEY_VENDOR_STATE = "vendor_state";
     final public static String KEY_VENDOR_CITY = "vendor_city";
     final public static String Key_vendor_email="email";
+    final public static String KEY_VENDOR_LAT="vendor_latitude";
+    final public static String KEY_VENDOR_LNG="vendor_longitude";
+
 
 
 
@@ -226,6 +229,22 @@ public class SaveSharedPreference {
         editor.apply();
 
         Log.d("setshare", "setVendorProfileData: "+email);
+    }
+
+    public static void setVendorLatLng (Context context,String lat,String lng){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_VENDOR_LAT,lat);
+        editor.putString(KEY_VENDOR_LNG,lng);
+        editor.apply();
+    }
+
+    public static List<String> getVendorLatLng(Context context){
+        List<String> data = new ArrayList<>();
+
+        data.add(0,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_LAT,""));
+        data.add(1,SaveSharedPreference.getPreferences(context).getString(KEY_VENDOR_LNG,""));
+
+        return data;
     }
 
     public static List<String> getVendorProfileData(Context context){

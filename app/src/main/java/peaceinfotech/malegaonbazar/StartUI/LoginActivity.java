@@ -157,6 +157,10 @@ public class LoginActivity extends AppCompatActivity {
                                    response.body().getDetailsModels().getState(),
                                    response.body().getDetailsModels().getCity());
 
+                           SaveSharedPreference.setVendorLatLng(LoginActivity.this,
+                                   response.body().getDetailsModels().getLat(),
+                                   response.body().getDetailsModels().getLng());
+
                            Log.d("idemail", "onResponse: "+response.body().getDetailsModels().getEmail()+" / "+response.body().getDetailsModels().getCity()+" / "+response.body().getDetailsModels().getState());
 
                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);

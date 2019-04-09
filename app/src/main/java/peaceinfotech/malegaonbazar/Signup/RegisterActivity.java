@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
@@ -33,6 +35,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 
 import org.json.JSONException;
@@ -44,6 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -94,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     Bitmap bitmapLogo,bitmapBan;
     SearchableSpinner spinDemo;
+    Double latitude,longitude;
 
 
 
@@ -236,6 +241,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                        Toast.makeText(RegisterActivity.this,"Password do not Match",Toast.LENGTH_LONG).show();
                     }
                 }
+
             }
         });
 
@@ -286,6 +292,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(isValidEmail(email)){
                         if(pass.equals(repass)){
                             requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+                            getLocationFromAddress(etvenloc.getText().toString()+","+city+","+state);
                             vendorUploadBitmap(bitmapLogo,bitmapBan,name,location,brand,catid,repass,email,state,city);
                         }
                         else{
@@ -484,6 +491,9 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("Password",password);
                 params.put("state_name",state);
                 params.put("city_name",city);
+                params.put("latitude",latitude.toString());
+                params.put("longitude",longitude.toString());
+
 
                 return params;
             }
@@ -561,7 +571,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     response.body().getDetailsModels().getState(),
                                     response.body().getDetailsModels().getCity());
 
-
+                            SaveSharedPreference.setVendorLatLng(RegisterActivity.this,
+                                    response.body().getDetailsModels().getLat(),
+                                    response.body().getDetailsModels().getLng());
 
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
                             startActivity(new Intent(RegisterActivity.this, VendorActivity.class));
@@ -677,6 +689,32 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public LatLng getLocationFromAddress(String strAddress) {
+
+        Geocoder coder = new Geocoder(RegisterActivity.this, Locale.getDefault());
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+
+            Log.d("latlng", "getLocationFromAddress: "+location.getLatitude()+location.getLongitude());
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
+            return p1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p1;
     }
 
 
