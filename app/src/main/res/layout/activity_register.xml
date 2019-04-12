@@ -224,7 +224,7 @@
                     android:layout_width="63dp"
                     android:layout_height="28dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btsubmit_back"
+                    android:background="@drawable/new_button_submit"
                     android:text="Choose\nImage"
                     android:textColor="#ffffff"
                     android:textSize="10sp" />
@@ -251,7 +251,7 @@
                     android:layout_width="63dp"
                     android:layout_height="28dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btsubmit_back"
+                    android:background="@drawable/new_button_submit"
                     android:text="Choose\nImage"
                     android:textColor="#ffffff"
                     android:textSize="10sp" />
@@ -298,7 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/btsubmit_back"
+                android:background="@drawable/new_button_submit"
                 android:text="sumbit"
                 android:textColor="#ffffff" />
         </LinearLayout>

@@ -27,7 +27,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
     public class RequestViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name,price,product;
+        TextView name,price,product,tvAccept,tvReject;
         Button accept,reject;
         RelativeLayout relayButton;
 
@@ -40,6 +40,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             accept=view.findViewById(R.id.bt_accept);
             reject=view.findViewById(R.id.bt_reject);
             relayButton=view.findViewById(R.id.relay_accept_reject);
+            tvAccept=view.findViewById(R.id.tv_request_accept);
+            tvReject=view.findViewById(R.id.tv_request_reject);
         }
     }
 
@@ -65,6 +67,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
+                holder.tvAccept.setVisibility(View.VISIBLE);
             }
         });
 
@@ -72,6 +75,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
+                holder.tvReject.setVisibility(View.VISIBLE);
             }
         });
 

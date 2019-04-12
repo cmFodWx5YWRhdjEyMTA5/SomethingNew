@@ -10,7 +10,8 @@
         android:orientation="vertical"
         android:id="@+id/linear_start_date"
         android:layout_margin="20dp"
-        android:layout_toLeftOf="@+id/view_bus">
+        android:layout_toLeftOf="@+id/view_bus"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -43,7 +44,8 @@
         android:id="@+id/linear_end_date"
         android:layout_toRightOf="@+id/view_bus"
         android:layout_margin="20dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -117,12 +119,23 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_get_earnings"
+        android:background="@drawable/btsubmit_back"
+        android:textColor="@color/white"
+        android:text="Check Earnings"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linear_discount"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/colorPrimary"
-        android:layout_below="@id/linear_earning"
+        android:layout_below="@id/bt_get_earnings"
         android:id="@+id/view_bus_vertical"
         android:layout_marginTop="20dp"/>
 

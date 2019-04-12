@@ -54,8 +54,7 @@
         <activity android:name=".Vendor.UI.DemoActcivity" />
         <activity android:name=".Vendor.UI.EditServiceActivity"/>
         <activity android:name=".Vendor.UI.EditProfileActivity"/>
-
-
+        <activity android:name=".Vendor.UI.AddOfferActvity"/>
     </application>
 
 </manifest>

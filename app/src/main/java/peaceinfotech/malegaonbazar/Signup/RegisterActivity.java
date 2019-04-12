@@ -526,7 +526,7 @@ public class RegisterActivity extends AppCompatActivity {
         return byteArrayOutputStream.toByteArray();
     }
 
-    public void LogIn (String mobile,String password) {
+    public void LogIn (final String mobile, final String password) {
 
 
         ApiUtils.getServiceClass().logIn(mobile, password).enqueue(new Callback<LogInModel>() {
@@ -575,6 +575,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     response.body().getDetailsModels().getLat(),
                                     response.body().getDetailsModels().getLng());
 
+                            SaveSharedPreference.setMobileAndPassword(RegisterActivity.this,
+                                    mobile,
+                                    password);
+
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
                             startActivity(new Intent(RegisterActivity.this, VendorActivity.class));
                             finish();
@@ -611,7 +615,7 @@ public class RegisterActivity extends AppCompatActivity {
                             categoryName.add(i,response.body().getCategoriesListModels().get(i).getCatName());
                             categoryId.add(i,response.body().getCategoriesListModels().get(i).getCatId());
                         }
-                        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(RegisterActivity.this, android.R.layout.simple_spinner_item,categoryName);
+                        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(RegisterActivity.this, android.R.layout.simple_spinner_dropdown_item,categoryName);
                         categoriesAdapter.notifyDataSetChanged();
                         spinCat.setAdapter(categoriesAdapter);
                     }
@@ -643,7 +647,7 @@ public class RegisterActivity extends AppCompatActivity {
                         for(int i=0;i<response.body().getStateLists().size();i++){
                             catState.add(i,response.body().getStateLists().get(i).getStateName());
                         }
-                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_item,catState);
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_dropdown_item,catState);
                         stateAdapter.notifyDataSetChanged();
                         spinState.setAdapter(stateAdapter);
                     }
@@ -673,7 +677,7 @@ public class RegisterActivity extends AppCompatActivity {
                             catCity.add(i,response.body().getCityLists().get(i).getName());
                         }
 
-                        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_item,catCity);
+                        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_dropdown_item,catCity);
                         cityAdapter.notifyDataSetChanged();
                         spinCity.setAdapter(cityAdapter);
                     }

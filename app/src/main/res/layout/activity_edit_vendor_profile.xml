@@ -183,7 +183,7 @@
                     android:id="@+id/bt_edit_logo"
                     android:layout_width="63dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/btsubmit_back"
+                    android:background="@drawable/new_button_submit"
                     android:text="Choose  Image"
                     android:textColor="#ffffff"
                     android:textSize="10sp"
@@ -216,7 +216,7 @@
                     android:id="@+id/bt_edit_ban"
                     android:layout_width="63dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/btsubmit_back"
+                    android:background="@drawable/new_button_submit"
                     android:text="Choose Image"
                     android:textColor="#ffffff"
                     android:textSize="10sp"
@@ -237,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/btsubmit_back"
+                android:background="@drawable/new_button_submit"
                 android:text="edit profile"
                 android:textColor="#ffffff" />
         </LinearLayout>

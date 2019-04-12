@@ -77,11 +77,28 @@ public class VendorActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Exit");
+        builder.setMessage("Are you sure you want to Exit");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            alertDialog.show();
         }
     }
 
@@ -137,9 +154,9 @@ public class VendorActivity extends AppCompatActivity
             case R.id.nav_vendor_profile:
                 fragment=new FragmentProfile();
                 break;
-            case R.id.nav_add_offers:
-                fragment=new FragmentAddOffers();
-                break;
+//            case R.id.nav_add_offers:
+//                fragment=new FragmentAddOffers();
+//                break;
             case R.id.nav_offers_list:
                 fragment=new FragmentOfferList();
                 break;
@@ -193,4 +210,6 @@ public class VendorActivity extends AppCompatActivity
 //            return p1;
 //        }
 //    }
+
+
 }

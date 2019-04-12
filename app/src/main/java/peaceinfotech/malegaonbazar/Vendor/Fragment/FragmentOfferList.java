@@ -3,6 +3,7 @@ package peaceinfotech.malegaonbazar.Vendor.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import peaceinfotech.malegaonbazar.RetrofitModel.OfferRetroListModel;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.Vendor.Adapter.OfferPreviewAdapter;
 import peaceinfotech.malegaonbazar.Vendor.Model.OfferPreviewModel;
+import peaceinfotech.malegaonbazar.Vendor.UI.AddOfferActvity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +35,7 @@ public class FragmentOfferList extends Fragment {
     RecyclerView recyclerView;
     OfferPreviewAdapter offerPreviewAdapter;
     TextView textView;
+    FloatingActionButton fabAddOffers;
 
 
 
@@ -44,9 +47,17 @@ public class FragmentOfferList extends Fragment {
 
         recyclerView=view.findViewById(R.id.preview_recycler);
         textView=view.findViewById(R.id.demo);
+        fabAddOffers=view.findViewById(R.id.fab_add_offers);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        fabAddOffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddOfferActvity.class));
+            }
+        });
 
         getOffersList();
 
@@ -56,7 +67,7 @@ public class FragmentOfferList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Offers List");
+        getActivity().setTitle("Offers");
     }
 
     public void getOffersList(){
@@ -70,30 +81,31 @@ public class FragmentOfferList extends Fragment {
 
                     if(response.body().getResponse().equalsIgnoreCase("success")){
 
-                        offerList = new ArrayList<>();
-                        for(int i=0;i<response.body().getOfferlistModels().size();i++){
-                            offerList.add(i,new OfferPreviewModel(
-                                    response.body().getOfferlistModels().get(i).getOfferId(),
-                                    response.body().getOfferlistModels().get(i).getOfferTitle(),
-                                    response.body().getOfferlistModels().get(i).getOfferDesc(),
-                                    response.body().getOfferlistModels().get(i).getPrice(),
-                                    response.body().getOfferlistModels().get(i).getOfferMinTrans(),
-                                    response.body().getOfferlistModels().get(i).getOfferMaxTrans(),
-                                    response.body().getOfferlistModels().get(i).getOfferStartDate(),
-                                    response.body().getOfferlistModels().get(i).getOfferEndDate(),
-                                    response.body().getOfferlistModels().get(i).getTermCondition(),
-                                    response.body().getOfferlistModels().get(i).getOfferType(),
-                                    response.body().getOfferlistModels().get(i).getOfferDiscount()));
+                            offerList = new ArrayList<>();
+                            for(int i=0;i<response.body().getOfferlistModels().size();i++){
+                                offerList.add(i,new OfferPreviewModel(
+                                        response.body().getOfferlistModels().get(i).getOfferId(),
+                                        response.body().getOfferlistModels().get(i).getOfferTitle(),
+                                        response.body().getOfferlistModels().get(i).getOfferDesc(),
+                                        response.body().getOfferlistModels().get(i).getPrice(),
+                                        response.body().getOfferlistModels().get(i).getOfferMinTrans(),
+                                        response.body().getOfferlistModels().get(i).getOfferMaxTrans(),
+                                        response.body().getOfferlistModels().get(i).getOfferStartDate(),
+                                        response.body().getOfferlistModels().get(i).getOfferEndDate(),
+                                        response.body().getOfferlistModels().get(i).getTermCondition(),
+                                        response.body().getOfferlistModels().get(i).getOfferType(),
+                                        response.body().getOfferlistModels().get(i).getOfferDiscount()));
 
-                            Log.d("offerlist", "onBindViewHolder: "+response.body().getOfferlistModels().get(i).getPrice()+"/"+i);
+                                Log.d("offerlist", "onBindViewHolder: "+response.body().getOfferlistModels().get(i).getPrice()+"/"+i);
 
-                        }
-                        offerPreviewAdapter = new OfferPreviewAdapter(offerList,getActivity());
-                        recyclerView.setAdapter(offerPreviewAdapter);
-                        offerPreviewAdapter.notifyDataSetChanged();
+                            }
+                            offerPreviewAdapter = new OfferPreviewAdapter(offerList,getActivity());
+                            recyclerView.setAdapter(offerPreviewAdapter);
+                            offerPreviewAdapter.notifyDataSetChanged();
                     }
-                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
-
+                    else if(response.body().getResponse().equalsIgnoreCase("failed"))
+                    {
+                        Toast.makeText(getActivity(),"No Offers to show please Add a Offer.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -112,9 +124,4 @@ public class FragmentOfferList extends Fragment {
         super.onResume();
         getOffersList();
     }
-
-
-
-
-
 }

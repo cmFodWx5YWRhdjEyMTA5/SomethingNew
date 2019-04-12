@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sign in"
                 android:layout_margin="10dp"
-                android:background="@drawable/btsubmit_back"
+                android:background="@drawable/new_button_submit"
                 android:textColor="#ffffff"
                 android:id="@+id/btsignin"/>
 

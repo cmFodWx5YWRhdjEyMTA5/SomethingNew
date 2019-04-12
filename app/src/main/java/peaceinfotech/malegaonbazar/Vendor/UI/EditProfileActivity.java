@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -82,6 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     Double latitude,longitude;
     String strLat,strLng;
+    View header;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,6 +104,8 @@ public class EditProfileActivity extends AppCompatActivity {
         spinState=findViewById(R.id.spin_edit_state);
         imgDemo=findViewById(R.id.img_demo);
 
+         header = LayoutInflater.from(EditProfileActivity.this)
+                .inflate(R.layout.spinner_custom_list_item, spinState, false);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Profile");
@@ -131,24 +135,28 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
 
-        spinState.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(View view, int position, long id) {
-                if(!spinState.getSelectedItem().equals(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10))){
-                    getCityList(spinState.getSelectedItem().toString());
-                    state = spinState.getSelectedItem().toString();
+        try {
+            spinState.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(View view, int position, long id) {
+                    if (!spinState.getSelectedItem().equals(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10))) {
+                        getCityList(spinState.getSelectedItem().toString());
+                        state = spinState.getSelectedItem().toString();
+                    } else {
+                        getCityList(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10));
+                        state = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
+                    }
                 }
-                else{
-                    getCityList(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10));
-                    state = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
+
+                @Override
+                public void onNothingSelected() {
+
                 }
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
+            });
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
         spinCity.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -257,7 +265,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             listCategoryName.add(i,response.body().getCategoriesListModels().get(i).getCatName());
                             listCategoryId.add(i,response.body().getCategoriesListModels().get(i).getCatId());
                         }
-                        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(EditProfileActivity.this, android.R.layout.simple_spinner_item,listCategoryName);
+                        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(EditProfileActivity.this, android.R.layout.simple_spinner_dropdown_item,listCategoryName);
                         categoriesAdapter.notifyDataSetChanged();
                         spinCategory.setAdapter(categoriesAdapter);
                         String compareValue = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(5);
@@ -292,7 +300,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         for(int i=0;i<response.body().getStateLists().size();i++){
                             listCategoryState.add(i,response.body().getStateLists().get(i).getStateName());
                         }
-                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_item,listCategoryState);
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_dropdown_item,listCategoryState);
                         stateAdapter.notifyDataSetChanged();
                         spinState.setAdapter(stateAdapter);
                         state=SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
@@ -330,7 +338,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             listCategoryCity.add(i,response.body().getCityLists().get(i).getName());
                         }
 
-                        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_item,listCategoryCity);
+                        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_dropdown_item,listCategoryCity);
                         cityAdapter.notifyDataSetChanged();
                         spinCity.setAdapter(cityAdapter);
                         city = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(11);
@@ -478,7 +486,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 params.put("oldBanner",SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(9));
                 params.put("latitude",strLat);
                 params.put("longitude",strLng);
-
 
                 return params;
 

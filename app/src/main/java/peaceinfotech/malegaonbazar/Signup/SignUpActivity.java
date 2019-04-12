@@ -140,7 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void sendOTP (String mobile){
-        SaveSharedPreference.setMobile(SignUpActivity.this,mobile);
+
         ApiUtils.getServiceClass().sendOTP(mobile).enqueue(new Callback<SendOTPModel>() {
             @Override
             public void onResponse(Call<SendOTPModel> call, Response<SendOTPModel> response) {
@@ -156,6 +156,8 @@ public class SignUpActivity extends AppCompatActivity {
                         RightSwipe = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.right_swipe);
                         layotp.setVisibility(View.VISIBLE);
                         layotp.setAnimation(RightSwipe);
+
+                        SaveSharedPreference.setMobile(SignUpActivity.this,response.body().getMobile());
                     }
                     else if(response.body().getReponse().equalsIgnoreCase("failed")){
                         Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();

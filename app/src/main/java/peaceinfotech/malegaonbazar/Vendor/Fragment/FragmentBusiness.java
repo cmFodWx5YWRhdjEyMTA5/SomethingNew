@@ -11,14 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,15 +33,7 @@ public class FragmentBusiness extends Fragment {
 
     EditText etStart,etEnd,etEarning,etDiscount;
     PieChart mChart;
-
-    private int[] yValues = {21, 2, 2};
-    private String[] xValues = {"Present Days", "Absents", "Leaves"};
-
-    // colors for different sections in pieChart
-    public static  final int[] MY_COLORS = {
-            Color.rgb(84,124,101), Color.rgb(64,64,64), Color.rgb(153,19,0),
-            Color.rgb(38,40,53)};
-
+    Button btGetEarnings;
     ArrayList<Integer> colors = new ArrayList<>();
 
 
@@ -53,40 +48,110 @@ public class FragmentBusiness extends Fragment {
         mChart=view.findViewById(R.id.pie_bus);
         etEarning=view.findViewById(R.id.et_bus_earning);
         etDiscount=view.findViewById(R.id.et_bus_discount);
+        btGetEarnings=view.findViewById(R.id.bt_get_earnings);
 
-        List<PieEntry> entries = new ArrayList<>();
+
 
        colors.add(Color.GREEN);
        colors.add(Color.RED);
-//       colors.add(Color.RED);
-//       colors.add(Color.BLUE);
 
 
-//       int earnings = Integer.parseInt(etEarning.getText().toString());
-//       int discount = Integer.parseInt(etDiscount.getText().toString());
+        List<PieEntry> entries = new ArrayList<>();
 
-       float discPercent = 2000*100/30000;
-       float earnPercent = (30000-2000)*100/30000;
-
-        Log.d("percent", "onCreateView: "+discPercent+" / "+earnPercent);
-
-       entries.add(new PieEntry(earnPercent, "Earnings"));
-       entries.add(new PieEntry(discPercent, "Discount"));
+        entries.add(new PieEntry(50f, "Earnings"));
+        entries.add(new PieEntry(50f, "Discount"));
 
 
-       PieDataSet set = new PieDataSet(entries,"Earning Data");
-       PieData data = new PieData(set);
-       set.setColors(colors);
-       set.setValueTextSize(30f);
+        PieDataSet set = new PieDataSet(entries,"Earning Data");
+        PieData data = new PieData(set);
+        set.setValueFormatter(new PercentFormatter());
+        set.setColors(colors);
+        set.setValueTextSize(30f);
 
 
-       mChart.setEntryLabelTextSize(20f);
-       mChart.setEntryLabelColor(Color.BLACK);
-       mChart.setRotationEnabled(false);
-       mChart.getDescription().setText(" ");
-       mChart.setData(data);
-       mChart.invalidate();
-       mChart.setDrawHoleEnabled(false);
+        mChart.setEntryLabelTextSize(20f);
+        mChart.setEntryLabelColor(Color.BLACK);
+        mChart.setRotationEnabled(false);
+        mChart.getDescription().setText(" ");
+        mChart.setData(data);
+        mChart.invalidate();
+        mChart.setDrawHoleEnabled(false);
+
+        btGetEarnings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(etEarning.getText().toString().isEmpty()||etDiscount.getText().toString().isEmpty()){
+                    if(etEarning.getText().toString().isEmpty()){
+                        etEarning.setError("Enter This Field");
+                    }
+                    if(etDiscount.getText().toString().isEmpty()){
+                        etDiscount.setError("Enter this Field");
+                    }
+                }
+                else{
+                    if(Integer.parseInt(etDiscount.getText().toString())>Integer.parseInt(etEarning.getText().toString())){
+                        Toast.makeText(getActivity(), "No Earnings", Toast.LENGTH_SHORT).show();
+
+                        List<PieEntry> entries = new ArrayList<>();
+
+                        entries.add(new PieEntry(0f, "Earnings"));
+                        entries.add(new PieEntry(100f, "Discount"));
+
+
+                        PieDataSet set = new PieDataSet(entries,"Earning Data");
+                        PieData data = new PieData(set);
+                        set.setColors(colors);
+                        set.setValueTextSize(30f);
+
+
+                        mChart.setEntryLabelTextSize(20f);
+                        mChart.setEntryLabelColor(Color.BLACK);
+                        mChart.setRotationEnabled(false);
+                        mChart.getDescription().setText(" ");
+                        mChart.setData(data);
+                        mChart.invalidate();
+                        mChart.setDrawHoleEnabled(false);
+
+
+                    }
+                    else{
+                        List<PieEntry> entries = new ArrayList<>();
+
+                        int earnings = Integer.parseInt(etEarning.getText().toString());
+                        int discount = Integer.parseInt(etDiscount.getText().toString());
+
+                        float discPercent = discount*100/earnings;
+                        float earnPercent = (earnings-discount)*100/earnings;
+
+                        Log.d("percent", "onCreateView: "+discPercent+" / "+earnPercent);
+
+                        entries.add(new PieEntry(earnPercent, "Earnings"));
+                        entries.add(new PieEntry(discPercent, "Discount"));
+
+
+                        PieDataSet set = new PieDataSet(entries,"Earning Data");
+                        PieData data = new PieData(set);
+                        set.setColors(colors);
+                        set.setValueTextSize(30f);
+
+
+                        mChart.setEntryLabelTextSize(20f);
+                        mChart.setEntryLabelColor(Color.BLACK);
+                        mChart.setRotationEnabled(false);
+                        mChart.getDescription().setText(" ");
+                        mChart.setData(data);
+                        mChart.invalidate();
+                        mChart.setDrawHoleEnabled(false);
+                    }
+                }
+
+
+            }
+        });
+
+
+
 
 
 

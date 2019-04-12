@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User"
-            android:background="@drawable/btsubmit_back"
+            android:background="@drawable/new_button_submit"
             android:textColor="@color/white"
             android:id="@+id/bt_user"
             android:layout_margin="10dp"/>
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vendor"
-            android:background="@drawable/btsubmit_back"
+            android:background="@drawable/new_button_submit"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             android:id="@+id/bt_vendor"/>
