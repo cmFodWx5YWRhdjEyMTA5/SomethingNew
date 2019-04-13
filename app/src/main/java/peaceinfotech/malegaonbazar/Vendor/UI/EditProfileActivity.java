@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     EditText etName,etLocation,etBrand,etEmail;
     AwesomeSpinner spinCategory;
-    SearchableSpinner spinState,spinCity;
+//    SearchableSpinner spinState,spinCity;
     public final int LOGO=1;
     public final int BAN=2;
     List<String> listCategoryName;
@@ -84,6 +85,8 @@ public class EditProfileActivity extends AppCompatActivity {
     Double latitude,longitude;
     String strLat,strLng;
     View header;
+    com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity ;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,12 +103,19 @@ public class EditProfileActivity extends AppCompatActivity {
         btBan=findViewById(R.id.bt_edit_ban);
         btEdit=findViewById(R.id.bt_ven_edit);
         spinCategory=findViewById(R.id.spinner_edit_category);
-        spinCity=findViewById(R.id.spin_edit_city);
-        spinState=findViewById(R.id.spin_edit_state);
         imgDemo=findViewById(R.id.img_demo);
+        searchSpinState=findViewById(R.id.search_spin_edit_state);
+        searchSpinCity=findViewById(R.id.search_spin_edit_city);
 
-         header = LayoutInflater.from(EditProfileActivity.this)
-                .inflate(R.layout.spinner_custom_list_item, spinState, false);
+//        spinCity=findViewById(R.id.spin_edit_city);
+//        spinState=findViewById(R.id.spin_edit_state);
+
+        searchSpinState.setTitle("State");
+        searchSpinCity.setTitle("City");
+
+        Log.d("state", "onCreate: "+state);
+
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Profile");
@@ -134,47 +144,31 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
 
-
-        try {
-            spinState.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(View view, int position, long id) {
-                    if (!spinState.getSelectedItem().equals(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10))) {
-                        getCityList(spinState.getSelectedItem().toString());
-                        state = spinState.getSelectedItem().toString();
-                    } else {
-                        getCityList(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10));
-                        state = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
-                    }
-                }
-
-                @Override
-                public void onNothingSelected() {
-
-                }
-            });
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        spinCity.setOnItemSelectedListener(new OnItemSelectedListener() {
+        searchSpinState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(View view, int position, long id) {
-                if(!spinCity.getSelectedItem().equals(SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(11))){
-                    city = spinCity.getSelectedItem().toString();
-                }
-                else{
-                    city = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(11);
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                state=searchSpinState.getSelectedItem().toString();
+
+                getCityList(state);
             }
 
             @Override
-            public void onNothingSelected() {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
+        searchSpinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                city=searchSpinCity.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         spinCategory.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -302,15 +296,16 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_dropdown_item,listCategoryState);
                         stateAdapter.notifyDataSetChanged();
-                        spinState.setAdapter(stateAdapter);
+//                        spinState.setAdapter(stateAdapter);
+                        searchSpinState.setAdapter(stateAdapter);
                         state=SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
 
-                        String compareValue = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(10);
-//                        if (compareValue != null) {
-//                            int spinnerPosition = stateAdapter.getPosition(compareValue);
-//                            Log.d("spinnerPosition", "onResponse: "+spinnerPosition);
-//                            spinState.setSelectedItem(spinnerPosition);
-//                        }
+                        String myString = state; //the value you want the position for
+                        ArrayAdapter myAdap = (ArrayAdapter) searchSpinState.getAdapter(); //cast to an ArrayAdapter
+                        int spinnerPosition = myAdap.getPosition(myString);
+                        searchSpinState.setSelection(spinnerPosition);
+
+                        getCityList(state);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
 
@@ -340,8 +335,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
                         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(EditProfileActivity.this,android.R.layout.simple_spinner_dropdown_item,listCategoryCity);
                         cityAdapter.notifyDataSetChanged();
-                        spinCity.setAdapter(cityAdapter);
+//                        spinCity.setAdapter(cityAdapter);
+
+                        searchSpinCity.setAdapter(cityAdapter);
                         city = SaveSharedPreference.getVendorProfileData(EditProfileActivity.this).get(11);
+
+                        String myString = city; //the value you want the position for
+                        ArrayAdapter myAdap = (ArrayAdapter) searchSpinCity.getAdapter(); //cast to an ArrayAdapter
+                        int spinnerPosition = myAdap.getPosition(myString);
+                        searchSpinCity.setSelection(spinnerPosition);
+
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
 
@@ -638,5 +641,6 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         return p1;
     }
+
 
 }

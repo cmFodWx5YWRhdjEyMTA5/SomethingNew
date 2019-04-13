@@ -20,6 +20,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     List<String> catState;
     List<String> catCity;
     AwesomeSpinner spinCat;
-    SearchableSpinner spinState,spinCity;
+   // SearchableSpinner spinState,spinCity;
     TextView tvCatHint,tvDemo;
     String catid="";
     String state = "";
@@ -98,7 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     Bitmap bitmapLogo,bitmapBan;
     SearchableSpinner spinDemo;
+    String strLat,strLng;
     Double latitude,longitude;
+    com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity;
 
 
 
@@ -123,8 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
         tvDemo=findViewById(R.id.tv_demo);
         imgDemo=findViewById(R.id.img_demo);
 
-        spinState=findViewById(R.id.spin_state);
-        spinCity=findViewById(R.id.spin_city);
+//        spinState=findViewById(R.id.spin_state);
+//        spinCity=findViewById(R.id.spin_city);
         spinCat=findViewById(R.id.spinner_category);
         etvenname=findViewById(R.id.etvenname);
         etvenloc=findViewById(R.id.etvenloc);
@@ -137,8 +140,11 @@ public class RegisterActivity extends AppCompatActivity {
         btban=findViewById(R.id.btban);
         submitven=findViewById(R.id.btvensubmit);
 
+        searchSpinCity=findViewById(R.id.search_spin_city);
+        searchSpinState=findViewById(R.id.search_spin_state);
 
-
+        searchSpinState.setTitle("State");
+        searchSpinCity.setTitle("City");
 
         bitmapLogo = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
         bitmapBan = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.new_ban);
@@ -156,6 +162,37 @@ public class RegisterActivity extends AppCompatActivity {
         getStateList();
 
 
+        searchSpinState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(searchSpinState.getSelectedItem()==null){
+                    Toast.makeText(RegisterActivity.this, "Select a option", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    state=searchSpinState.getSelectedItem().toString();
+                    getCityList(state);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        searchSpinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                city=searchSpinCity.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         spinCat.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -166,30 +203,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-        spinState.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(View view, int position, long id) {
-                getCityList(spinState.getSelectedItem().toString());
-                state=spinState.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
-
-        spinCity.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(View view, int position, long id) {
-                city = spinCity.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
 
         btlogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -491,9 +504,8 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("Password",password);
                 params.put("state_name",state);
                 params.put("city_name",city);
-                params.put("latitude",latitude.toString());
-                params.put("longitude",longitude.toString());
-
+                params.put("latitude",strLat);
+                params.put("longitude",strLng);
 
                 return params;
             }
@@ -602,8 +614,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void getCategoriesList(){
 
-
-
         ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<CategoriesHomeModel>() {
             @Override
             public void onResponse(Call<CategoriesHomeModel> call, Response<CategoriesHomeModel> response) {
@@ -649,7 +659,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_dropdown_item,catState);
                         stateAdapter.notifyDataSetChanged();
-                        spinState.setAdapter(stateAdapter);
+
+                        searchSpinState.setAdapter(stateAdapter);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
 
@@ -679,7 +690,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_dropdown_item,catCity);
                         cityAdapter.notifyDataSetChanged();
-                        spinCity.setAdapter(cityAdapter);
+
+                        searchSpinCity.setAdapter(cityAdapter);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
 
@@ -711,6 +723,9 @@ public class RegisterActivity extends AppCompatActivity {
             latitude=location.getLatitude();
             longitude=location.getLongitude();
 
+            strLat=latitude.toString();
+            strLng=longitude.toString();
+
             Log.d("latlng", "getLocationFromAddress: "+location.getLatitude()+location.getLongitude());
             p1 = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -720,7 +735,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return p1;
     }
-
 
 }
 

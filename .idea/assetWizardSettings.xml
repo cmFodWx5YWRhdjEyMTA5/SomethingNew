@@ -199,10 +199,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_add_white_24dp" />
+                            <entry key="height" value="427" />
+                            <entry key="outputName" value="ic_cancel" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\back11 (1).svg" />
+                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\cancel.svg" />
+                            <entry key="width" value="427" />
                           </map>
                         </option>
                       </PersistentState>

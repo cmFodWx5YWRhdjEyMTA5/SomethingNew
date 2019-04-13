@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
         TextView name,price,product,tvAccept,tvReject;
         Button accept,reject;
         RelativeLayout relayButton;
+        ImageView imgAccept,imgReject;
 
         public RequestViewHolder(@NonNull View view) {
             super(view);
@@ -42,6 +44,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             relayButton=view.findViewById(R.id.relay_accept_reject);
             tvAccept=view.findViewById(R.id.tv_request_accept);
             tvReject=view.findViewById(R.id.tv_request_reject);
+            imgAccept=view.findViewById(R.id.img_req_accept);
+            imgReject=view.findViewById(R.id.img_req_reject);
         }
     }
 
@@ -67,7 +71,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
-                holder.tvAccept.setVisibility(View.VISIBLE);
+                //holder.tvAccept.setVisibility(View.VISIBLE);
+                holder.imgAccept.setVisibility(View.VISIBLE);
             }
         });
 
@@ -75,7 +80,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
-                holder.tvReject.setVisibility(View.VISIBLE);
+                //holder.tvReject.setVisibility(View.VISIBLE);
+                holder.imgReject.setVisibility(View.VISIBLE);
             }
         });
 

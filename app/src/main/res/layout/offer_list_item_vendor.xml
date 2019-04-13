@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tv_pr"
                     android:layout_alignParentEnd="true"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:textColor="@color/black"
                     android:text="\u20B9 500"
                     android:id="@+id/tv_ven_offer_price"/>
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="55dp"
                     android:layout_toRightOf="@+id/eln_ven_quantity"
-                    android:text=" Total Price:"
+                    android:text=" Total : "
                     android:gravity="center"
                     android:id="@+id/tv_ven_show"
                     android:layout_marginTop="10dp"/>
@@ -110,9 +110,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_toRightOf="@+id/tv_ven_show"
-                    android:gravity="center"
+                    android:gravity="start|center"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/tv_ven_final_price" />
+                    android:id="@+id/tv_ven_final_price"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 

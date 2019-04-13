@@ -142,14 +142,11 @@
                 android:text="Select a State *"
                 android:visibility="visible" />
 
-            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                app:spinnerHint="Select a State"
-                android:id="@+id/spin_state"
-                android:background="@drawable/viewoffers_background"
-                app:SpinnerExpandHeight="200dp"/>
-
+                android:id="@+id/search_spin_state"/>
 
             <TextView
                 android:id="@+id/tv_city_hint"
@@ -159,13 +156,12 @@
                 android:layout_marginTop="20dp"
                 android:text="Select a City *"
                 android:visibility="visible" />
-            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                app:spinnerHint="Select a City"
-                android:id="@+id/spin_city"
-                android:background="@drawable/viewoffers_background"
-                app:SpinnerExpandHeight="200dp"/>
+                android:id="@+id/search_spin_city"/>
 
 
             <EditText
@@ -228,6 +224,8 @@
                     android:text="Choose\nImage"
                     android:textColor="#ffffff"
                     android:textSize="10sp" />
+
+
 
             </LinearLayout>
 

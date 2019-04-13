@@ -60,33 +60,10 @@
                 android:text="Select a State *"
                 android:visibility="visible" />
 
-            <RelativeLayout
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="300dp"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/tv_edit_state"
-                    android:text="state"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:padding="5dp"/>
-
-                <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    app:spinnerHint="Select a State"
-                    android:id="@+id/spin_edit_state"
-                    android:background="@drawable/viewoffers_background"
-                    app:SpinnerExpandHeight="200dp"
-                    android:visibility="visible"
-                    android:layout_alignParentEnd="true"/>
-
-            </RelativeLayout>
-
-
+                android:layout_height="40dp"
+                android:id="@+id/search_spin_edit_state"/>
 
 
             <TextView
@@ -97,13 +74,12 @@
                 android:layout_marginTop="20dp"
                 android:text="Select a City *"
                 android:visibility="visible" />
-            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                app:spinnerHint="Select a City"
-                android:id="@+id/spin_edit_city"
-                android:background="@drawable/viewoffers_background"
-                app:SpinnerExpandHeight="200dp"/>
+                android:id="@+id/search_spin_edit_city"/>
 
             <!--<EditText-->
             <!--android:id="@+id/etvencity"-->
