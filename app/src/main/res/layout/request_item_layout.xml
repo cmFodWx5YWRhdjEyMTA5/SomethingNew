@@ -51,14 +51,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp">
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:text="Name: "
                     android:textSize="18sp"
-                    android:gravity="end"
+                    android:gravity="start"
                     android:id="@+id/tv_name" />
 
                 <TextView
@@ -78,11 +79,11 @@
                     android:id="@+id/view_centre_first"/>
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:text="Quantity: "
                     android:textSize="18sp"
-                    android:gravity="end"
+                    android:gravity="start"
                     android:id="@+id/tv_quant"
                     android:layout_toRightOf="@+id/view_centre_first"/>
 
@@ -98,15 +99,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp">
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:text="Product: "
                     android:textSize="18sp"
                     android:id="@+id/tv_prod"
-                    android:gravity="end"/>
+                    android:gravity="start"/>
 
                 <TextView
                     android:id="@+id/tv_product"
@@ -125,7 +127,7 @@
                     android:id="@+id/view_centre_second"/>
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_discount"
                     android:text="Discount: "
@@ -144,14 +146,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp">
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:text="Price: "
                     android:textSize="18sp"
-                    android:gravity="end"
+                    android:gravity="start"
                     android:id="@+id/tv_prod_price"/>
 
                 <TextView
@@ -171,12 +174,12 @@
                     android:id="@+id/view_centre_third"/>
 
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_total"
                     android:text="Total: "
                     android:textSize="18sp"
-                    android:gravity="end"
+                    android:gravity="start"
                     android:layout_toRightOf="@+id/view_centre_third"/>
 
                 <TextView
@@ -201,8 +204,9 @@
             android:textColor="#ff00"
             android:text="REJECTED"
             android:layout_below="@+id/lay_left"
-            android:gravity="center"
-            android:visibility="gone"/>
+            android:gravity="start"
+            android:visibility="gone"
+            android:paddingLeft="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -211,9 +215,10 @@
             android:textSize="20sp"
             android:id="@+id/tv_request_accept"
             android:textColor="#008000"
-            android:gravity="center"
+            android:gravity="start"
             android:text="ACCEPTED"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:paddingLeft="10dp"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -225,7 +230,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/black"
             android:id="@+id/line_horizontal_view"/>
 

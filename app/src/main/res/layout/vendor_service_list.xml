@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:text="Ac-Services"
         android:textColor="@color/black"
         android:id="@+id/tv_service_name"/>
@@ -20,16 +20,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_marginTop="10dp"
         android:id="@+id/tv_service_desc"
+        android:paddingLeft="10dp"
         android:text="xjvjvxjxcnvcnxvjxcnvjxcnxcknxcncxvnxcvnxcknxckjxcjnxcjnxcnvvxjkxc"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/black"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,31 +39,29 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:id="@+id/bt_service_edit"
             android:layout_toLeftOf="@+id/view_centre"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="13sp"
             android:text="EDIT"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"/>
+            android:textColor="@color/black" />
         <View
             android:layout_width="2dp"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             android:layout_centerInParent="true"
             android:id="@+id/view_centre"
             android:background="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:id="@+id/bt_service_delete"
             android:layout_toRightOf="@+id/view_centre"
             android:text="DELETE"
-            android:textSize="20sp"
+            android:textSize="13sp"
             android:gravity="center"
-            android:textColor="#ff00"
-            android:layout_marginTop="5dp"/>
+            android:textColor="#ff00" />
 
     </RelativeLayout>
 

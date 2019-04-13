@@ -49,21 +49,30 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_name"
                     android:text="Name : "
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_first"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_first"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/tv_name"
+                    android:layout_toRightOf="@+id/view_cen_first"
                     android:textSize="20sp"
                     android:layout_marginTop="5dp"
                     android:layout_alignParentEnd="true"
@@ -77,50 +86,68 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_bname"
                     android:text="Brand Name : "
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_second"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_second"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_bname"
-                    android:layout_toRightOf="@id/tv_bname"
+                    android:layout_toRightOf="@id/view_cen_second"
                     android:layout_marginTop="6dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/black"
-                    android:text="Peace Infotech"/>
+                    android:text="Peace Infotech" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_loc"
                     android:text="Address : "
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_third"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_third"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_location"
-                    android:layout_toRightOf="@id/tv_loc"
+                    android:layout_toRightOf="@id/view_cen_third"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
@@ -133,22 +160,31 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_city"
                     android:text="City : "
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_four"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_four"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_city"
-                    android:layout_toRightOf="@id/tv_city"
+                    android:layout_toRightOf="@id/view_cen_four"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
@@ -162,22 +198,31 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_state"
                     android:text="State : "
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_fifth"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_fifth"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_state"
-                    android:layout_toRightOf="@id/tv_state"
+                    android:layout_toRightOf="@id/view_cen_fifth"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
@@ -191,22 +236,31 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
                     android:layout_alignParentStart="true"
                     android:text="Mobile : "
                     android:id="@+id/tv_mobile"
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_six"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_six"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_mobile"
-                    android:layout_toRightOf="@id/tv_mobile"
+                    android:layout_toRightOf="@id/view_cen_six"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
@@ -220,7 +274,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
                     android:layout_width="200dp"
@@ -229,26 +285,35 @@
                     android:id="@+id/tv_mail"
                     android:layout_alignParentStart="true"
                     android:text="Email-Id : "
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@id/view_cen_sev"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_sev"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_vendor_email"
-                    android:layout_toRightOf="@id/tv_mail"
+                    android:layout_toRightOf="@id/view_cen_sev"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/black"
-                    android:text="sid.j23@gmail.com"/>
+                    android:text="sid.j23@gmail.com" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
 
                 <TextView
                     android:layout_width="200dp"
@@ -257,12 +322,19 @@
                     android:id="@+id/tv_cat"
                     android:layout_alignParentStart="true"
                     android:text="Category : "
-                    android:gravity="end"/>
+                    android:gravity="end"
+                    android:layout_toLeftOf="@+id/view_cen_eight"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/view_cen_eight"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/tv_cat"
+                    android:layout_toRightOf="@+id/view_cen_eight"
                     android:id="@+id/tv_cat_name"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"

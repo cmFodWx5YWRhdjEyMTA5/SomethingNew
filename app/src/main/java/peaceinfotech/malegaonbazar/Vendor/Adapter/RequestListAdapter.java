@@ -71,8 +71,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
-                //holder.tvAccept.setVisibility(View.VISIBLE);
-                holder.imgAccept.setVisibility(View.VISIBLE);
+                holder.tvAccept.setVisibility(View.VISIBLE);
+//                holder.imgAccept.setVisibility(View.VISIBLE);
             }
         });
 
@@ -80,8 +80,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             @Override
             public void onClick(View v) {
                 holder.relayButton.setVisibility(View.GONE);
-                //holder.tvReject.setVisibility(View.VISIBLE);
-                holder.imgReject.setVisibility(View.VISIBLE);
+                holder.tvReject.setVisibility(View.VISIBLE);
+//                holder.imgReject.setVisibility(View.VISIBLE);
             }
         });
 
