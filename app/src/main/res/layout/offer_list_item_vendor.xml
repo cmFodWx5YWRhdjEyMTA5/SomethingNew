@@ -82,7 +82,8 @@
                     android:text=" \u20B9 500"
                     android:textSize="16sp"
                     android:id="@+id/tv_ven_offer_price"
-                    android:layout_toLeftOf="@+id/view_offer"/>
+                    android:layout_toLeftOf="@+id/view_offer"
+                    android:paddingRight="5dp"/>
 
                 <View
                     android:layout_width="0dp"
@@ -105,7 +106,9 @@
                     android:textSize="16sp"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/tv_create_date"
-                    android:text="20/03/2019"/>
+                    android:text="20/03/2019"
+                    android:textColor="@color/black"
+                    android:paddingRight="10dp"/>
 
             </RelativeLayout>
 

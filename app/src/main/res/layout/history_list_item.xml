@@ -41,90 +41,9 @@
                 android:paddingRight="10dp"
                 android:id="@+id/tv_buyer_name"
                 android:textColor="@color/black"
-                android:layout_toLeftOf="@+id/view_centre_first"/>
+                android:layout_alignParentEnd="true"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/view_centre_first"/>
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Quantity: "
-                android:textSize="20sp"
-                android:id="@+id/tv_qunt"
-                android:gravity="start"
-                android:paddingLeft="10dp"
-                android:layout_toRightOf="@+id/view_centre_first"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_qunt"
-                android:textSize="20sp"
-                android:layout_alignParentEnd="true"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/tv_quanrrt"
-                android:textColor="@color/black"
-                android:text="2"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="5dp">
-
-            <TextView
-                android:layout_width="95dp"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Price: "
-                android:paddingLeft="10dp"
-                android:gravity="start"
-                android:id="@+id/tv_prodpr"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_prodpr"
-                android:textSize="20sp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/tv_product_cost"
-                android:textColor="@color/black"
-                android:layout_toLeftOf="@+id/view_centre_sec"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/view_centre_sec"/>
-
-            <TextView
-                android:id="@+id/tv_tot"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/view_centre_sec"
-                android:gravity="start"
-                android:paddingLeft="10dp"
-                android:text="Total: "
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_tot"
-                android:textSize="20sp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/tv_product_tot"
-                android:textColor="@color/black"
-                android:text="100"/>
 
 
         </RelativeLayout>
@@ -145,21 +64,85 @@
                 android:gravity="start"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/tv_buyn"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:id="@+id/tv_product_name"
+                android:textColor="@color/black" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp">
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Quantity: "
+                android:textSize="20sp"
+                android:id="@+id/tv_qunt"
+                android:gravity="start"
+                android:paddingLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_qunt"
+                android:textSize="20sp"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/tv_quanrrt"
                 android:textColor="@color/black"
-                android:layout_toLeftOf="@+id/view_centre_thr"/>
+                android:text="2"/>
+
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="4dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/view_centre_thr"/>
+
+
+            <TextView
+                android:id="@+id/tv_tot"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/view_centre_thr"
+                android:gravity="start"
+                android:paddingLeft="10dp"
+                android:text="Total: "
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_tot"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/tv_product_tot"
+                android:textColor="@color/black"
+                android:text="200"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp">
 
             <TextView
                 android:layout_width="100dp"
@@ -168,49 +151,20 @@
                 android:paddingLeft="10dp"
                 android:text="Discount: "
                 android:id="@+id/tv_disc"
-                android:gravity="start"
-                android:layout_toRightOf="@+id/view_centre_thr"/>
+                android:gravity="start" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/tv_disc"
                 android:textSize="20sp"
-                android:layout_alignParentEnd="true"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:id="@+id/tv_product_disc"
                 android:textColor="@color/black"
-                android:text="50"/>
+                android:text="50"
+                android:layout_toLeftOf="@id/view_centre_fhr"/>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingLeft="5dp">
-
-            <TextView
-                android:layout_width="95dp"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:paddingLeft="10dp"
-                android:text="Mode: "
-                android:id="@+id/tv_pm"
-                android:gravity="start"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_pm"
-                android:textSize="20sp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/tv_payment_mode"
-                android:textColor="@color/black"
-                android:layout_toLeftOf="@+id/view_centre_fhr"/>
 
             <View
                 android:layout_width="0dp"
@@ -240,6 +194,62 @@
                 android:id="@+id/tv_payment_paid"
                 android:textColor="@color/black"
                 android:text="150"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="5dp">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Price: "
+                android:paddingLeft="10dp"
+                android:gravity="start"
+                android:id="@+id/tv_prodpr"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_prodpr"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/tv_product_cost"
+                android:textColor="@color/black"
+                android:layout_toLeftOf="@+id/view_centre_fiv"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/view_centre_fiv"/>
+
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:text="Mode: "
+                android:id="@+id/tv_pm"
+                android:gravity="start"
+                android:layout_toRightOf="@+id/view_centre_fiv"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_pm"
+                android:textSize="20sp"
+                android:id="@+id/tv_payment_mode"
+                android:textColor="@color/black" />
+
+
 
         </RelativeLayout>
 
