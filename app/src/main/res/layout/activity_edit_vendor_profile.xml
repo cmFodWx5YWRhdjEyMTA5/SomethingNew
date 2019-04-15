@@ -14,12 +14,7 @@
         android:theme="@style/Theme.MyFancyTheme"
         android:id="@+id/tool_edit_ven_profile"/>
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress_in_edit_profile"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -209,22 +204,40 @@
 
             </RelativeLayout>
 
+
+
             <ImageView
                 android:id="@+id/img_demo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
 
-            <Button
-                android:id="@+id/bt_ven_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/new_button_submit"
-                android:text="Update profile"
-                android:textColor="#ffffff"
-                android:padding="10dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/bt_ven_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/new_button_submit"
+                    android:text="Update profile"
+                    android:textColor="#ffffff"
+                    android:padding="10dp"
+                    android:layout_centerInParent="true"/>
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progress_in_edit_profile"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible"/>
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
     </ScrollView>

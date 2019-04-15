@@ -253,7 +253,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         ApiUtils.getServiceClass().categoriesRegister().enqueue(new Callback<CategoriesHomeModel>() {
             @Override
-            public void onResponse(Call<CategoriesHomeModel> call, Response<CategoriesHomeModel> response) {
+            public void onResponse(Call<CategoriesHomeModel>        call, Response<CategoriesHomeModel> response) {
                 if(response.isSuccessful()){
                     if(response.body().getResponse().equalsIgnoreCase("success")){
                         listCategoryName = new ArrayList<>();
@@ -441,7 +441,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         //our custom volley request
-        pbEditProfile.setVisibility(View.VISIBLE);
+
+        btEdit.setVisibility(View.GONE);
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST," http://autoreplyz.com/Malegaon/Api/Userapi/vendorupdate",
                 new com.android.volley.Response.Listener<NetworkResponse>() {
                     @Override
@@ -455,10 +456,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
                                 changeData(SaveSharedPreference.getMobileAndPassword(EditProfileActivity.this).get(0),
                                         SaveSharedPreference.getMobileAndPassword(EditProfileActivity.this).get(1));
-                                pbEditProfile.setVisibility(View.GONE);
                                 AlertDialog();
+                                btEdit.setVisibility(View.VISIBLE);
                             } else {
                                 Toast.makeText(EditProfileActivity.this, "Some error", Toast.LENGTH_LONG).show();
+                                btEdit.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -468,6 +470,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        btEdit.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.d("error", "onErrorResponse: "+error.getMessage());
                     }
@@ -647,6 +650,4 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         return p1;
     }
-
-
 }

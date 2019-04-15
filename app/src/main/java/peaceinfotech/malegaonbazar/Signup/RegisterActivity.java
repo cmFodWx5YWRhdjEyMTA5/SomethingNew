@@ -67,6 +67,7 @@ import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
+import peaceinfotech.malegaonbazar.Vendor.UI.EditProfileActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,8 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
     ScrollView vendorlay;
     public final int LOGO=1;
     public final int BAN=2;
-    MultipartBody.Part logoFileToUpload,banFileToUpload;
-    RequestBody logoFileName,banFileName;
     List<String> categoryName;
     List<String> categoryId;
     List<String> catState;
@@ -348,6 +347,9 @@ public class RegisterActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapLogo = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            Toast.makeText(RegisterActivity.this, "Logo Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
+
+
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());
@@ -369,7 +371,9 @@ public class RegisterActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapBan = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
- //           imgDemo.setImageURI(selectedImage);
+            Toast.makeText(RegisterActivity.this, "Banner Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
+
+            //           imgDemo.setImageURI(selectedImage);
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());

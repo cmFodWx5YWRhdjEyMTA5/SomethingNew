@@ -8,6 +8,7 @@
     android:gravity="center"
     android:background="@drawable/back_login">
 
+    
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -46,11 +47,21 @@
             android:visibility="gone"
             android:layout_weight="1"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/progress_in_login"
+                android:visibility="visible"
+                android:indeterminate="true"/>
+
 
             <Button
                 android:layout_width="wrap_content"
@@ -59,14 +70,16 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/new_button_submit"
                 android:textColor="#ffffff"
-                android:id="@+id/btsignin"/>
+                android:id="@+id/btsignin"
+                android:visibility="visible"/>
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,12 +127,6 @@
                     android:id="@+id/tv_forget_pass"/>
 
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
-
     </LinearLayout>
-
 </RelativeLayout>

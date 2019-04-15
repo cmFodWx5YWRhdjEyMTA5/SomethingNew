@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etmob,etpass;
     TextView warn,tvSignUp,tvForgetPass;
     Button btsignin;
+    ProgressBar pbLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp=findViewById(R.id.tv_signup);
         tvForgetPass=findViewById(R.id.tv_forget_pass);
         warn=findViewById(R.id.tvwarn);
+        pbLogin=findViewById(R.id.progress_in_login);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())){
             if(SaveSharedPreference.getRole(LoginActivity.this).equalsIgnoreCase("user")){
@@ -75,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     else {
                         if(warn.getVisibility()==View.VISIBLE){
                             warn.setVisibility(View.GONE);
+                            btsignin.setVisibility(View.GONE);
                             LogIn(mobile,pass);
                         }
                         else {
@@ -170,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                        }
                    }
                    else if(response.body().getResponse().equalsIgnoreCase("failed")){
+                       btsignin.setVisibility(View.VISIBLE);
                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                    }
                }
@@ -177,8 +182,7 @@ public class LoginActivity extends AppCompatActivity {
 
            @Override
            public void onFailure(Call<LogInModel> call, Throwable t) {
-
-
+               btsignin.setVisibility(View.VISIBLE);
 
                Log.d("loginfail", "onFailure: "+t);
            }
