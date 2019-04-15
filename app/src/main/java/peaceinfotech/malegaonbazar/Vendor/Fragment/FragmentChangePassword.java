@@ -1,9 +1,11 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.RetrofitModel.ResponseMessageModel;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.Vendor.UI.EditOfferActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +57,7 @@ public class FragmentChangePassword extends Fragment {
                 }
                 else{
                     if(etNewPass.getText().toString().equals(etNewRePass.getText().toString())){
-                        changePassword(etNewRePass.getText().toString());
+                        AlertDialog(etNewRePass.getText().toString());
                     }
                     else{
                         Toast.makeText(getActivity(), "Password Don't Match", Toast.LENGTH_SHORT).show();
@@ -99,6 +102,26 @@ public class FragmentChangePassword extends Fragment {
 
             }
         });
+    }
+
+    public void AlertDialog(final String newPass){
+        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        builder.setTitle("Change Password");
+        builder.setMessage("Are you sure you want to Change the Password");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changePassword(newPass);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 
 }

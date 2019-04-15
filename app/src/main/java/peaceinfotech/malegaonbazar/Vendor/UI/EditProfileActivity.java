@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -86,6 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
     String strLat,strLng;
     View header;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity ;
+    ProgressBar pbEditProfile;
 
 
     @Override
@@ -107,6 +109,7 @@ public class EditProfileActivity extends AppCompatActivity {
         searchSpinState=findViewById(R.id.search_spin_edit_state);
         searchSpinCity=findViewById(R.id.search_spin_edit_city);
 
+        pbEditProfile=findViewById(R.id.progress_in_edit_profile);
 //        spinCity=findViewById(R.id.spin_edit_city);
 //        spinState=findViewById(R.id.spin_edit_state);
 
@@ -389,6 +392,7 @@ public class EditProfileActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapLogo = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            Toast.makeText(EditProfileActivity.this, "Logo Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());
@@ -410,6 +414,7 @@ public class EditProfileActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapBan = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            Toast.makeText(this, "Banner Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
             //           imgDemo.setImageURI(selectedImage);
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
@@ -436,6 +441,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         //our custom volley request
+        pbEditProfile.setVisibility(View.VISIBLE);
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST," http://autoreplyz.com/Malegaon/Api/Userapi/vendorupdate",
                 new com.android.volley.Response.Listener<NetworkResponse>() {
                     @Override
@@ -447,9 +453,9 @@ public class EditProfileActivity extends AppCompatActivity {
                             //If it is success
                             if (obj.getString("response").equalsIgnoreCase("success")) {
 
-
                                 changeData(SaveSharedPreference.getMobileAndPassword(EditProfileActivity.this).get(0),
                                         SaveSharedPreference.getMobileAndPassword(EditProfileActivity.this).get(1));
+                                pbEditProfile.setVisibility(View.GONE);
                                 AlertDialog();
                             } else {
                                 Toast.makeText(EditProfileActivity.this, "Some error", Toast.LENGTH_LONG).show();

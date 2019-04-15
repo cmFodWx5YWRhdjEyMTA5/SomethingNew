@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class FragmentServices extends Fragment {
     ServicesListAdapter servicesListAdapter;
     ServicesListAdapter listAdapter = new ServicesListAdapter();
     RecyclerView recyclerView;
+    ProgressBar pbServices;
 
     @Nullable
     @Override
@@ -50,6 +52,7 @@ public class FragmentServices extends Fragment {
         etServiceDesc=view.findViewById(R.id.et_service_desc);
         btAddService=view.findViewById(R.id.bt_add_service);
         recyclerView=view.findViewById(R.id.recycle_service);
+        pbServices=view.findViewById(R.id.progress_in_services);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -136,8 +139,11 @@ public class FragmentServices extends Fragment {
                         recyclerView.setAdapter(servicesListAdapter);
                         servicesListAdapter.notifyDataSetChanged();
 
+                        pbServices.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
+                        pbServices.setVisibility(View.GONE);
                         Toast.makeText(getActivity(),"No services to show please add a service.", Toast.LENGTH_SHORT).show();
                     }
                 }

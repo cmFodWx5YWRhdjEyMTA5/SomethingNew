@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class FragmentOfferList extends Fragment {
     OfferPreviewAdapter offerPreviewAdapter;
     TextView textView;
     FloatingActionButton fabAddOffers;
+    ProgressBar pbOffers;
 
 
 
@@ -46,8 +48,8 @@ public class FragmentOfferList extends Fragment {
         View view=inflater.inflate(R.layout.fragment_vendor_offer_list,container,false);
 
         recyclerView=view.findViewById(R.id.preview_recycler);
-        textView=view.findViewById(R.id.demo);
         fabAddOffers=view.findViewById(R.id.fab_add_offers);
+        pbOffers=view.findViewById(R.id.progress_in_offer);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -102,9 +104,13 @@ public class FragmentOfferList extends Fragment {
                             offerPreviewAdapter = new OfferPreviewAdapter(offerList,getActivity());
                             recyclerView.setAdapter(offerPreviewAdapter);
                             offerPreviewAdapter.notifyDataSetChanged();
+
+                        pbOffers.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed"))
                     {
+                        pbOffers.setVisibility(View.GONE);
                         Toast.makeText(getActivity(),"No Offers to show please Add a Offer.", Toast.LENGTH_SHORT).show();
                     }
                 }

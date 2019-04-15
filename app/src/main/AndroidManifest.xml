@@ -15,33 +15,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartUI.LaunchActivity"></activity>
+        <activity android:name=".StartUI.LaunchActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".StartUI.SplashScreen">
+        <activity android:name=".StartUI.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StartUI.LoginActivity" />
-        <activity android:name=".Signup.SignUpActivity" />
-        <activity android:name=".StartUI.SelectionActivity"/>
-        <activity android:name=".Signup.RegisterActivity" />
-        <activity android:name=".StartUI.ChangePasswordActivity"/>
-        <activity android:name=".StartUI.PasswordOTPVerification"/>
+        <activity android:name=".StartUI.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartUI.SelectionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Signup.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartUI.ChangePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartUI.PasswordOTPVerification"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".User.UI.UserActivity"
             android:label="@string/title_activity_user"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".User.UI.SearchLocation" />
-        <activity android:name=".User.UI.DirectionActivity" />
-        <activity android:name=".User.UI.OfferInformationActivity" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".User.UI.SearchLocation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".User.UI.DirectionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".User.UI.OfferInformationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".User.NotificationActivity"
             android:taskAffinity=""
@@ -50,12 +62,18 @@
         <activity
             android:name=".Vendor.UI.VendorActivity"
             android:label="@string/title_activity_vendor"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Vendor.UI.EditOfferActivity" />
-        <activity android:name=".Vendor.UI.DemoActcivity" />
-        <activity android:name=".Vendor.UI.EditServiceActivity"/>
-        <activity android:name=".Vendor.UI.EditProfileActivity"/>
-        <activity android:name=".Vendor.UI.AddOfferActvity"/>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Vendor.UI.EditOfferActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Vendor.UI.DemoActcivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Vendor.UI.EditServiceActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Vendor.UI.EditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Vendor.UI.AddOfferActvity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

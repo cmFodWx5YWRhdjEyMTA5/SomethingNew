@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btsubmit_back"
+            android:background="@drawable/new_button_submit"
             android:textColor="@color/white"
             android:text="Add Service"
             android:id="@+id/bt_add_service"/>
@@ -53,13 +53,29 @@
     </LinearLayout>
 
 
-
-    <android.support.v7.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lay_add_services"
-        android:id="@+id/recycle_service"
-        tool:listitem="@layout/vendor_service_list"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lay_add_services">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:id="@+id/progress_in_services"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lay_add_services"
+            android:id="@+id/recycle_service"
+            tool:listitem="@layout/vendor_service_list"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+
 
 
 </RelativeLayout>

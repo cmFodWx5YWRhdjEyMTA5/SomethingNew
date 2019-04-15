@@ -123,13 +123,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bt_get_earnings"
-        android:background="@drawable/btsubmit_back"
+        android:background="@drawable/new_button_submit"
         android:textColor="@color/white"
         android:text="Check Earnings"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/linear_discount"
         android:layout_marginTop="20dp"
-        android:padding="5dp"/>
+        android:padding="10dp"/>
 
     <View
         android:layout_width="match_parent"

@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class EditOfferActivity extends AppCompatActivity {
     Spinner spinDiscount;
     String offerType = "";
     Intent getIntent;
+    ProgressBar pbEditOffer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class EditOfferActivity extends AppCompatActivity {
         btEdit=findViewById(R.id.bt_edit_offer);
         toolbar=findViewById(R.id.tool_edit_offer);
         spinDiscount=findViewById(R.id.spinner_edit_discount);
-
+        pbEditOffer=findViewById(R.id.progress_in_edit_offer);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -222,6 +224,7 @@ public class EditOfferActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                pbEditOffer.setVisibility(View.VISIBLE);
                 editOffers();
             }
         });
@@ -253,6 +256,7 @@ public class EditOfferActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseMessageModel> call, Response<ResponseMessageModel> response) {
                 if(response.isSuccessful()){
                     if(response.body().getResponse().equalsIgnoreCase("success")){
+                        pbEditOffer.setVisibility(View.GONE);
                         Toast.makeText(EditOfferActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         finish();
                     }

@@ -1,5 +1,6 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,8 @@ public class FragmentProfile extends Fragment {
     TextView tvName,tvBrandName,tvLocation,tvMobile,tvEmail,tvCatName,tvState,tvCity;
     Button btEdit;
     List<String> data = new ArrayList<>();
+    ProgressBar pbInProfile;
+    ScrollView svProfile;
 
 
     @Nullable
@@ -56,7 +61,8 @@ public class FragmentProfile extends Fragment {
         tvCity=view.findViewById(R.id.tv_vendor_state);
         tvCatName=view.findViewById(R.id.tv_cat_name);
         btEdit=view.findViewById(R.id.bt_ven_edit_profile);
-
+        pbInProfile=view.findViewById(R.id.progress_in_profile);
+        svProfile=view.findViewById(R.id.scroll_in_profile);
 
         getData();
 
@@ -81,6 +87,7 @@ public class FragmentProfile extends Fragment {
 
 
     public void getData(){
+
 
         tvName.setText(SaveSharedPreference.getVendorProfileData(getActivity()).get(1));
         tvLocation.setText(SaveSharedPreference.getVendorProfileData(getActivity()).get(2));
@@ -110,6 +117,8 @@ public class FragmentProfile extends Fragment {
                     .centerCrop()
                     .into(imgBan);
         }
+        pbInProfile.setVisibility(View.GONE);
+        svProfile.setVisibility(View.VISIBLE);
     }
 
     @Override
