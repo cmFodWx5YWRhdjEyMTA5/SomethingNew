@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,13 +42,13 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
-import gr.escsoft.michaelprimez.searchablespinner.interfaces.OnItemSelectedListener;
+
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.Retrofit.ApiUtils;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
@@ -86,6 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Double latitude,longitude;
     String strLat,strLng;
     View header;
+    TextView tvLogoPath,tvBannerPath;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity ;
     ProgressBar pbEditProfile;
 
@@ -108,6 +110,8 @@ public class EditProfileActivity extends AppCompatActivity {
         imgDemo=findViewById(R.id.img_demo);
         searchSpinState=findViewById(R.id.search_spin_edit_state);
         searchSpinCity=findViewById(R.id.search_spin_edit_city);
+        tvLogoPath=findViewById(R.id.tv_edit_logo_path);
+        tvBannerPath=findViewById(R.id.tv_edit_ban_path);
 
         pbEditProfile=findViewById(R.id.progress_in_edit_profile);
 //        spinCity=findViewById(R.id.spin_edit_city);
@@ -392,7 +396,10 @@ public class EditProfileActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapLogo = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            String file = getFileName(picturePath);
+            tvLogoPath.setText(file);
             Toast.makeText(EditProfileActivity.this, "Logo Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
+            Log.d("path", "onActivityResult: "+picturePath);
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());
@@ -414,6 +421,8 @@ public class EditProfileActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapBan = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            String file = getFileName(picturePath);
+            tvBannerPath.setText(file);
             Toast.makeText(this, "Banner Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
             //           imgDemo.setImageURI(selectedImage);
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
@@ -649,5 +658,13 @@ public class EditProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return p1;
+    }
+
+    public String getFileName (String picturePath){
+        String str[] = picturePath.split("/");
+        List<String> al = new ArrayList<String>();
+        al = Arrays.asList(str);
+
+        return al.get(al.size()-1);
     }
 }

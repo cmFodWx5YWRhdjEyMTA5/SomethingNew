@@ -1,8 +1,10 @@
 package peaceinfotech.malegaonbazar.Vendor.Fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +42,8 @@ public class FragmentServices extends Fragment {
     ServicesListAdapter listAdapter = new ServicesListAdapter();
     RecyclerView recyclerView;
     ProgressBar pbServices;
+    FloatingActionButton fabAddOffers;
+    Dialog addDialog;
 
     @Nullable
     @Override
@@ -48,35 +52,51 @@ public class FragmentServices extends Fragment {
 
 
         tvDemo=view.findViewById(R.id.tv_demo);
-        etServiceName=view.findViewById(R.id.et_service_name);
-        etServiceDesc=view.findViewById(R.id.et_service_desc);
-        btAddService=view.findViewById(R.id.bt_add_service);
         recyclerView=view.findViewById(R.id.recycle_service);
         pbServices=view.findViewById(R.id.progress_in_services);
-
+        fabAddOffers=view.findViewById(R.id.fab_add_services);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         getServices();
 
-        btAddService.setOnClickListener(new View.OnClickListener() {
+        fabAddOffers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etServiceName.getText().toString().isEmpty()||etServiceDesc.getText().toString().isEmpty()){
-                    if(etServiceName.getText().toString().isEmpty())
-                    {
-                        etServiceName.setError("Please Enter this Field");
+                addDialog = new Dialog(getActivity());
+
+                addDialog.setContentView(R.layout.dialog_vendor_add_service);
+
+                btAddService=addDialog.findViewById(R.id.bt_add_service);
+                etServiceName=addDialog.findViewById(R.id.et_service_name);
+                etServiceDesc=addDialog.findViewById(R.id.et_service_desc);
+
+
+                btAddService.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(etServiceName.getText().toString().isEmpty()||etServiceDesc.getText().toString().isEmpty()){
+                            if(etServiceName.getText().toString().isEmpty())
+                            {
+                                etServiceName.setError("Please Enter this Field");
+                            }
+                            if(etServiceDesc.getText().toString().isEmpty())
+                            {
+                                etServiceDesc.setError("Please Enter this Field");
+                            }
+                        }
+                        else{
+                            addService(etServiceName.getText().toString(),etServiceDesc.getText().toString());
+                        }
                     }
-                    if(etServiceDesc.getText().toString().isEmpty())
-                    {
-                        etServiceDesc.setError("Please Enter this Field");
-                    }
-                }
-                else{
-                    addService(etServiceName.getText().toString(),etServiceDesc.getText().toString());
-                }
+                });
+
+                addDialog.create();
+                addDialog.show();
             }
         });
+
+
 
 
         return view;
@@ -100,7 +120,8 @@ public class FragmentServices extends Fragment {
                         Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         etServiceName.setText("");
                         etServiceDesc.setText("");
-
+                        Toast.makeText(getActivity(), "Service Added Successfully", Toast.LENGTH_SHORT).show();
+                        addDialog.dismiss();
                         getServices();
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){

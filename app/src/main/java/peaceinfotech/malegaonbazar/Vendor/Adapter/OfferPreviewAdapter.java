@@ -45,8 +45,8 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 
     public class PreviewHolder extends RecyclerView.ViewHolder{
 
-        public TextView offertitle,offer,offerPrice,finalPrice,min,max,delete,start,expiry,terms,termsCondition,edit;
-        public ImageView image;
+        public TextView offertitle,offer,offerPrice,finalPrice,min,max,start,expiry,terms,termsCondition;
+        public ImageView image,imgEdit,imgDelete;
         public Button getbutton;
         public LinearLayout linearMain;
         public RelativeLayout relayTerms;
@@ -63,15 +63,15 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             min=view.findViewById(R.id.tv_min);
             max=view.findViewById(R.id.tv_max);
             getbutton=view.findViewById(R.id.btoffer);
-            delete=view.findViewById(R.id.tv_delete);
             start=view.findViewById(R.id.tv_st_date);
             expiry=view.findViewById(R.id.tv_ex_date);
             linearMain=view.findViewById(R.id.linear_main);
             relayTerms=view.findViewById(R.id.relay_terms);
             terms=view.findViewById(R.id.tv_terms);
             termsCondition=view.findViewById(R.id.tv_terms_condition);
-            edit=view.findViewById(R.id.tv_edit);
             quantity=view.findViewById(R.id.eln_ven_quantity);
+            imgDelete=view.findViewById(R.id.image_ic_delete);
+            imgEdit=view.findViewById(R.id.image_ic_edit);
         }
     }
 
@@ -106,7 +106,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
 //
 //
 //        final String uid=offers.getUid();
-        holder.edit.setOnClickListener(new View.OnClickListener() {
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent putIntent = new Intent(context, EditOfferActivity.class);
@@ -125,7 +125,7 @@ public class OfferPreviewAdapter extends RecyclerView.Adapter<OfferPreviewAdapte
             }
         });
 
-        holder.delete.setOnClickListener(new View.OnClickListener() {
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);

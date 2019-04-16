@@ -64,14 +64,15 @@
             android:id="@+id/spin_lay"
             android:gravity="center">
 
-            <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
-                android:layout_width="match_parent"
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:id="@+id/search_spinner"
-                app:SearchHintText="Select a Category"
                 android:saveEnabled="true"
                 android:clickable="true"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"

@@ -52,8 +52,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
-import gr.escsoft.michaelprimez.searchablespinner.interfaces.OnItemSelectedListener;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import peaceinfotech.malegaonbazar.R;
@@ -97,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
     String id = "";
     private RequestQueue requestQueue;
     Bitmap bitmapLogo,bitmapBan;
-    SearchableSpinner spinDemo;
+  //  SearchableSpinner spinDemo;
     String strLat,strLng;
     Double latitude,longitude;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity;

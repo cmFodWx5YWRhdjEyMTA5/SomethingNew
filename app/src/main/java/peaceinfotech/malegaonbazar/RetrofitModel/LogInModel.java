@@ -112,6 +112,17 @@ public class LogInModel {
         @Expose
         public String lng;
 
+        @SerializedName("referrelcode")
+        @Expose String referenceId;
+
+
+        public String getReferenceId() {
+            return referenceId;
+        }
+
+        public void setReferenceId(String referenceId) {
+            this.referenceId = referenceId;
+        }
 
         public String getLat() {
             return lat;

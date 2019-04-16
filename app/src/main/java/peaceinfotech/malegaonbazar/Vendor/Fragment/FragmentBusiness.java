@@ -52,8 +52,8 @@ public class FragmentBusiness extends Fragment {
 
 
 
-       colors.add(Color.GREEN);
-       colors.add(Color.RED);
+       colors.add(Color.parseColor("#FE6770"));
+       colors.add(Color.parseColor("#00BAE2"));
 
 
         List<PieEntry> entries = new ArrayList<>();
@@ -106,7 +106,7 @@ public class FragmentBusiness extends Fragment {
 
 
                         mChart.setEntryLabelTextSize(20f);
-                        mChart.setEntryLabelColor(Color.BLACK);
+                        mChart.setEntryLabelColor(Color.WHITE);
                         mChart.setRotationEnabled(false);
                         mChart.getDescription().setText(" ");
                         mChart.setData(data);

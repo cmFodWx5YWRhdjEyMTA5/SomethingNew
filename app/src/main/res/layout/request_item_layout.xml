@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_background"
+    android:background="@drawable/offer_item_list"
     android:orientation="vertical"
     android:elevation="10dp"
     android:layout_margin="10dp">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,31 +63,27 @@
 
                 <TextView
                     android:id="@+id/tv_custname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     tools:text="@tools:sample/first_names"
                     android:layout_toRightOf="@+id/tv_name"
-                    android:layout_toLeftOf="@+id/view_centre_first"/>
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/view_centre_first"/>
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="Quantity: "
                     android:textSize="18sp"
                     android:gravity="start"
                     android:id="@+id/tv_quant"
-                    android:layout_toRightOf="@+id/view_centre_first"/>
+                    android:layout_toRightOf="@+id/tv_custname"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:layout_toRightOf="@+id/tv_quant"
@@ -112,34 +107,31 @@
 
                 <TextView
                     android:id="@+id/tv_product"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     tools:text="@tools:sample/cities"
                     android:layout_toRightOf="@+id/tv_prod"
-                    android:layout_toLeftOf="@+id/view_centre_second"/>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/view_centre_second"/>
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_discount"
                     android:text="Discount: "
                     android:textSize="18sp"
-                    android:layout_toRightOf="@+id/view_centre_second"/>
+                    android:layout_toRightOf="@+id/tv_product"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="\u20b9 50"
                     android:layout_toRightOf="@+id/tv_discount"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
             </RelativeLayout>
 
@@ -158,38 +150,36 @@
                     android:id="@+id/tv_prod_price"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_price"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_toRightOf="@id/tv_prod_price"
-                    android:layout_toLeftOf="@+id/view_centre_third"/>
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/view_centre_third"/>
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_total"
                     android:text="Total: "
                     android:textSize="18sp"
                     android:gravity="start"
-                    android:layout_toRightOf="@+id/view_centre_third"/>
+                    android:layout_toRightOf="@+id/tv_price"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_sh_total"
                     android:layout_toRightOf="@+id/tv_total"
                     android:textSize="20sp"
                     android:textColor="@color/black"
-                    android:text="\u20b9 150"/>
+                    android:text="\u20b9 150"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
             </RelativeLayout>
 
@@ -204,9 +194,9 @@
             android:textColor="#ff00"
             android:text="REJECTED"
             android:layout_below="@+id/lay_left"
-            android:gravity="start"
+            android:gravity="end"
             android:visibility="gone"
-            android:paddingLeft="10dp"/>
+            android:paddingRight="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -215,37 +205,27 @@
             android:textSize="20sp"
             android:id="@+id/tv_request_accept"
             android:textColor="#008000"
-            android:gravity="start"
+            android:gravity="end"
             android:text="ACCEPTED"
             android:visibility="gone"
-            android:paddingLeft="10dp"/>
+            android:paddingRight="10dp"/>
 
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:id="@+id/relay_accept_reject">
+        android:id="@+id/relay_accept_reject"
+        android:layout_marginTop="10dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/black"
-            android:id="@+id/line_horizontal_view"/>
 
         <Button
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/line_horizontal_view"
             android:id="@+id/bt_accept"
             android:background="@drawable/new_button_submit"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_toLeftOf="@+id/bt_reject"
+            android:layout_marginRight="30dp"
             android:textColor="@color/white"
             android:text="ACCEPt"/>
 
@@ -254,7 +234,6 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/line_horizontal_view"
             android:layout_marginRight="30dp"
             android:background="@drawable/new_button_submit"
             android:text="Reject"

@@ -12,7 +12,8 @@
         android:id="@+id/toold"
         app:titleTextColor="#ffffff"
         android:background="@color/colorPrimary"
-        android:theme="@style/Theme.MyFancyTheme"/>
+        android:theme="@style/Theme.MyFancyTheme"
+        android:elevation="10dp"/>
 
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         android:layout_marginBottom="30dp"
         android:id="@+id/demo_button"
         android:text="Get Direction"
-        android:background="@drawable/btsubmit_back"
+        android:background="@drawable/new_button_submit"
         android:textColor="@color/white" />
 
 

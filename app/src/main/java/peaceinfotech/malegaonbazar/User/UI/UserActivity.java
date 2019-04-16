@@ -66,6 +66,7 @@ public class UserActivity extends AppCompatActivity
 
 
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -182,13 +183,32 @@ public class UserActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Exit");
+        builder.setMessage("Are you sure you want to Exit");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
-            Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.frame_user);
+//            super.onBackPressed();
+//            Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.frame_user);
+            alertDialog.show();
         }
 
     }
@@ -291,4 +311,6 @@ public class UserActivity extends AppCompatActivity
             getLocationPermission();
         }
     }
+
+
 }

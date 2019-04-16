@@ -4,66 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/list_background"
+    android:background="@drawable/offer_item_list"
     android:padding="10dp"
     android:layout_margin="10dp"
-    android:elevation="10dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Ac-Services"
-        android:textColor="@color/black"
-        android:id="@+id/tv_service_name"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/tv_service_desc"
-        android:paddingLeft="10dp"
-        android:text="xjvjvxjxcnvcnxvjxcnvjxcnxcknxcncxvnxcvnxcknxckjxcjnxcjnxcnvvxjkxc"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        android:layout_marginTop="5dp"/>
+    android:elevation="30dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/bt_service_edit"
-            android:layout_toLeftOf="@+id/view_centre"
-            android:gravity="center"
-            android:textSize="13sp"
-            android:text="EDIT"
-            android:textColor="@color/black" />
-        <View
-            android:layout_width="2dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:id="@+id/view_centre"
-            android:background="@color/black"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Ac-Services"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/tv_service_name"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/bt_service_delete"
-            android:layout_toRightOf="@+id/view_centre"
-            android:text="DELETE"
-            android:textSize="13sp"
-            android:gravity="center"
-            android:textColor="#ff00" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            android:id="@+id/img_service_del"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit"
+            android:layout_toLeftOf="@+id/img_service_del"
+            android:id="@+id/img_service_edit"
+            android:layout_marginRight="20dp"/>
 
     </RelativeLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_service_desc"
+        android:textColor="@color/black"
+        android:text="xjvjvxjxcnvcnxvjxcnvjxcnxcknxcncxvnxcvnxcknxckjxcjnxcjnxcnvvxjkxc"/>
+
 
 
 </LinearLayout>

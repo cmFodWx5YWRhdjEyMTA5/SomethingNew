@@ -201,11 +201,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="height" value="427" />
-                            <entry key="outputName" value="ic_cancel" />
+                            <entry key="height" value="211" />
+                            <entry key="outputName" value="ic_fade" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\cancel.svg" />
-                            <entry key="width" value="427" />
+                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\fade.svg" />
+                            <entry key="width" value="600" />
                           </map>
                         </option>
                       </PersistentState>

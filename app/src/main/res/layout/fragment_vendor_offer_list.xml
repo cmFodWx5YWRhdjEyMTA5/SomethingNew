@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/preview_recycler"
             android:layout_centerHorizontal="true"
-            tools:listitem="@layout/offer_list_item_vendor"/>
+            tools:listitem="@layout/offer_list_item_vendor"
+           />
 
     </FrameLayout>
 
