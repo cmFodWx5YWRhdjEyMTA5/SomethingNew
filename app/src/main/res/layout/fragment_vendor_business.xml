@@ -140,18 +140,11 @@
         android:layout_marginTop="20dp"
         android:padding="10dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/colorPrimary"
-        android:layout_below="@id/bt_get_earnings"
-        android:id="@+id/view_bus_vertical"
-        android:layout_marginTop="20dp"/>
 
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/view_bus_vertical"
+        android:layout_below="@+id/bt_get_earnings"
         android:layout_marginTop="20dp"
         android:id="@+id/pie_bus">
 

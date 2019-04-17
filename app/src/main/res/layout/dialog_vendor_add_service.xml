@@ -4,8 +4,18 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/background_date">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Add Service"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"/>
 
     <EditText
         android:layout_width="250dp"
@@ -13,7 +23,7 @@
         android:hint="Service Name"
         android:id="@+id/et_service_name"
         android:maxLines="1"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:layout_width="250dp"

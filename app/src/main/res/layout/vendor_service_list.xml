@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/edit"
+            android:src="@drawable/ic_edit"
             android:layout_toLeftOf="@+id/img_service_del"
             android:id="@+id/img_service_edit"
             android:layout_marginRight="20dp"/>

@@ -36,7 +36,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/edit"
+                    android:src="@drawable/ic_edit"
                     android:id="@+id/image_ic_edit"
                     android:layout_toLeftOf="@+id/image_ic_delete"
                     android:layout_marginRight="20dp"/>
@@ -183,7 +183,7 @@
         android:textColor="#FF0000FF"
         android:text="*Terms &amp; Condition Apply"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:gravity="start"
         android:paddingStart="10dp" />
 
     <RelativeLayout
@@ -225,24 +225,25 @@
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/view_trans"
             android:id="@+id/lay_min"
-            android:gravity="center"
             android:paddingLeft="15dp">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Min Transaction"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="\u20B9 1"
                 android:textSize="18sp"
                 android:id="@+id/tv_min"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
         </LinearLayout>
 
@@ -253,30 +254,31 @@
             android:id="@+id/view_trans"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/view_trans"
-            android:paddingRight="15dp"
-            android:gravity="center">
+            android:paddingRight="15dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Max Transaction"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
             <TextView
                 android:id="@+id/tv_max"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="\u20B9 1000"
                 android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
         </LinearLayout>
 
@@ -301,24 +303,25 @@
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/view_date"
             android:id="@+id/lay_start_date"
-            android:gravity="center"
             android:paddingStart="15dp">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start Date"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="01/01/2019"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:id="@+id/tv_st_date"/>
+                android:id="@+id/tv_st_date"
+                android:gravity="start"/>
 
         </LinearLayout>
 
@@ -334,24 +337,25 @@
             android:orientation="vertical"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:gravity="center"
             android:paddingEnd="15dp"
             android:layout_toRightOf="@+id/view_date">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Expiry Date"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
             <TextView
                 android:id="@+id/tv_ex_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="23/01/2019"
                 android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:gravity="start"/>
 
         </LinearLayout>
 

@@ -67,10 +67,12 @@ public class FragmentBusiness extends Fragment {
         set.setValueFormatter(new PercentFormatter());
         set.setColors(colors);
         set.setValueTextSize(30f);
+        set.setValueTextColor(Color.WHITE);
+
 
 
         mChart.setEntryLabelTextSize(20f);
-        mChart.setEntryLabelColor(Color.BLACK);
+        mChart.setEntryLabelColor(Color.WHITE);
         mChart.setRotationEnabled(false);
         mChart.getDescription().setText(" ");
         mChart.setData(data);
@@ -103,7 +105,7 @@ public class FragmentBusiness extends Fragment {
                         PieData data = new PieData(set);
                         set.setColors(colors);
                         set.setValueTextSize(30f);
-
+                        set.setValueTextColor(Color.WHITE);
 
                         mChart.setEntryLabelTextSize(20f);
                         mChart.setEntryLabelColor(Color.WHITE);
@@ -134,15 +136,17 @@ public class FragmentBusiness extends Fragment {
                         PieData data = new PieData(set);
                         set.setColors(colors);
                         set.setValueTextSize(30f);
+                        set.setValueTextColor(Color.WHITE);
 
 
                         mChart.setEntryLabelTextSize(20f);
-                        mChart.setEntryLabelColor(Color.BLACK);
+                        mChart.setEntryLabelColor(Color.WHITE);
                         mChart.setRotationEnabled(false);
                         mChart.getDescription().setText(" ");
                         mChart.setData(data);
                         mChart.invalidate();
                         mChart.setDrawHoleEnabled(false);
+
                     }
                 }
 
