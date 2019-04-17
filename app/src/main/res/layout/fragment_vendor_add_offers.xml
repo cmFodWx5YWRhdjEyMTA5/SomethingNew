@@ -211,7 +211,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:text="Add Offer"
-            android:background="@drawable/btsubmit_back"
+            android:background="@drawable/new_button_submit"
             android:textColor="#ffffff"/>
 
         </LinearLayout>

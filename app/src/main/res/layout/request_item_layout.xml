@@ -22,30 +22,6 @@
             android:paddingTop="5dp"
             android:id="@+id/lay_left">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_accepted"
-                    android:layout_margin="5dp"
-                    android:layout_alignParentEnd="true"
-                    android:visibility="gone"
-                    android:id="@+id/img_req_accept"/>
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_cancel"
-                    android:layout_margin="5dp"
-                    android:layout_alignParentEnd="true"
-                    android:visibility="gone"
-                    android:id="@+id/img_req_reject"/>
-
-            </RelativeLayout>
-
 
 
             <RelativeLayout

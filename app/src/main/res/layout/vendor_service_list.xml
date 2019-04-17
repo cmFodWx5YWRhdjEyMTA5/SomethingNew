@@ -22,16 +22,16 @@
             android:id="@+id/tv_service_name"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_delete"
             android:id="@+id/img_service_del"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="5dp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/edit"
             android:layout_toLeftOf="@+id/img_service_del"
             android:id="@+id/img_service_edit"

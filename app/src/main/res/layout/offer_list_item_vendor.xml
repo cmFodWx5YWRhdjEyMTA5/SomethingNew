@@ -34,22 +34,20 @@
                     android:paddingLeft="10dp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/edit"
                     android:id="@+id/image_ic_edit"
                     android:layout_toLeftOf="@+id/image_ic_delete"
                     android:layout_marginRight="20dp"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/image_ic_delete"
-                    android:src="@drawable/delete"
+                    android:src="@drawable/ic_delete"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"/>
-
-
             </RelativeLayout>
 
 
