@@ -5,7 +5,8 @@
         android:id="@+id/item_edit"
         android:title="Edit"
         android:visible="true"
-        android:icon="@drawable/edit"/>
+        android:icon="@drawable/edit"
+        />
     <item
         android:id="@+id/item_delete"
         android:title="Delete"

@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,6 +89,7 @@ public class EditProfileActivity extends AppCompatActivity {
     String strLat,strLng;
     View header;
     TextView tvLogoPath,tvBannerPath;
+    ScrollView scrollView;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity ;
     ProgressBar pbEditProfile;
 
@@ -112,7 +114,7 @@ public class EditProfileActivity extends AppCompatActivity {
         searchSpinCity=findViewById(R.id.search_spin_edit_city);
         tvLogoPath=findViewById(R.id.tv_edit_logo_path);
         tvBannerPath=findViewById(R.id.tv_edit_ban_path);
-
+        scrollView=findViewById(R.id.edit_vendor_lay);
         pbEditProfile=findViewById(R.id.progress_in_edit_profile);
 //        spinCity=findViewById(R.id.spin_edit_city);
 //        spinState=findViewById(R.id.spin_edit_state);
@@ -233,6 +235,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 else{
                     if(isValidEmail(etEmail.getText().toString())){
+
+                        etName.setEnabled(false);
+                        etBrand.setEnabled(false);
+                        etEmail.setEnabled(false);
+                        etLocation.setEnabled(false);
+                        spinCategory.setEnabled(false);
+                        searchSpinCity.setEnabled(false);
+                        searchSpinState.setEnabled(false);
+                        btLogo.setFocusable(false);
+
+
+                        Log.d("focus", "onClick: "+getCurrentFocus());
+
                         requestQueue = Volley.newRequestQueue(EditProfileActivity.this);
                         getLocationFromAddress(etLocation.getText().toString()+","+city+","+state);
                         vendorEditBitmap(bitmapLogo,bitmapBan,
@@ -241,6 +256,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 etBrand.getText().toString(),
                                 etEmail.getText().toString(),
                                 catid,state,city);
+
 
                     }
                     else {
@@ -450,7 +466,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         //our custom volley request
-
         btEdit.setVisibility(View.GONE);
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST," http://autoreplyz.com/Malegaon/Api/Userapi/vendorupdate",
                 new com.android.volley.Response.Listener<NetworkResponse>() {
@@ -468,8 +483,15 @@ public class EditProfileActivity extends AppCompatActivity {
                                 AlertDialog();
                                 btEdit.setVisibility(View.VISIBLE);
                             } else {
-                                Toast.makeText(EditProfileActivity.this, "Some error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EditProfileActivity.this, "Please Edit Data Some Data Before Clicking the Update Menu", Toast.LENGTH_LONG).show();
                                 btEdit.setVisibility(View.VISIBLE);
+                                etName.setEnabled(true);
+                                etBrand.setEnabled(true);
+                                etEmail.setEnabled(true);
+                                etLocation.setEnabled(true);
+                                spinCategory.setEnabled(true);
+                                searchSpinCity.setEnabled(true);
+                                searchSpinState.setEnabled(true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -617,16 +639,15 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                     else if(response.body().getResponse().equalsIgnoreCase("failed")){
                         Toast.makeText(EditProfileActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<LogInModel> call, Throwable t) {
-
-
-
                 Log.d("loginfail", "onFailure: "+t);
+
             }
         });
     }

@@ -3,8 +3,12 @@ package peaceinfotech.malegaonbazar.Vendor.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
@@ -17,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +47,11 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
     Context context;
     List<ServicesListModel> serviceList = new ArrayList<>();
     View menuView;
+//    ImageButton red, blue;
+
+    private PopupWindow mDropdown = null;
+    LayoutInflater mInflater;
+    Button pop;
 
     public ServicesListAdapter(Context context, List<ServicesListModel> serviceList) {
         this.context = context;
@@ -87,7 +98,8 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
             public void onClick(View v) {
 
 
-                PopupMenu menu = new PopupMenu (context, holder.imgOptions);
+                Context wrapper = new ContextThemeWrapper(context, R.style.NavigationDrawerStyle);
+                PopupMenu menu = new PopupMenu (wrapper, holder.imgOptions);
                 try {
                     Field[] fields = menu.getClass().getDeclaredFields();
                     for (Field field : fields) {
@@ -173,23 +185,40 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
                             case R.id.item_delete:
 
                                 //Delete Option
-                                ApiUtils.getServiceClass().deleteServices(services.getServiceId()).enqueue(new Callback<ResponseMessageModel>() {
-                                    @Override
-                                    public void onResponse(Call<ResponseMessageModel> call, Response<ResponseMessageModel> response) {
-                                        if(response.isSuccessful()){
-                                            if(response.body().getResponse().equalsIgnoreCase("success")){
-                                                notifyItemRemoved(i);
-                                                serviceList.remove(i);
-                                            }
-                                        }
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<ResponseMessageModel> call, Throwable t) {
+                                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                                builder.setTitle("Delete");
+                                builder.setMessage("Are you sure you want to delete this Offer");
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       ApiUtils.getServiceClass().deleteServices(services.getServiceId()).enqueue(new Callback<ResponseMessageModel>() {
+                                           @Override
+                                           public void onResponse(Call<ResponseMessageModel> call, Response<ResponseMessageModel> response) {
+                                               if(response.isSuccessful()){
+                                                   if(response.body().getResponse().equalsIgnoreCase("success")){
+                                                       notifyItemRemoved(i);
+                                                       serviceList.remove(i);
+                                                   }
+                                               }
+                                           }
 
-                                    }
-                                });
+                                           @Override
+                                           public void onFailure(Call<ResponseMessageModel> call, Throwable t) {
 
+                                           }
+                                       });
+                                   }
+                               });
+                               builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+
+                                   }
+                               });
+
+                                AlertDialog alertDialog=builder.create();
+                                alertDialog.show();
                                 break;
                         }
                         return true;
@@ -198,13 +227,11 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
                 menu.inflate (R.menu.service_option_menu_recycler);
                 menu.show();
 
-
-
-
             }
         });
 
     }
+
 
 
     @Override

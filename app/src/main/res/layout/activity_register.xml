@@ -200,20 +200,20 @@
                 android:visibility="gone"/>
 
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_logo_hint"
+                style="@style/InputLabel"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:text="Logo"
+                android:visibility="visible" />
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Logo   "
-                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btlogo"
@@ -225,9 +225,26 @@
                     android:textColor="#ffffff"
                     android:textSize="10sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/tv_logo_path"/>
 
 
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_ban_hint"
+                style="@style/InputLabel"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Banner"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="200dp"
@@ -236,13 +253,6 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Banner"
-                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btban"
@@ -253,6 +263,14 @@
                     android:text="Choose\nImage"
                     android:textColor="#ffffff"
                     android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/tv_ban_path"/>
 
             </LinearLayout>
 

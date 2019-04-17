@@ -46,6 +46,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -99,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
     String strLat,strLng;
     Double latitude,longitude;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity;
+    TextView tvLogo,tvBan;
 
 
 
@@ -118,7 +120,8 @@ public class RegisterActivity extends AppCompatActivity {
         etuserloc=findViewById(R.id.etuserlocation);
         etuserpass=findViewById(R.id.etuserpass);
         etuserrepass=findViewById(R.id.etuserrepass);
-
+        tvLogo=findViewById(R.id.tv_logo_path);
+        tvBan=findViewById(R.id.tv_ban_path);
         tvCatHint=findViewById(R.id.tv_cat_hint);
         tvDemo=findViewById(R.id.tv_demo);
         imgDemo=findViewById(R.id.img_demo);
@@ -345,9 +348,9 @@ public class RegisterActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapLogo = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            String file = getFileName(picturePath);
+            tvLogo.setText(file);
             Toast.makeText(RegisterActivity.this, "Logo Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
-
-
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());
@@ -369,6 +372,8 @@ public class RegisterActivity extends AppCompatActivity {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapBan = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            String file = getFileName(picturePath);
+            tvBan.setText(file);
             Toast.makeText(RegisterActivity.this, "Banner Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
 
             //           imgDemo.setImageURI(selectedImage);
@@ -738,6 +743,13 @@ public class RegisterActivity extends AppCompatActivity {
         return p1;
     }
 
+    public String getFileName (String picturePath){
+        String str[] = picturePath.split("/");
+        List<String> al = new ArrayList<String>();
+        al = Arrays.asList(str);
+
+        return al.get(al.size()-1);
+    }
 }
 
 //   private String getRealPathFromURIPath(Uri contentURI, Activity activity) {

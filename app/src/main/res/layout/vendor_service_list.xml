@@ -6,7 +6,10 @@
     android:orientation="vertical"
     android:background="@drawable/offer_item_list"
     android:padding="10dp"
-    android:layout_margin="10dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
     android:elevation="30dp">
 
     <RelativeLayout
@@ -22,8 +25,8 @@
             android:id="@+id/tv_service_name"/>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_options_recycler"
             android:id="@+id/img_service_options"
             android:layout_alignParentEnd="true"

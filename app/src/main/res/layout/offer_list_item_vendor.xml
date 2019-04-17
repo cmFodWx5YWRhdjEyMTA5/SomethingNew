@@ -6,7 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:elevation="30dp"
-    android:layout_margin="10dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
     android:padding="10dp"
     android:id="@+id/linear_main"
     android:background="@drawable/offer_item_list">
@@ -232,7 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Min Transaction"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:gravity="start" />
 
@@ -267,8 +270,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Max Transaction"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
+                android:paddingLeft="10dp"
                 android:gravity="start"/>
 
             <TextView
@@ -278,7 +282,8 @@
                 android:text="\u20B9 1000"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:gravity="start"/>
+                android:gravity="start"
+                android:paddingLeft="10dp"/>
 
         </LinearLayout>
 
@@ -310,7 +315,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start Date"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:gravity="start"/>
 
@@ -344,9 +349,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Expiry Date"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
-                android:gravity="start"/>
+                android:gravity="start"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:id="@+id/tv_ex_date"
@@ -355,7 +361,8 @@
                 android:text="23/01/2019"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:gravity="start"/>
+                android:gravity="start"
+                android:paddingLeft="10dp"/>
 
         </LinearLayout>
 

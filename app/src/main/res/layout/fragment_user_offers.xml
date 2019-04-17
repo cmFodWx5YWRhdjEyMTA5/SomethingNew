@@ -278,7 +278,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_phone_no"/>
+                                android:src="@drawable/ic_phone_in_talk_black_24dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -297,7 +297,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_email"/>
+                                android:src="@drawable/ic_email_black_24dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"

@@ -102,21 +102,16 @@
 
                 </RelativeLayout>
 
-                <com.mikhaellopez.circularimageview.CircularImageView
+
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="180dp"
-                    android:layout_centerHorizontal="true"
                     android:src="@drawable/profilephoto"
-                    app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="4dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_color="#000000"
-                    app:civ_shadow_radius="10"
-                    android:id="@+id/img_logo"
-                    android:elevation="5dp"/>
-
+                    app:civ_border_color="@color/colorPrimary"
+                    android:id="@+id/img_profile_logo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="180dp"/>
 
             </RelativeLayout>
 
@@ -134,12 +129,12 @@
                     android:src="@drawable/ic_profile_mobile"
                     android:id="@+id/img_mob"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:text="Mobile : "
                     android:id="@+id/tv_mobile"
                     android:gravity="start"
@@ -176,7 +171,7 @@
                     android:layout_height="20dp"
                     android:id="@+id/img_address"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_profile_address"/>
 
                 <TextView
@@ -184,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_loc"
                     android:text="Address : "
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:gravity="start"
                     android:layout_alignParentEnd="true"
                     android:textColor="@color/colorPrimary"
@@ -219,14 +214,14 @@
                     android:id="@+id/img_city"
                     android:src="@drawable/ic_profile_city"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_city"
                     android:text="City : "
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_alignParentEnd="true"
                     android:gravity="start"
                     android:textColor="@color/colorPrimary"
@@ -263,14 +258,14 @@
                     android:src="@drawable/ic_profile_state"
                     android:layout_marginLeft="20dp"
                     android:id="@+id/img_state"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_state"
                     android:text="State : "
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="10dp"
                     android:gravity="start"
                     android:layout_alignParentEnd="true"
@@ -309,12 +304,12 @@
                     android:layout_marginLeft="20dp"
                     android:id="@+id/img_email"
                     android:src="@drawable/ic_profile_email"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_mail"
                     android:layout_alignParentEnd="true"
                     android:text="Email-Id : "

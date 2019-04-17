@@ -6,7 +6,10 @@
     android:background="@drawable/offer_item_list"
     android:orientation="vertical"
     android:elevation="10dp"
-    android:layout_margin="10dp">
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

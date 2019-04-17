@@ -66,12 +66,12 @@ public class FragmentBusiness extends Fragment {
         PieData data = new PieData(set);
         set.setValueFormatter(new PercentFormatter());
         set.setColors(colors);
-        set.setValueTextSize(30f);
+        set.setValueTextSize(20f);
         set.setValueTextColor(Color.WHITE);
 
 
 
-        mChart.setEntryLabelTextSize(20f);
+        mChart.setEntryLabelTextSize(15f);
         mChart.setEntryLabelColor(Color.WHITE);
         mChart.setRotationEnabled(false);
         mChart.getDescription().setText(" ");
@@ -104,10 +104,10 @@ public class FragmentBusiness extends Fragment {
                         PieDataSet set = new PieDataSet(entries,"Earning Data");
                         PieData data = new PieData(set);
                         set.setColors(colors);
-                        set.setValueTextSize(30f);
+                        set.setValueTextSize(20f);
                         set.setValueTextColor(Color.WHITE);
 
-                        mChart.setEntryLabelTextSize(20f);
+                        mChart.setEntryLabelTextSize(15f);
                         mChart.setEntryLabelColor(Color.WHITE);
                         mChart.setRotationEnabled(false);
                         mChart.getDescription().setText(" ");
@@ -135,11 +135,11 @@ public class FragmentBusiness extends Fragment {
                         PieDataSet set = new PieDataSet(entries,"Earning Data");
                         PieData data = new PieData(set);
                         set.setColors(colors);
-                        set.setValueTextSize(30f);
+                        set.setValueTextSize(20f);
                         set.setValueTextColor(Color.WHITE);
 
 
-                        mChart.setEntryLabelTextSize(20f);
+                        mChart.setEntryLabelTextSize(15f);
                         mChart.setEntryLabelColor(Color.WHITE);
                         mChart.setRotationEnabled(false);
                         mChart.getDescription().setText(" ");
