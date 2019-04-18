@@ -153,6 +153,8 @@ public class PasswordOTPVerification extends AppCompatActivity {
                         layotp.setVisibility(View.VISIBLE);
                         layotp.setAnimation(RightSwipe);
                         Log.d("changeotp", "onResponse: "+response.body().getOtp());
+
+                        SaveSharedPreference.setMobile(PasswordOTPVerification.this,response.body().getMobile());
                     }
                     else if(response.body().getReponse().equalsIgnoreCase("failed")){
                         Toast.makeText(PasswordOTPVerification.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -178,7 +180,6 @@ public class PasswordOTPVerification extends AppCompatActivity {
             public void onResponse(Call<VerifyOTPModel> call, Response<VerifyOTPModel> response) {
                 if(response.isSuccessful()){
                     if(response.body().getReponse().equalsIgnoreCase("success")){
-
                         Intent in = new Intent(PasswordOTPVerification.this, ChangePasswordActivity.class);
                         startActivity(in);
                         finish();

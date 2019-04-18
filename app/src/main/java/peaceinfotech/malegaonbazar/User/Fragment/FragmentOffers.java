@@ -38,6 +38,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -64,7 +67,7 @@ import peaceinfotech.malegaonbazar.User.UI.DirectionActivity;
 import peaceinfotech.malegaonbazar.User.GetData.GetNearbyPlacesData;
 import peaceinfotech.malegaonbazar.User.UI.SearchLocation;
 
-public class FragmentOffers extends Fragment implements OnMapReadyCallback,LocationListener {
+public class FragmentOffers extends Fragment implements OnMapReadyCallback, LocationListener {
 
     GoogleMap mMap;
 
@@ -88,9 +91,9 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     Geocoder geocoder;
     List<Address> addresses;
     LinearLayout layup, laysearch, layoffers;
-    RelativeLayout relayFav,relayOffers,relaySpin;
+    RelativeLayout relayFav, relayOffers, relaySpin;
     Animation infoup, infodown;
-    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer,tvaddFav,tvremoveFav,tvCategories;
+    TextView tvtitle, tvvic, tvback, tvdirec, tvviewoffers, tvboffer, tvaddFav, tvremoveFav, tvCategories;
     LatLng endlatlng, orglatlng;
     LatLng searchLatlng;
     boolean searchout = false;
@@ -101,6 +104,8 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
     ScrollView scrollView;
     RatingBar ratingBar;
     SearchableSpinner searchableSpinner;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
 
 
     @Nullable
@@ -124,20 +129,40 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         layoffers = view.findViewById(R.id.offersup);
         tvboffer = view.findViewById(R.id.tvboffer);
         recyclerView = view.findViewById(R.id.recycler_offers);
-        scrollView=view.findViewById(R.id.scroll_lay);
-        ratingBar=view.findViewById(R.id.rating_star);
-        tvaddFav=view.findViewById(R.id.tv_add_fav);
-        tvremoveFav=view.findViewById(R.id.tv_remove_fav);
-        relayFav=view.findViewById(R.id.relay_fav);
-        searchableSpinner=view.findViewById(R.id.search_spinner);
-        relayOffers=view.findViewById(R.id.relay_offers);
-        tvCategories=view.findViewById(R.id.tv_categories);
-        relaySpin=view.findViewById(R.id.spin_lay);
+        scrollView = view.findViewById(R.id.scroll_lay);
+        ratingBar = view.findViewById(R.id.rating_star);
+        tvaddFav = view.findViewById(R.id.tv_add_fav);
+        tvremoveFav = view.findViewById(R.id.tv_remove_fav);
+        relayFav = view.findViewById(R.id.relay_fav);
+        searchableSpinner = view.findViewById(R.id.search_spinner);
+        relayOffers = view.findViewById(R.id.relay_offers);
+        tvCategories = view.findViewById(R.id.tv_categories);
+        relaySpin = view.findViewById(R.id.spin_lay);
         initGoogleMap(savedInstanceState);
 
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        categories.add(0,"Select a Category");
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(20 * 1000);
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        orglatitude = location.getLatitude();
+                        orglongitude = location.getLongitude();
+                        //txtLocation.setText(String.format(Locale.US, "%s -- %s", wayLatitude, wayLongitude));
+                        Log.d("Location", "onLocationResult: "+orglatitude+","+orglongitude);
+                    }
+                }
+            }
+        };
+
+        categories.add(0, "Select a Category");
         categories.add(1, "Restaurant");
         categories.add(2, "School");
         categories.add(3, "Hospital");
@@ -163,103 +188,99 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
 //        tvCategories.setVisibility(View.VISIBLE);
 
         searchableSpinner.setActivated(true);
-       searchableSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if (searchableSpinner.getSelectedItem() == "Restaurant") {
-                   mMap.clear();
-                   if (onSearchClick && searchout) {
-                       searchNewLocation(sorglat, sorglog);
-                       click = "restaurant";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   } else {
-                       getLocation();
-                       click = "restaurant";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   }
-               }
-               else if (searchableSpinner.getSelectedItem() == "Hospital") {
-                   mMap.clear();
-                   if (onSearchClick && searchout) {
-                       searchNewLocation(sorglat, sorglog);
-                       click = "hospital";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   } else {
-                       getLocation();
-                       click = "hospital";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   }
-               }
-               else if (searchableSpinner.getSelectedItem() == "School") {
-                   mMap.clear();
-                   if (onSearchClick && searchout) {
-                       searchNewLocation(sorglat, sorglog);
-                       click = "school";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   } else {
-                       getLocation();
-                       click = "school";
-                       String url = getUrl(orglatitude, orglongitude, click);
-                       Object dataTransfer[] = new Object[3];
-                       dataTransfer[0] = mMap;
-                       dataTransfer[1] = url;
-                       dataTransfer[2] = click;
-                       GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                       getNearbyPlacesData.execute(dataTransfer);
-                       Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
-                       tvCategories.setText(searchableSpinner.getSelectedItem().toString());
-                   }
-               }
+        searchableSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (searchableSpinner.getSelectedItem() == "Restaurant") {
+                    mMap.clear();
+                    if (onSearchClick && searchout) {
+                        searchNewLocation(sorglat, sorglog);
+                        click = "restaurant";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    } else {
+                        getLocation();
+                        click = "restaurant";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    }
+                } else if (searchableSpinner.getSelectedItem() == "Hospital") {
+                    mMap.clear();
+                    if (onSearchClick && searchout) {
+                        searchNewLocation(sorglat, sorglog);
+                        click = "hospital";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    } else {
+                        getLocation();
+                        click = "hospital";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    }
+                } else if (searchableSpinner.getSelectedItem() == "School") {
+                    mMap.clear();
+                    if (onSearchClick && searchout) {
+                        searchNewLocation(sorglat, sorglog);
+                        click = "school";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    } else {
+                        getLocation();
+                        click = "school";
+                        String url = getUrl(orglatitude, orglongitude, click);
+                        Object dataTransfer[] = new Object[3];
+                        dataTransfer[0] = mMap;
+                        dataTransfer[1] = url;
+                        dataTransfer[2] = click;
+                        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                        getNearbyPlacesData.execute(dataTransfer);
+                        Toast.makeText(getActivity(), click, Toast.LENGTH_LONG).show();
+                        tvCategories.setText(searchableSpinner.getSelectedItem().toString());
+                    }
+                }
 
-           }
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-           }
-       });
-
-
+            }
+        });
 
 
         relayOffers.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +298,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 mMapView.setClickable(false);
 
                 for (int i = 0; i < 5; i++) {
-                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20,"ss",500));
+                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20, "ss", 500));
                 }
 
                 offersListAdapter = new OffersListAdapter(offersList, getActivity());
@@ -301,7 +322,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 mMapView.setClickable(false);
 
                 for (int i = 0; i < 5; i++) {
-                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20," ",500));
+                    offersList.add(new OffersListModel("Offers Title", "Get 20% off on first purchase", 20, " ", 500));
                 }
 
                 offersListAdapter = new OffersListAdapter(offersList, getActivity());
@@ -320,7 +341,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 layup.setAnimation(infodown);
                 //changing the color
                 searchableSpinner.setEnabled(true);
-               // tvCategories.setVisibility(View.GONE);
+                // tvCategories.setVisibility(View.GONE);
                 laysearch.setEnabled(true);
                 tvlocation.setTextColor(Color.parseColor("#000000"));
 
@@ -357,11 +378,10 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         relayFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tvaddFav.getVisibility()==View.VISIBLE){
+                if (tvaddFav.getVisibility() == View.VISIBLE) {
                     tvaddFav.setVisibility(View.GONE);
                     tvremoveFav.setVisibility(View.VISIBLE);
-                }
-                else if(tvremoveFav.getVisibility()==View.VISIBLE){
+                } else if (tvremoveFav.getVisibility() == View.VISIBLE) {
                     tvremoveFav.setVisibility(View.GONE);
                     tvaddFav.setVisibility(View.VISIBLE);
                 }
@@ -395,46 +415,50 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
         return placeurl.toString();
     }
 
-    private void getSearchedLocation(LatLng latLng) {
-        MarkerOptions mo = new MarkerOptions();
-        mo.position(latLng);
-        mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(mo);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-    }
+//    private void getSearchedLocation(LatLng latLng) {
+//        MarkerOptions mo = new MarkerOptions();
+//        mo.position(latLng);
+//        mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        mMap.addMarker(mo);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//    }
 
     private void getLocation() {
 
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+        else{
+            mfusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    if (task.isSuccessful()) {
+                        Location clocation = (Location) task.getResult();
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(clocation.getLatitude(), clocation.getLongitude())));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f));
+
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(new LatLng(clocation.getLatitude(), clocation.getLongitude()));
+                        markerOptions.title("Current Location");
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        mMap.addMarker(markerOptions).showInfoWindow();
+
+                        orglatitude = clocation.getLatitude();
+                        orglongitude = clocation.getLongitude();
+                        Log.d("location", orglatitude + "/" + orglongitude);
+                        getGeocoder(orglatitude, orglongitude);
+
+                    } else {
+                        Toast.makeText(getActivity(), "Current location not found check your gps", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
 
-        mfusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    Location clocation = (Location) task.getResult();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(clocation.getLatitude(), clocation.getLongitude())));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15f));
 
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(clocation.getLatitude(), clocation.getLongitude()));
-                    markerOptions.title("Current Location");
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    mMap.addMarker(markerOptions).showInfoWindow();
-
-                    orglatitude = clocation.getLatitude();
-                    orglongitude = clocation.getLongitude();
-                    Log.d("location",orglatitude+"/"+orglongitude);
-                    getGeocoder(orglatitude, orglongitude);
-
-                } else {
-                    Toast.makeText(getActivity(), "Current location not found check your gps", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
     }
 
 
@@ -448,8 +472,25 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationPermissionGranted = true;
+
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                        return;
+                    }
+                    mfusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Location> task) {
+                            if(task.isSuccessful()){
+                                getLocation();
+                            }
+                        }
+                    });
                 }
+                else {
+                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
             }
         }
     }
@@ -548,7 +589,7 @@ public class FragmentOffers extends Fragment implements OnMapReadyCallback,Locat
                 searchLatlng = new LatLng(lat, log);
                 mMap.clear();
                 layup.setVisibility(View.GONE);
-               // searchableSpinner.setSelectedItem(0);
+                searchableSpinner.setSelection(0);
                 searchNewLocation(lat, log);
             }
             if (resultCode == Activity.RESULT_CANCELED) {

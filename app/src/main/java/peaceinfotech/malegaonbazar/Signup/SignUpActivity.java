@@ -184,7 +184,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.d("verify", "onResponse: " + response.body().getReponse() + "/" + response.body().getMessage());
                     if(response.body().getReponse().equalsIgnoreCase("success")) {
 
-                        Intent in = new Intent(SignUpActivity.this, RegisterActivity.class);
+                        Intent in = new Intent(SignUpActivity.this, SelectionActivity.class);
                         startActivity(in);
                         finish();
                     }

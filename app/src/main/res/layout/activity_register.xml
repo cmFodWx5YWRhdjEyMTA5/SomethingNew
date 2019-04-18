@@ -39,15 +39,23 @@
             android:hint="Fullname *"
             android:layout_marginTop="20dp"
             android:id="@+id/etusername"
-            android:singleLine="true"/>
+            android:maxLines="1"/>
 
         <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Location *"
+            android:hint="Address *"
             android:id="@+id/etuserlocation"
-            android:singleLine="true"/>
+            android:maxLines="1"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="City *"
+            android:id="@+id/etusercity"
+            android:maxLines="1"/>
 
         <EditText
             android:layout_width="200dp"
@@ -55,7 +63,8 @@
             android:layout_marginTop="20dp"
             android:hint="Password *"
             android:id="@+id/etuserpass"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:maxLines="1"/>
 
         <EditText
             android:layout_width="200dp"
@@ -63,7 +72,8 @@
             android:layout_marginTop="20dp"
             android:hint="Confirm-Password *"
             android:id="@+id/etuserrepass"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:maxLines="1"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -85,7 +95,7 @@
         android:background="@drawable/background"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/vendorlay">
 
         <LinearLayout

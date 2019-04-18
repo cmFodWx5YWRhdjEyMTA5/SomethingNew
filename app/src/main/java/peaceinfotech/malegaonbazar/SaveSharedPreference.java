@@ -32,7 +32,9 @@ public class SaveSharedPreference {
     final public static String KEY_USER_NAME = "user_name";
     final public static String KEY_USER_LOCATION = "user_location";
     final public static String KEY_USER_MOBILE = "user_mobile";
+    final public static String KEY_USER_CITY = "user_city";
     final public static String KEY_USER_REFER_ID = "user_reference_id";
+    final public static String KEY_USER_PASSWORD = "user_password";
 
     //Vendor Profile
     final public static String KEY_VENDOR_PASSWORD = "vendor_pass";
@@ -150,6 +152,22 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_MOBILE,"");
     }
 
+    public static void setUserMobilePassword(Context context,String mobile,String password){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(KEY_USER_MOBILE,mobile);
+        editor.putString(KEY_USER_PASSWORD,password);
+        editor.apply();
+    }
+
+    public static List<String> getUserMobilePassword(Context context){
+        List<String> data = new ArrayList<>();
+
+        data.add(0,getPreferences(context).getString(KEY_USER_MOBILE,""));
+        data.add(1,getPreferences(context).getString(KEY_USER_PASSWORD,""));
+
+        return data;
+    }
+
     public static void setMobileAndPassword(Context context,String mobile,String password){
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(KEY_VENDOR_MOBILE,mobile);
@@ -177,11 +195,12 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_ROLE_NAME,"");
     }
 
-    public static void setUserProfileData(Context context,String id,String name,String location,String mobile,String referenceId){
+    public static void setUserProfileData(Context context,String id,String name,String location,String city,String mobile,String referenceId){
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(KEY_USER_ID,id);
         editor.putString(KEY_USER_NAME,name);
         editor.putString(KEY_USER_LOCATION,location);
+        editor.putString(KEY_USER_CITY,city);
         editor.putString(KEY_USER_MOBILE,mobile);
         editor.putString(KEY_USER_REFER_ID,referenceId);
         editor.apply();
@@ -191,8 +210,9 @@ public class SaveSharedPreference {
         List<String> data = new ArrayList<>();
 
         data.add(0,getPreferences(context).getString(KEY_USER_ID,""));
-        data.add(2,getPreferences(context).getString(KEY_USER_NAME,""));
-        data.add(3,getPreferences(context).getString(KEY_USER_LOCATION,""));
+        data.add(1,getPreferences(context).getString(KEY_USER_NAME,""));
+        data.add(2,getPreferences(context).getString(KEY_USER_LOCATION,""));
+        data.add(3,getPreferences(context).getString(KEY_USER_CITY,""));
         data.add(4,getPreferences(context).getString(KEY_USER_MOBILE,""));
         data.add(5,getPreferences(context).getString(KEY_USER_REFER_ID,""));
 

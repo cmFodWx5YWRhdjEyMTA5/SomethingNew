@@ -26,15 +26,8 @@ public class FragmentWallet extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_user_wallet,container,false);
 
         refId = view.findViewById(R.id.tv_ref_id);
-        String refid = "UseRef"+random.nextInt(10000);
 
-        if(refid != SaveSharedPreference.getUserReference(getActivity())) {
-            refId.setText(SaveSharedPreference.getUserReference(getActivity()));
-        }
-        else {
-            refId.setText(refid);
-        }
-
+        refId.setText(SaveSharedPreference.getUserProfileData(getActivity()).get(5));
 
         return view;
     }

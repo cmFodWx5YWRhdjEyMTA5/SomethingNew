@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                        if(response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")){
 
                            Toast.makeText(LoginActivity.this, "This Service is Not Yet Available", Toast.LENGTH_SHORT).show();
+                           SaveSharedPreference.setUserMobilePassword(LoginActivity.this,mobile,password);
                            SaveSharedPreference.setRole(LoginActivity.this,
                                    response.body().getDetailsModels().getRoleID(),
                                    response.body().getDetailsModels().getRoleName());
@@ -136,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                                    response.body().getDetailsModels().getUserId(),
                                    response.body().getDetailsModels().getFullName(),
                                    response.body().getDetailsModels().getLocation(),
+                                   response.body().getDetailsModels().getCity(),
                                    response.body().getDetailsModels().getMobile(),
                                    response.body().getDetailsModels().getReferenceId());
 

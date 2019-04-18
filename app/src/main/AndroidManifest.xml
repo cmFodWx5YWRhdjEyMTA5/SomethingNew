@@ -54,6 +54,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".User.UI.OfferInformationActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".User.UI.EditUserProfileActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".User.NotificationActivity"
             android:taskAffinity=""

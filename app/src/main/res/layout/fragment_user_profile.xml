@@ -22,63 +22,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Mobile No. : -"
-            android:paddingLeft="10dp"
-            android:id="@+id/tv_mob"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_profile_mobile"
+            android:id="@+id/img_mob"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Mobile No."
+            android:paddingLeft="10dp"
+            android:id="@+id/tv_mob"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@+id/img_mob"/>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_user_mobile"
             android:textSize="20sp"
             android:paddingRight="10dp"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/tv_mob"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
+            android:layout_below="@+id/tv_mob"
             android:maxLength="10"
             android:text="1234567890"
-            android:textColor="@color/black"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reference Id : -"
-            android:textSize="25sp"
-            android:id="@+id/tv_ref"
-            android:paddingLeft="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_ref"
-            android:paddingRight="10dp"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
             android:textColor="@color/black"
-            android:text="UserRef1234"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"/>
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/img_mob"/>
 
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,26 +92,121 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:id="@+id/tv_location"
-            android:layout_marginLeft="10dp"
-            android:text="Location : -"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_profile_address"
+            android:id="@+id/img_add"
+            android:layout_marginLeft="20dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_location"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentEnd="true"
             android:textSize="20sp"
-            android:layout_marginLeft="30dp"
-            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/tv_location"
+            android:text="Address"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/img_add"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_location"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
             android:text="Mumbai"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:id="@+id/tv_user_loc"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/img_add"/>
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/img_city"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_profile_city"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/tv_city"
+            android:text="City"
+            android:paddingLeft="10dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@+id/img_city"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_city"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:text="Mumbai"
+            android:textColor="@color/black"
+            android:id="@+id/tv_user_city"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@id/img_city"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_ref_id"
+            android:id="@+id/img_ref"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reference Id"
+            android:textSize="20sp"
+            android:id="@+id/tv_ref"
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/img_ref"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ref"
+            android:paddingRight="10dp"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:text="UserRef1234"
+            android:id="@+id/tv_user_ref"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/img_ref"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:textSize="15sp"
+        android:background="@drawable/new_button_submit"
+        android:text="Edit Profile"
+        android:textColor="@color/white"
+        android:id="@+id/bt_edit_user"/>
 
 </LinearLayout>

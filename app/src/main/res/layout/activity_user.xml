@@ -23,6 +23,8 @@
         app:menu="@menu/activity_user_drawer"
         app:itemIconTint="@drawable/drawer_item_color"
         app:itemTextColor="@drawable/drawer_item_color"
-        android:background="@drawable/nav_drawer_back"/>
+        android:background="@drawable/nav_drawer_back"
+        android:theme="@style/NavigationDrawerStyle"/>
+
 
 </android.support.v4.widget.DrawerLayout>

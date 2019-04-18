@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.Marker;
 import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.R;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
+import peaceinfotech.malegaonbazar.User.Fragment.FragmentChangePassword;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentFavourites;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile;
@@ -266,6 +267,9 @@ public class UserActivity extends AppCompatActivity
                 break;
             case R.id.nav_fav:
                 fragment = new FragmentFavourites();
+                break;
+            case R.id.nav_chan_pass:
+                fragment = new FragmentChangePassword();
                 break;
             case R.id.nav_share:
                 ShareOption();

@@ -7,24 +7,35 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:title="Profile" />
+            android:title="Profile"
+            android:icon="@drawable/ic_menu_drawer_options_profile"/>
         <item
             android:id="@+id/nav_offers"
-            android:title="Offers" />
+            android:title="Offers"
+            android:icon="@drawable/ic_menu_drawer_options_offers"/>
         <item
             android:id="@+id/nav_wallet"
             android:title="Wallet"
+            android:icon="@drawable/ic_menu_drawer_options_wallet"
             app:actionViewClass="android.widget.TextView"/>
         <item
             android:id="@+id/nav_fav"
             android:title="Favourites"
+            android:icon="@drawable/ic_menu_drawer_options_favorites"
             app:actionViewClass="android.widget.TextView"/>
+
+        <item
+            android:id="@+id/nav_chan_pass"
+            android:title="Change Password"
+            android:icon="@drawable/ic_menu_drawer_options_password"/>
         <item
             android:id="@+id/nav_share"
-            android:title="Share"/>
+            android:title="Share"
+            android:icon="@drawable/ic_menu_drawer_options_share"/>
         <item
             android:id="@+id/nav_logout"
-            android:title="Log-Out"/>
+            android:title="Log-Out"
+            android:icon="@drawable/ic_menu_drawer_options_logout"/>
 
     </group>
 

@@ -63,10 +63,8 @@ import peaceinfotech.malegaonbazar.RetrofitModel.StateListModel;
 import peaceinfotech.malegaonbazar.SaveSharedPreference;
 import peaceinfotech.malegaonbazar.RetrofitModel.CategoriesHomeModel;
 import peaceinfotech.malegaonbazar.RetrofitModel.UserRegisterModel;
-import peaceinfotech.malegaonbazar.StartUI.LoginActivity;
 import peaceinfotech.malegaonbazar.StartUI.SelectionActivity;
 import peaceinfotech.malegaonbazar.User.UI.UserActivity;
-import peaceinfotech.malegaonbazar.Vendor.UI.EditProfileActivity;
 import peaceinfotech.malegaonbazar.Vendor.UI.VendorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
     Button btlogo,btban;
     ImageView imgDemo;
-    EditText etusername,etuserloc,etuserpass,etuserrepass;
+    EditText etusername,etuserloc,etusercity,etuserpass,etuserrepass;
     EditText etvenname,etvenloc,etvenbname,etvencat,etvenmail,etvenpass,etvenrepass;
     String type;
     LinearLayout userlay;
@@ -117,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         submituser=findViewById(R.id.btusersubmit);
         etusername=findViewById(R.id.etusername);
+        etusercity=findViewById(R.id.etusercity);
         etuserloc=findViewById(R.id.etuserlocation);
         etuserpass=findViewById(R.id.etuserpass);
         etuserrepass=findViewById(R.id.etuserrepass);
@@ -149,15 +148,16 @@ public class RegisterActivity extends AppCompatActivity {
         bitmapLogo = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
         bitmapBan = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.new_ban);
 
-//        Intent getin =getIntent();
-//        type=getin.getStringExtra("type");
-//
-//        if(type.equalsIgnoreCase("user")){
-//            userlay.setVisibility(View.VISIBLE);
-//        }
-//        else if(type.equalsIgnoreCase("vendor")){
-//            vendorlay.setVisibility(View.VISIBLE);
-//        }
+        Intent getin =getIntent();
+        type=getin.getStringExtra("type");
+
+        if(type.equalsIgnoreCase("user")){
+            userlay.setVisibility(View.VISIBLE);
+        }
+        else if(type.equalsIgnoreCase("vendor")){
+            vendorlay.setVisibility(View.VISIBLE);
+        }
+
         getCategoriesList();
         getStateList();
 
@@ -229,9 +229,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String location=etuserloc.getText().toString();
                 String pass=etuserpass.getText().toString();
                 String repass=etuserrepass.getText().toString();
+                String city=etusercity.getText().toString();
 
 
-                if(name.isEmpty()||location.isEmpty()||pass.isEmpty()||repass.isEmpty()){
+                if(name.isEmpty()||location.isEmpty()||pass.isEmpty()||repass.isEmpty()||city.isEmpty()){
                     if(name.isEmpty()){
                         etusername.setError("PLease enter this field");
                     }
@@ -244,10 +245,13 @@ public class RegisterActivity extends AppCompatActivity {
                     if(repass.isEmpty()){
                         etuserrepass.setError("Please enter this field");
                     }
+                    if(city.isEmpty()){
+                        etusercity.setError("Please enter this field");
+                    }
                 }
                 else{
                     if(pass.equals(repass)){
-                        UserRegister("2",name,location,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
+                        UserRegister("2",name,location,city,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
                     }
                     else{
                         etuserrepass.setError("Password Don't Match");
@@ -402,13 +406,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        startActivity(new Intent(RegisterActivity.this, SignUpActivity.class));
+        startActivity(new Intent(RegisterActivity.this, SelectionActivity.class));
         finish();
 
     }
 
-    public void UserRegister(String roleId, String fullname, String location, String mobile, final String password){
-        ApiUtils.getServiceClass().userRegister(roleId,fullname,location,mobile,password).enqueue(new Callback<UserRegisterModel>() {
+    public void UserRegister(String roleId, String fullname, String location,String city,String mobile, final String password){
+        ApiUtils.getServiceClass().userRegister(roleId,fullname,location,city,mobile,password).enqueue(new Callback<UserRegisterModel>() {
             @Override
             public void onResponse(Call<UserRegisterModel> call, Response<UserRegisterModel> response) {
                 if(response.isSuccessful()){
@@ -557,20 +561,23 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")) {
 
-//                            SaveSharedPreference.setRole(RegisterActivity.this,
-//                                    response.body().getDetailsModels().getRoleId(),
-//                                    response.body().getDetailsModels().getRoleName());
-//
-//                            SaveSharedPreference.setUserProfileData(RegisterActivity.this,
-//                                    response.body().getDetailsModels().getUserId(),
-//                                    response.body().getDetailsModels().getFullName(),
-//                                    response.body().getDetailsModels().getLocation(),
-//                                    response.body().getDetailsModels().getMobile(),
-//                                    response.body().getDetailsModels().getReferenceId());
+                            SaveSharedPreference.setUserMobilePassword(RegisterActivity.this,mobile,password);
 
-//                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-//                            startActivity(new Intent(RegisterActivity.this, UserActivity.class));
-//                            finish();
+                            SaveSharedPreference.setRole(RegisterActivity.this,
+                                    response.body().getDetailsModels().getRoleID(),
+                                    response.body().getDetailsModels().getRoleName());
+
+                            SaveSharedPreference.setUserProfileData(RegisterActivity.this,
+                                    response.body().getDetailsModels().getUserId(),
+                                    response.body().getDetailsModels().getFullName(),
+                                    response.body().getDetailsModels().getLocation(),
+                                    response.body().getDetailsModels().getCity(),
+                                    response.body().getDetailsModels().getMobile(),
+                                    response.body().getDetailsModels().getReferenceId());
+
+                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+                            startActivity(new Intent(RegisterActivity.this, UserActivity.class));
+                            finish();
                         } else if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")) {
                             SaveSharedPreference.setRole(RegisterActivity.this,
                                     response.body().getDetailsModels().getRoleID(),

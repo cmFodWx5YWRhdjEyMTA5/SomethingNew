@@ -152,9 +152,6 @@ public class FragmentProfile extends Fragment {
 //                                    response.body().getDetailsModels().getMobile(),
 //                                    response.body().getDetailsModels().getReferenceId());
 
-//                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-//                            startActivity(new Intent(RegisterActivity.this, UserActivity.class));
-//                            finish();
                         } else if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")) {
                             SaveSharedPreference.setRole(getActivity(),
                                     response.body().getDetailsModels().getRoleID(),

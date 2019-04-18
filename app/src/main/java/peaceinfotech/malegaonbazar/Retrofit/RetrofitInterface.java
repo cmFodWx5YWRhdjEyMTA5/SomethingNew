@@ -57,6 +57,7 @@ public interface RetrofitInterface {
     Call<UserRegisterModel> userRegister(@Field("Roleid")String roleId,
                                          @Field("Fullname")String fullName,
                                          @Field("Location")String location,
+                                         @Field("City")String city,
                                          @Field("Mobile")String mobile,
                                          @Field("Password")String password);
 
@@ -125,6 +126,14 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     @POST("changepassword/")
     Call<ResponseMessageModel> changePassword(@Field("mobile")String mobile,@Field("OldPassword")String oldPass,@Field("NewPassword")String newPass);
+
+    @FormUrlEncoded
+    @POST("updateuser/")
+    Call<ResponseMessageModel> editUserProfile(@Field("user_id")String userId,
+                                               @Field("Fullname")String name,
+                                               @Field("Location")String location,
+                                               @Field("City")String city);
+
 
 }
 
