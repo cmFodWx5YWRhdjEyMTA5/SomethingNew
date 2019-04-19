@@ -16,7 +16,7 @@
         android:background="@drawable/background"
         android:elevation="40dp"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/userlay">
 
         <TextView
@@ -75,15 +75,69 @@
             android:inputType="textPassword"
             android:maxLines="1"/>
 
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_prof_hint"
+            style="@style/InputLabel"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="sumbit"
             android:layout_marginTop="20dp"
-            android:id="@+id/btusersubmit"
-            android:background="@drawable/new_button_submit"
-            android:textColor="#ffffff"
-            android:layout_marginBottom="20dp"/>
+            android:text="Profile Photo (Optional)" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btuserprofimg"
+                android:layout_width="63dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
+                android:background="@drawable/new_button_submit"
+                android:text="Choose\nImage"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:id="@+id/tv_user_prof_path"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progress_user"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sumbit"
+                android:layout_marginTop="20dp"
+                android:id="@+id/btusersubmit"
+                android:background="@drawable/new_button_submit"
+                android:textColor="#ffffff"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+
     </LinearLayout>
 
 
@@ -259,7 +313,6 @@
             <LinearLayout
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -318,15 +371,33 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
 
-            <Button
-                android:id="@+id/btvensubmit"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/new_button_submit"
-                android:text="sumbit"
-                android:textColor="#ffffff" />
+                android:layout_gravity="center">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/progress_vendor"/>
+
+                <Button
+                    android:id="@+id/btvensubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/new_button_submit"
+                    android:text="sumbit"
+                    android:textColor="#ffffff"
+                    android:layout_gravity="center"/>
+
+
+            </FrameLayout>
+
+
         </LinearLayout>
 
     </ScrollView>

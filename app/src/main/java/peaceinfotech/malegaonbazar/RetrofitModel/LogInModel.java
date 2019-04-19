@@ -115,6 +115,16 @@ public class LogInModel {
         @SerializedName("referrelcode")
         @Expose String referenceId;
 
+        @SerializedName("profile")
+        @Expose String profileUrl;
+
+        public String getProfileUrl() {
+            return profileUrl;
+        }
+
+        public void setProfileUrl(String profileUrl) {
+            this.profileUrl = profileUrl;
+        }
 
         public String getReferenceId() {
             return referenceId;

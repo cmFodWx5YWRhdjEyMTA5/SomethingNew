@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@drawable/offer_item_list"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:elevation="30dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/hist_wall_prod"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:text="Chinese Food"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/hist_wall_prod"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:text="\u20B9 100"
+            android:id="@+id/hist_wall_amount"
+            android:textColor="@color/black"/>
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_profile_address"
+            android:id="@+id/hist_img1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:paddingLeft="10dp"
+            android:id="@+id/hist_wall_location"
+            android:text="Dragon Food Corner"
+            android:layout_toRightOf="@+id/hist_img1"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_calendar"
+            android:id="@+id/hist_img2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:id="@+id/hist_wall_date"
+            android:paddingLeft="10dp"
+            android:text="16/04/2019"
+            android:layout_toRightOf="@+id/hist_img2"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

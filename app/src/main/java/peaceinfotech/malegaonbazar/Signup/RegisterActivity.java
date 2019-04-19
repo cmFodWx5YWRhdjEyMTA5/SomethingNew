@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submituser,submitven;
-    Button btlogo,btban;
+    Button btlogo,btban,btprof;
     ImageView imgDemo;
     EditText etusername,etuserloc,etusercity,etuserpass,etuserrepass;
     EditText etvenname,etvenloc,etvenbname,etvencat,etvenmail,etvenpass,etvenrepass;
@@ -81,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
     ScrollView vendorlay;
     public final int LOGO=1;
     public final int BAN=2;
+    public final int USER_PROFILE = 3;
     List<String> categoryName;
     List<String> categoryId;
     List<String> catState;
@@ -93,12 +95,13 @@ public class RegisterActivity extends AppCompatActivity {
     String city = "";
     String id = "";
     private RequestQueue requestQueue;
-    Bitmap bitmapLogo,bitmapBan;
+    Bitmap bitmapLogo,bitmapBan,bitmapProf;
   //  SearchableSpinner spinDemo;
     String strLat,strLng;
     Double latitude,longitude;
     com.toptoche.searchablespinnerlibrary.SearchableSpinner searchSpinState,searchSpinCity;
-    TextView tvLogo,tvBan;
+    TextView tvLogo,tvBan,tvUserProf;
+    ProgressBar pbVendor,pbUser;
 
 
 
@@ -123,8 +126,11 @@ public class RegisterActivity extends AppCompatActivity {
         tvBan=findViewById(R.id.tv_ban_path);
         tvCatHint=findViewById(R.id.tv_cat_hint);
         tvDemo=findViewById(R.id.tv_demo);
+        tvUserProf=findViewById(R.id.tv_user_prof_path);
+        btprof=findViewById(R.id.btuserprofimg);
         imgDemo=findViewById(R.id.img_demo);
-
+        pbVendor=findViewById(R.id.progress_vendor);
+        pbUser=findViewById(R.id.progress_user);
 //        spinState=findViewById(R.id.spin_state);
 //        spinCity=findViewById(R.id.spin_city);
         spinCat=findViewById(R.id.spinner_category);
@@ -147,6 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         bitmapLogo = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
         bitmapBan = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.new_ban);
+        bitmapProf = BitmapFactory.decodeResource(RegisterActivity.this.getResources(),R.drawable.profilephoto);
 
         Intent getin =getIntent();
         type=getin.getStringExtra("type");
@@ -221,6 +228,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        btprof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i,USER_PROFILE);
+            }
+        });
+
         submituser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,7 +266,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(pass.equals(repass)){
-                        UserRegister("2",name,location,city,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
+                      //  UserRegister("2",name,location,city,SaveSharedPreference.getMobile(RegisterActivity.this),repass);
+                        requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+                        submituser.setVisibility(View.GONE);
+                        pbUser.setVisibility(View.VISIBLE);
+                        userUploadBitmap(bitmapProf,name,location,city,repass);
                     }
                     else{
                         etuserrepass.setError("Password Don't Match");
@@ -310,6 +329,8 @@ public class RegisterActivity extends AppCompatActivity {
                         if(pass.equals(repass)){
                             requestQueue = Volley.newRequestQueue(RegisterActivity.this);
                             getLocationFromAddress(etvenloc.getText().toString()+","+city+","+state);
+                            submitven.setVisibility(View.VISIBLE);
+                            pbVendor.setVisibility(View.VISIBLE);
                             vendorUploadBitmap(bitmapLogo,bitmapBan,name,location,brand,catid,repass,email,state,city);
                         }
                         else{
@@ -392,6 +413,21 @@ public class RegisterActivity extends AppCompatActivity {
 //            Log.d("image file1",banFileToUpload.toString()+"/"+banFileName);
 
         }
+        if (requestCode == USER_PROFILE && resultCode == RESULT_OK && null != data){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            imgDemo.setImageURI(selectedImage);
+            bitmapProf = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
+            String file = getFileName(picturePath);
+            tvUserProf.setText(file);
+            Toast.makeText(RegisterActivity.this, "Banner Uploaded Successfully : "+picturePath, Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
@@ -437,6 +473,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage("Registered Successfully");
+        builder.setCancelable(false);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -451,6 +488,81 @@ public class RegisterActivity extends AppCompatActivity {
         final AlertDialog alertDialog=builder.create();
 
         alertDialog.show();
+    }
+
+
+    private void userUploadBitmap(final Bitmap bitmapProf,
+                                  final String name,
+                                  final String location,
+                                  final String city,
+                                  final String password){
+
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST," http://autoreplyz.com/Malegaon/Api/Userapi/usersignup",
+                new com.android.volley.Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            JSONObject obj = new JSONObject(new String(response.data));
+//                            JSONObject o=jsonResponse.getJSONObject("details");
+                            Log.d("SID", "onResponse: " + obj.getString("response"));
+                            //If it is success
+                            if (obj.getString("response").equalsIgnoreCase("success")) {
+
+                                submituser.setVisibility(View.VISIBLE);
+                                pbUser.setVisibility(View.GONE);
+                                AlertDialog("user",password);
+
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Some error", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
+            /*
+             * If you want to add more parameters with the image
+             * you can do it here
+             * here we have only one parameter with the image
+             * which is tags
+             * */
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("Roleid","2");
+                params.put("Fullname",name);
+                params.put("Location",location);
+                params.put("Mobile",SaveSharedPreference.getMobile(RegisterActivity.this));
+                params.put("Password",password);
+                params.put("City",city);
+
+                return params;
+            }
+
+            /*
+             * Here we are passing image by renaming it with a unique name
+             * */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long profImageName = System.currentTimeMillis();
+                params.put("Profile", new DataPart(profImageName + ".png", getFileDataFromDrawable(bitmapProf)));
+                return params;
+            }
+        };
+
+        //adding the request to volley
+        //idi requestQueue.add(stringRequest);
+        requestQueue.add(volleyMultipartRequest);
+
     }
 
 
@@ -478,6 +590,8 @@ public class RegisterActivity extends AppCompatActivity {
                             //If it is success
                             if (obj.getString("response").equalsIgnoreCase("success")) {
 
+                                pbVendor.setVisibility(View.GONE);
+                                submitven.setVisibility(View.VISIBLE);
                                 AlertDialog("vendor",password);
 
                             } else {
@@ -551,7 +665,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void LogIn (final String mobile, final String password) {
 
-
         ApiUtils.getServiceClass().logIn(mobile, password).enqueue(new Callback<LogInModel>() {
             @Override
             public void onResponse(Call<LogInModel> call, Response<LogInModel> response) {
@@ -573,7 +686,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     response.body().getDetailsModels().getLocation(),
                                     response.body().getDetailsModels().getCity(),
                                     response.body().getDetailsModels().getMobile(),
-                                    response.body().getDetailsModels().getReferenceId());
+                                    response.body().getDetailsModels().getReferenceId(),
+                                    response.body().getDetailsModels().getProfileUrl());
 
                             SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
                             startActivity(new Intent(RegisterActivity.this, UserActivity.class));

@@ -3,13 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_background"
-    android:elevation="10dp"
-    android:layout_margin="10dp">
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:elevation="30dp"
+    android:background="@drawable/offer_item_list">
 
     <ImageView
         android:id="@+id/img_logo"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:layout_alignParentStart="true"
@@ -27,35 +30,30 @@
         android:textStyle="italic"
         android:layout_below="@+id/img_logo"
         android:layout_marginTop="5dp"
-        android:id="@+id/tv_list_offer_num"/>
+        android:id="@+id/tv_list_offer_num"
+        android:layout_toLeftOf="@+id/lay_info"/>
 
-    <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:textColor="#ff0000"
-            android:text="- Remove From Favourites"
-            android:visibility="visible"
-            android:id="@+id/tv_list_remove_fav"
-            android:layout_below="@id/tv_list_offer_num"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
-
-
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_delete"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/lay_info"
+        android:id="@+id/img_fav_del"/>
 
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/img_logo"
-        android:layout_marginRight="10dp"
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="20dp"
+        android:id="@+id/lay_info">
 
         <TextView
             android:id="@+id/tv_list_title"
@@ -70,13 +68,15 @@
 
             <RatingBar
                 android:id="@+id/rating_list_star"
-                style="?android:attr/ratingBarStyleSmall"
+                style="@style/RatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="0.1" />
+                android:stepSize="0.1"
+                android:progressTint="@color/colorPrimary"
+                android:progressBackgroundTint="@color/grey"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,8 +96,8 @@
             android:layout_marginTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_phone_in_talk_black_24dp"/>
 
             <TextView
@@ -106,7 +106,8 @@
                 android:textStyle="italic"
                 android:layout_marginLeft="5dp"
                 android:text="+91-88556-78855"
-                android:id="@+id/tv_list_contact"/>
+                android:id="@+id/tv_list_contact"
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -116,8 +117,8 @@
             android:layout_marginTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_email_black_24dp"/>
 
             <TextView
@@ -126,7 +127,8 @@
                 android:textStyle="italic"
                 android:text="sid.j@gmail.com"
                 android:layout_marginLeft="5dp"
-                android:id="@+id/tv_list_email"/>
+                android:id="@+id/tv_list_email"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -137,16 +139,17 @@
             android:layout_marginTop="5dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_home_address" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_profile_address" />
             <TextView
                 android:id="@+id/tv_list_vic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textStyle="italic"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 

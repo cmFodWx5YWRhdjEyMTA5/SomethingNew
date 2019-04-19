@@ -139,7 +139,8 @@ public class LoginActivity extends AppCompatActivity {
                                    response.body().getDetailsModels().getLocation(),
                                    response.body().getDetailsModels().getCity(),
                                    response.body().getDetailsModels().getMobile(),
-                                   response.body().getDetailsModels().getReferenceId());
+                                   response.body().getDetailsModels().getReferenceId(),
+                                   response.body().getDetailsModels().getProfileUrl());
 
                            SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
                            startActivity(new Intent(LoginActivity.this, UserActivity.class));

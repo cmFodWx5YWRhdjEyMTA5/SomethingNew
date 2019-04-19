@@ -44,6 +44,8 @@ import peaceinfotech.malegaonbazar.User.Fragment.FragmentOffers;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile;
 import peaceinfotech.malegaonbazar.User.Fragment.FragmentWallet;
 
+import static peaceinfotech.malegaonbazar.User.Fragment.FragmentProfile.PROF;
+
 public class UserActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -178,6 +180,12 @@ public class UserActivity extends AppCompatActivity
                         gpsLocation = true;
                 }
             }
+//            break;
+//            case PROF : {
+//                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_profile);
+//                fragment.onActivityResult(requestCode, resultCode, data);
+//            }
+//            break;
         }
 
     }

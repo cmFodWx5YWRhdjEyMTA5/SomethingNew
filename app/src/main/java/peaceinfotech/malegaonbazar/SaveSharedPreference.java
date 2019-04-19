@@ -35,6 +35,8 @@ public class SaveSharedPreference {
     final public static String KEY_USER_CITY = "user_city";
     final public static String KEY_USER_REFER_ID = "user_reference_id";
     final public static String KEY_USER_PASSWORD = "user_password";
+    final public static String KEY_USER_PROFILE = "user_profile";
+
 
     //Vendor Profile
     final public static String KEY_VENDOR_PASSWORD = "vendor_pass";
@@ -195,7 +197,7 @@ public class SaveSharedPreference {
         return getPreferences(context).getString(KEY_ROLE_NAME,"");
     }
 
-    public static void setUserProfileData(Context context,String id,String name,String location,String city,String mobile,String referenceId){
+    public static void setUserProfileData(Context context,String id,String name,String location,String city,String mobile,String referenceId,String progImgUrl){
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(KEY_USER_ID,id);
         editor.putString(KEY_USER_NAME,name);
@@ -203,6 +205,7 @@ public class SaveSharedPreference {
         editor.putString(KEY_USER_CITY,city);
         editor.putString(KEY_USER_MOBILE,mobile);
         editor.putString(KEY_USER_REFER_ID,referenceId);
+        editor.putString(KEY_USER_PROFILE,progImgUrl);
         editor.apply();
     }
 
@@ -215,7 +218,7 @@ public class SaveSharedPreference {
         data.add(3,getPreferences(context).getString(KEY_USER_CITY,""));
         data.add(4,getPreferences(context).getString(KEY_USER_MOBILE,""));
         data.add(5,getPreferences(context).getString(KEY_USER_REFER_ID,""));
-
+        data.add(6,getPreferences(context).getString(KEY_USER_PROFILE,""));
         return data;
     }
 

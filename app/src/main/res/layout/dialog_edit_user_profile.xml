@@ -51,17 +51,76 @@
         android:layout_gravity="center"/>
 
 
+    <TextView
+        android:id="@+id/tv_prof_hint"
+        style="@style/InputLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Profile Photo (Optional)"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/bt_edit_user_prof"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/new_button_submit"
+            android:text="Choose Image"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:id="@+id/tv_edit_user_prof_path"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress_edit_user_profile"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="update"
+            android:layout_marginTop="20dp"
+            android:id="@+id/bt_user_update_profile"
+            android:background="@drawable/new_button_submit"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"/>
 
 
-    <Button
+    </FrameLayout>
+
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="update"
-        android:layout_marginTop="20dp"
-        android:id="@+id/bt_user_update_profile"
-        android:background="@drawable/new_button_submit"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"/>
+        android:id="@+id/img_edit_user_demo"
+        android:visibility="gone"/>
 
 </LinearLayout>

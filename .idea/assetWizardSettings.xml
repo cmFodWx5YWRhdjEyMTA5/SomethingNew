@@ -200,8 +200,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_menu_drawer_options_wallet" />
-                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\wallet.svg" />
+                            <entry key="outputName" value="ic_calendar" />
+                            <entry key="sourceFile" value="E:\Peace Project\Images\MalegaonBazaar\calendar.svg" />
                           </map>
                         </option>
                       </PersistentState>

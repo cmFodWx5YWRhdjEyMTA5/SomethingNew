@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -28,8 +29,9 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
 
     public class FavViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvTitle,tvVotes,tvMobile,tvEmail,tvAddress,tvRemove,tvOffers;
+        public TextView tvTitle,tvVotes,tvMobile,tvEmail,tvAddress,tvOffers;
         public RatingBar ratingBar;
+        public ImageView imgDel;
 
         public FavViewHolder(@NonNull View view) {
             super(view);
@@ -39,10 +41,9 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
             tvMobile = view.findViewById(R.id.tv_list_contact);
             tvEmail = view.findViewById(R.id.tv_list_email);
             tvAddress = view.findViewById(R.id.tv_list_vic);
-            tvRemove = view.findViewById(R.id.tv_list_remove_fav);
             tvOffers = view.findViewById(R.id.tv_list_offer_num);
             ratingBar = view.findViewById(R.id.rating_list_star);
-
+            imgDel=view.findViewById(R.id.img_fav_del);
         }
     }
 
@@ -53,7 +54,7 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull FavViewHolder holder, final int i) {
 
         final FavouriteListModel fav  = favList.get(i);
 
@@ -64,6 +65,13 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
         holder.tvAddress.setText(fav.getAddress());
         holder.tvMobile.setText(fav.getContact());
         holder.tvEmail.setText(fav.getEmail());
+
+        holder.imgDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notifyItemRemoved(i);
+            }
+        });
 
     }
 

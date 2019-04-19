@@ -256,8 +256,6 @@ public class EditProfileActivity extends AppCompatActivity {
                                 etBrand.getText().toString(),
                                 etEmail.getText().toString(),
                                 catid,state,city);
-
-
                     }
                     else {
                         etEmail.setError("Enter Valid Email id");
