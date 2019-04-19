@@ -221,18 +221,18 @@ public class FragmentProfile extends Fragment {
 
                         if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("user")) {
 
-                            SaveSharedPreference.setRole(getActivity(),
-                                    response.body().getDetailsModels().getRoleID(),
-                                    response.body().getDetailsModels().getRoleName());
-
-                            SaveSharedPreference.setUserProfileData(getActivity(),
-                                    response.body().getDetailsModels().getUserId(),
-                                    response.body().getDetailsModels().getFullName(),
-                                    response.body().getDetailsModels().getLocation(),
-                                    response.body().getDetailsModels().getCity(),
-                                    response.body().getDetailsModels().getMobile(),
-                                    response.body().getDetailsModels().getReferenceId(),
-                                    response.body().getDetailsModels().getProfileUrl());
+//                            SaveSharedPreference.setRole(getActivity(),
+//                                    response.body().getDetailsModels().getRoleID(),
+//                                    response.body().getDetailsModels().getRoleName());
+//
+//                            SaveSharedPreference.setUserProfileData(getActivity(),
+//                                    response.body().getDetailsModels().getUserId(),
+//                                    response.body().getDetailsModels().getFullName(),
+//                                    response.body().getDetailsModels().getLocation(),
+//                                    response.body().getDetailsModels().getCity(),
+//                                    response.body().getDetailsModels().getMobile(),
+//                                    response.body().getDetailsModels().getReferenceId(),
+//                                    response.body().getDetailsModels().getProfileUrl());
 
                         } else if (response.body().getDetailsModels().getRoleName().equalsIgnoreCase("vendor")) {
 //                            SaveSharedPreference.setRole(getActivity(),
@@ -287,10 +287,10 @@ public class FragmentProfile extends Fragment {
             cursor.close();
             imgDemo.setImageURI(selectedImage);
             bitmapProf = ((BitmapDrawable) imgDemo.getDrawable()).getBitmap();
-            String file = getFileName(picturePath);
-            tvProf.setText(file);
-            Toast.makeText(getActivity(), "Logo Uploaded Successfully : " + picturePath, Toast.LENGTH_SHORT).show();
-            Log.d("path", "onActivityResult: " + picturePath);
+//            String file = getFileName(picturePath);
+//            tvProf.setText(file);
+//            Toast.makeText(getActivity(), "Logo Uploaded Successfully : " + picturePath, Toast.LENGTH_SHORT).show();
+//            Log.d("path", "onActivityResult: " + picturePath);
 //            String filePath = getRealPathFromURIPath(selectedImage, RegisterActivity.this);
 //            File file = new File(filePath);
 //            //Log.d(TAG, "Filename " + file.getName());
